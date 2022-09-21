@@ -1,0 +1,38 @@
+\documentclass{jsreport}
+\usepackage[utf8]{inputenc}
+\usepackage[dvipdfmx,colorlinks=true, bookmarks=true,bookmarksnumbered=true, bookmarkstype=toc, linkcolor=cyan,urlcolor=cyan, citecolor=cyan]{hyperref}
+\usepackage{pxjahyper}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[dvipdfmx]{color}
+\usepackage{multirow}
+\usepackage{here}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{url}
+\usepackage{setspace}
+
+
+% ユーザー変数
+\newcommand{\myname}{中村　竜也}
+\newcommand{\studentid}{211S114S}
+\newcommand{\submitdate}{令和5年2月 日}
+\newcommand{\papertitle}{LHC-ATLAS実験Run-3に向けた\\???}
+
+\newcommand{\ctext}[1]{\raise0.2ex\hbox{\textcircled{\scriptsize{#1}}}} %丸文字を\ctext{}で入力できるようにする
+\newcommand{\unit}[1]{\ \mathrm{#1}} %\unit{}で単位を入力できるようにする。
+\newcommand{\siki}[1]{式(\ref{#1})} %式の参照を楽に
+\newcommand{\zu}[1]{図\ref{#1}} %図の参照を楽に
+\newcommand{\hyou}[1]{表\ref{#1}} %表の参照を楽に
+\newcommand{\setu}[1]{\ref{#1}節}
+\newcommand{\syou}[1]{第\ref{#1}章}
+\newcommand{\pt}{p_\mathrm{T}}
+
+\makeatletter %数式,図,表番号に章番号も含む
+\@addtoreset{equation}{chapter}
+\def\theequation{\thechapter.\arabic{equation}}
+\@addtoreset{figure}{chapter}
+\def\thefigure{\thechapter.\arabic{figure}}
+\@addtoreset{table}{chapter}
+\def\thetable{\thechapter.\arabic{table}}
+\makeatother
+

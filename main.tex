@@ -1,18 +1,49 @@
-\documentclass{article}
-\usepackage[utf8]{inputenc}
 
-\title{try}
-\author{tatsuya.nakamura }
-\date{September 2022}
+\input{preamble}
 
 \begin{document}
+\include{cover}
+\newpage
 
-\maketitle
+\thispagestyle{empty}
+\newpage
+\thispagestyle{empty}
+\newpage
 
-\section{Introduction}
+%----abstract----
+\include{abstract}
+\newpage
+\thispagestyle{empty}
+%\newpage
+%----table----
+\pagenumbering{roman}
+\setcounter{tocdepth}{3}
+\tableofcontents
+\newpage
+
+%----document----
+\pagenumbering{arabic}
+%\newpage
+
+\include{chapter1}
+\include{chapter2}
+\include{chapter3}
+\include{chapter4}
+\include{chapter5}
+%\include{chapter6}
+\include{chapter7}
+
+\newpage
+
+
+\bibliography{ref.bib}
+%\bibliographystyle{unsrturl}
+\bibliographystyle{junsrt}
+\newpage
+
+\newpage
+\thispagestyle{empty}
+%~
+%\newpage
 
 \end{document}
-
-あ
-
-test
