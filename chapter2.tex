@@ -1,17 +1,17 @@
 \chapter{LHC-ATLAS実験}
 \label{chapter2}
 
-LHC-ATLAS 実験とは、LHC (Large Hadron Collider)を用いた高エネルギーの陽子–陽子衝突によって生成された粒子を ATLAS (A Troidal LHC ApparatuS) 検出器によって検出し、標準模型の精密測定や新粒子探索などを行う実験である。LHC は 2018 年に Run-2 を終了し、2019 年から 2021 年にかけて LHC 及び ATLAS 検出器のアップグレードが行われ、2022 年から Run-3 が開始された。
+LHC-ATLAS 実験とは、LHC (Large Hadron Collider)を用いた高エネルギーの陽子–陽子衝突によって生成された粒子を ATLAS (A Troidal LHC ApparatuS) 検出器によって検出し、標準模型の精密測定や新粒子探索などを行う実験である。
+LHCでは高エネルギー状態の陽子を衝突させることにより、TeV スケールまでの物理事象を広く調べることを可能にしている。
+LHC は 2018 年に Run-2 を終了し、2019 年から 2021 年にかけて LHC 及び ATLAS 検出器のアップグレードが行われ、2022 年から Run-3 が開始された。
 
 本章では、Run-3におけるLHC及びATLAS検出器の概要とATLAS実験で採用されているトリガーシステムについて述べる。
 
 \section{LHC加速器}
 \label{section2-1}
-
-Large Hadron Collider (LHC)は、スイスのジュネーブ郊外にある欧州素粒子原子核研究機構 (CERN)の地下に建設された周長約 27 km の世界最大の大型ハドロン衝突型加速器である。LHC加速器の概略図を図\ref{fig:LHC加速器}に示す。
-LHC は14 TeV の重心エネルギー、$1\times10^{34}$ cm$^{-2}$s${^-1}$の瞬間ルミノシティで陽子-陽子衝突が可能なように設計されている。LHCの衝突実験で使用される陽子ビームはバンチと呼ばれる 10${^11}$ 個の集合体になっており、このバンチ単位で陽子を加速、衝突させている。
-LHCの一周あたりに 25 ns の間隔で陽子ビームが入射されており、陽子-陽子衝突を起こした際の各バンチの衝突頻度は 40 MHz である。
-LHCでは陽子を段階的に加速させ高エネルギー状態の陽子を衝突させることにより、TeV スケールまでの物理事象を広く調べることを可能にしている。
+Large Hadron Collider (LHC)は、スイスのジュネーブ郊外にある欧州素粒子原子核研究機構 (CERN)の地下に建設された周長約 27 km の世界最大の大型ハドロン衝突型加速器である。LHCの全体像を図\ref{fig:LHC加速器}に示す。
+LHC は14 TeV の重心系エネルギー、$1\times10^{34}$ cm$^{-2}$s${^-1}$の瞬間ルミノシティで陽子-陽子衝突が可能なように設計されている。LHCの衝突実験で使用される陽子ビームはバンチと呼ばれる 10${^11}$ 個の陽子のかたまりで構成されており、LHCの一周あたりに 25 ns のバンチ間隔で入射されているため、陽子-陽子衝突を起こす際の各バンチの衝突頻度は 40 MHz となっている。
+Run-3では陽子-陽子衝突の重心系エネルギーを 13.6 TeVに増強し、瞬間ルミノシティ 2.0$\times$10$^{34}$ cm$^{−2}$s$^{−1}$ での運転を行い、Run-2 で取得したデータと合わせて積分ルミノシティで 350 fb$^{−1}$ のデータを取得する予定である。
 
 \begin{figure}[tb]
   \centering
@@ -118,12 +118,14 @@ ATLASのカロリメータは、電磁カロリメータとハドロンカロリ
 
 \subsection{ミューオンスペクトロメータ}
 \label{section2-2-4}
-バレル領域は |η| < 1.05、エンドキャップ領域は |η| > 1.05
-に対応する。また、η > 0 を A-side、η < 0 を C-side と呼ぶ。
 
 \subsubsection{・Resisitive Plate Chamber (RPC)}
 \subsubsection{・New Small Wheel (NSW)}
 \subsubsection{・Thin Gap Chambers (TGC)}
+TGC は磁場領域より内側に EI (Endcap Inner) と呼ばれるステーション、磁場領域より外側に M1、M2、M3 (Middle 1,2,3) と呼ばれる 3 つのサブステーションが配置されている。磁場領域より外側にある M1 ステーションは TGC Triplet で構成されており、M2、M3 ステーションは TGC Doublet で構成されている。
+M1、M2、M3 のヒット情報をトリガー判定に使用し、M3 はミューオントリガーの位置情報を決定するための基準として用いられているため、Pivot plane と呼ばれている。
+磁場領域より内側にある EI ステーションは TGC Doublet で構成されており、これは EI チェンバーはトロイド磁石と干渉しないように配置されているため、図  のように一部の φ 領域のみをカバーしている。。TGC-EI のヒット情報を TGC-BW の飛跡情報とコインシデンスをとるために用いる。
+
 \subsubsection{・Monitored Drift Tube (MDT)}
 \subsubsection{・small-strip TGC (sTGC)}
 \subsubsection{・Micromegas (MM)}
@@ -133,6 +135,13 @@ ATLASのカロリメータは、電磁カロリメータとハドロンカロリ
 \subsubsection{Level1 Trigger}
 ・L1Calo\\
 ・L1Muon\\
+\begin{figure}[tb]
+  \centering
+  \includegraphics[clip, width=10cm]{fig/3/muon_trigger_overview.png}
+  \caption{初段ミューオントリガー}
+  \label{fig:muon}
+\end{figure}
+
 ・Central Trigger
 \subsubsection{High-Level Trigger}
 
