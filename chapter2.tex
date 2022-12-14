@@ -1,13 +1,17 @@
 \chapter{LHC-ATLAS実験}
 \label{chapter2}
 
-LHC-ATLAS 実験は、LHC （Large Hadron Collider）を用いた陽子–陽子衝突によって生成された粒子を ATLAS （A Troidal LHC ApparatuS）検出器によって検出し、標準模型の精密測定や新粒子探索などを行う実験である [5]。LHC は 2018 年に Run-2 を終了し、2019 年から 2021 年にかけて LHC 及び ATLAS 検出器のアップグレードが行われ、2022 年から Run-3 が開始された。
+LHC-ATLAS 実験とは、LHC (Large Hadron Collider)を用いた高エネルギーの陽子–陽子衝突によって生成された粒子を ATLAS (A Troidal LHC ApparatuS) 検出器によって検出し、標準模型の精密測定や新粒子探索などを行う実験である。LHC は 2018 年に Run-2 を終了し、2019 年から 2021 年にかけて LHC 及び ATLAS 検出器のアップグレードが行われ、2022 年から Run-3 が開始された。
+
+本章では、Run-3におけるLHC及びATLAS検出器の概要とATLAS実験で採用されているトリガーシステムについて述べる。
 
 \section{LHC加速器}
 \label{section2-1}
 
 Large Hadron Collider (LHC)は、スイスのジュネーブ郊外にある欧州素粒子原子核研究機構 (CERN)の地下に建設された周長約 27 km の世界最大の大型ハドロン衝突型加速器である。LHC加速器の概略図を図\ref{fig:LHC加速器}に示す。
-LHC加速器では高いエネルギーで陽子を衝突させることにより、TeV スケールまでの物理事象を広く調べることを目的とし様々な実験を行っている。
+LHC は14 TeV の重心エネルギー、$1\times10^{34}$ cm$^{-2}$s${^-1}$の瞬間ルミノシティで陽子-陽子衝突が可能なように設計されている。LHCの衝突実験で使用される陽子ビームはバンチと呼ばれる 10${^11}$ 個の集合体になっており、このバンチ単位で陽子を加速、衝突させている。
+LHCの一周あたりに 25 ns の間隔で陽子ビームが入射されており、陽子-陽子衝突を起こした際の各バンチの衝突頻度は 40 MHz である。
+LHCでは陽子を段階的に加速させ高エネルギー状態の陽子を衝突させることにより、TeV スケールまでの物理事象を広く調べることを可能にしている。
 
 \begin{figure}[tb]
   \centering
@@ -17,23 +21,26 @@ LHC加速器では高いエネルギーで陽子を衝突させることによ�
 \end{figure}
 
 
-LHCに陽子ビームを入射する前に、いくつかの前段加速器を使用し加速される。
-初めに線源からの陽子は 線形加速器である LINAC2 で 50MeV まで加速される。第二段階は、Proton Synchrotron Booster (PSB) で1.4GeVまで加速される。Proton Synchrotron (PS) でビームを26GeVまで加速し、40MHzのバンチ構造を形成する。
-その後、Super Proton Synchrotron (SPS) で450GeVまで加速された後、ビームはLHCに入射される。
+LHCでは陽子を衝突させる前に、いくつかの前段加速器を使用しTeVスケールの高エネルギーまで加速している。
+初めに水素原子に強い電場をかけることで、衝突実験で使用する陽子を得る。
+この陽子は線形加速器である LINAC2 で 50MeV まで加速される。次に、Proton Synchrotron Booster (PSB) で1.4GeVまで加速された後、Proton Synchrotron (PS) で陽子を26GeVまで加速し、40MHzのバンチ構造を持った陽子ビームを形成する。
+その後、Super Proton Synchrotron (SPS) で450GeVまで加速された後、陽子ビームはLHCに入射され最大で7 TeV まで加速される。
 LHCは陽子ビームが反対方向に周回するための2つのリングから構成されており、4か所ある衝突点にそれぞれ検出器が設置されている。
-その衝突点の一つにATLAS 検出器が設置され、陽子同士の衝突から生成される粒子を検出する。
- 他3箇所にも検出器が設置されており、それぞれCMS（Compact Muon Solenoid）、LHCb （Large Hadron Collider b）、ALICE （A Large Ion Collider Experiment）である。
- ATLAS と CMS の2つの検出器は、標準模型の検証から標準模型を超える現象の探索まで可能な汎用検出器である。
- LHCb と呼ばれる検出器は、B-ハドロン系の物理を研究するために設計されたものである。
- 最後の ALICE は、QCD 現象を探るために重イオン衝突の研究に最適化された検出器である。
+その衝突点の一つに　ATLAS 検出器が設置され、陽子同士の衝突から生成される粒子を検出する。
+他3箇所にも検出器が設置されており、それぞれCMS（Compact Muon Solenoid）、LHCb （Large Hadron Collider b）、ALICE （A Large Ion Collider Experiment）である。
+ATLAS と CMS の2つの検出器は、標準模型の検証から標準模型を超える現象の探索まで可能な汎用検出器である。
+LHCb と呼ばれる検出器は、B-ハドロン系の物理を研究するために設計されたものである。
+最後の ALICE は、QCD 現象を探るために重イオン衝突の研究に最適化された検出器である。
 
-LHC
-
-\section{ATLAS実験}
+\section{LHC-ATLAS 実験}
 \label{section2-2}
+本節では、LHC-ATLAS 実験で使用される ATLAS 検出器とトリガーシステムについて説明する。
+
 \subsection{ATLAS検出器}
-ATLAS検出器は、LHCの衝突点の1つに設置された、直径25ｍ、長さ44ｍの円筒形の大型汎用検出器である。
-ATLAS検出器は複数の検出器を組み合わせて構成されており、内側から内部飛跡検出器、カロリメータ、ミューオンスペクトロメータといった検出器が設置されている。また、内部飛跡検出器とカロリメータの間には超電導ソレノイド磁石、カロリメータの外側にはトロイド磁石がそれぞれ設置されており、磁場によって曲げられた荷電粒子の曲率半径から運動量の算出を行っている。
+ATLAS検出器は、LHCの衝突点の1つに設置された、直径25ｍ、長さ44ｍの円筒形の大型汎用検出器である。全体像を図\ref{fig:ATLAS検出器}に示す。
+ATLAS検出器は複数の検出器を組み合わせて構成されており、内側から内部飛跡検出器、カロリメータ、ミューオン検出器といった検出器が設置されている。また、内部飛跡検出器とカロリメータの間には超電導ソレノイド磁石、カロリメータの外側にはトロイド磁石がそれぞれ設置されている。
+これらの検出器からの情報を組み合わせることで、粒子の識別やエネルギーなどの測定を行う。
+以下では各検出器の概要について述べる。
 
 \begin{figure}[tb]
   \centering
@@ -44,7 +51,20 @@ ATLAS検出器は複数の検出器を組み合わせて構成されており、
 
 
 \subsection{ATLAS検出器における座標系}
-ATLAS検出器における座標系を示す（図\ref{fig:a}）。検出器の中心を原点とし、ビーム軸に沿ってｚ軸を取る。地面に対して平行方向にx軸を取り、垂直方向にy軸を取る直行座標系および、円筒座標系を設定する。また、ATLAS実験では、$\eta=-ln(tan\theta/2)$と定義される擬ラピディティ$\eta$を使用する。
+ATLAS実験では図\ref{fig:a}に示すような直行座標系と円筒座標系が使用されている。直行座標系では、検出器の中心を原点として、ビーム軸に沿ってｚ軸を取り、ビーム軸に垂直な平面をx-y平面としたときに、加速器の中心方向を正とするx軸及び、地面に対して垂直方向上向きを正とするy軸を設定する。円筒座標系では、ビーム軸に沿ったｚ軸に対し、動径方向を$R$、ビーム軸周りの角度を方位角$\phi$、ビーム軸からの角度を極角$\theta$としている。
+ATLAS 検出器では z 軸が正の側を A-side、負の側を C-side と定義している。
+
+また、ATLAS実験で使用される座標系として、
+\begin{equation}
+　\eta=-ln(tan\frac{\theta}{2})
+　\label{ラピディティ}
+\end{equation}
+
+と定義される擬ラピディティ$\eta$が用いられる。
+
+ATLAS 検出器は円筒形をしており、側面部分と底面部分に配置される検出器を分けて考えるため、$|\eta| < 1.0$ の側面部分をバレル領域、$|\eta| > 1.0$ の底面部分をエンドキャップ領域と呼ぶ。
+
+
 
 \begin{figure}[tb]
   \centering
@@ -53,15 +73,19 @@ ATLAS検出器における座標系を示す（図\ref{fig:a}）。検出器の�
   \label{fig:a}
 \end{figure}
 
-衝突点を原点とし、ビーム軸に沿ってｚ軸を取る。地面に水平方向にx軸を取り、x-z平面に垂直方向にy軸を取る。
+\subsection{マグネットシステム}
+ATLAS 実験では、荷電粒子の運動量測定のために超伝導磁石を用いている。超伝導磁石は 2 種類あり、1 つは衝突点付近で発生した荷電粒子の運動量測定のために用いられるソレノイド磁石であり、もう 1 つはミューオンの運動量測定のために用いられるトロイド磁石である。トロイド磁石はバレル部とエンドキャップ部に分けられ、それぞれ$\phi$ 方向に等間隔で 8 つずつ配置されている。ただし、バレル部とエンドキャップ部での磁場の干渉を考慮して、エンドキャップ部のトロイド磁石はバレル部に対して 22.5 度回転した状態で配置されている。
 
 \subsection{内部飛跡検出器}
+内部飛跡検出器は衝突点で発生した荷電粒子の飛跡を測定する。その際、荷電粒子の飛跡はソレノイド磁石によって曲げられる。この飛跡は荷電粒子の運動量の算出に用いられる。
+内部飛跡検出器は内側から Insertable B-Layer (IBL)、ピクセル検出器、Semiconductor Tracker (SCT)、Transition Radiation Tracker (TRT) で構成されている。
+
 
 \begin{figure}
     \centering
-    \begin{minipage}[b]{0.3\linewidth}
+    \begin{minipage}[b]{0.4\linewidth}
         \centering
-        \includegraphics[clip, width=8cm]{fig/2/inner_detectoer1.jpg}
+        \includegraphics[clip, width=7cm]{fig/2/inner_detectoer1.jpg}
         \vspace{10pt}
         \subcaption{内部飛跡検出器の概略図}
         \label{fig:内部飛跡検出器の概略図1}
@@ -69,13 +93,13 @@ ATLAS検出器における座標系を示す（図\ref{fig:a}）。検出器の�
     \hfill
     \begin{minipage}[b]{0.5\linewidth}
         \centering
-        \includegraphics[clip, width=7cm]{fig/2/inner_detector2.jpg}
+        \includegraphics[clip, width=6cm]{fig/2/inner_detector2.jpg}
         \vspace{10pt}
         \subcaption{内部飛跡検出器の概略図}
         \label{fig:内部飛跡検出器の概略図2}
     \end{minipage}
-    \caption{Three simple graphs}
-    \label{fig:three graphs}
+    \caption{内部飛跡検出器}
+    \label{fig:内部飛跡検出器}
 \end{figure}
 
 
@@ -97,13 +121,22 @@ ATLASのカロリメータは、電磁カロリメータとハドロンカロリ
 バレル領域は |η| < 1.05、エンドキャップ領域は |η| > 1.05
 に対応する。また、η > 0 を A-side、η < 0 を C-side と呼ぶ。
 
-
+\subsubsection{・Resisitive Plate Chamber (RPC)}
+\subsubsection{・New Small Wheel (NSW)}
 \subsubsection{・Thin Gap Chambers (TGC)}
+\subsubsection{・Monitored Drift Tube (MDT)}
+\subsubsection{・small-strip TGC (sTGC)}
+\subsubsection{・Micromegas (MM)}
 
 
+\subsection{ATLAS トリガーシステム}
+\subsubsection{Level1 Trigger}
+・L1Calo\\
+・L1Muon\\
+・Central Trigger
+\subsubsection{High-Level Trigger}
 
-\subsection{マグネットシステム}
-\subsubsection{・ソレノイド磁石}
+
 
 
 

@@ -1,8 +1,34 @@
-\chapter{機械学習によるLook-up Tableの作成手法}
+\chapter{機械学習によるCWの作成手法}
+本章では機械学習を用いてCWを作成する手法について述べる。
+本研究では、シミュレーション用のCWと実際の測定用のCWをそれぞれ作成している。
+また、作成したCWの性能について、それぞれ評価を行う。
+
 \section{機械学習}
+機械学習とは、データからコンピューターが自動で特徴量やルールを学習し、学習した結果に基づいて新たなデータに対し分類や予測を行う分析手法の一つである。
+
+機械学習には、教師あり学習、教師なし学習、強化学習
+
+・回帰問題\\
+・分類問題
+\subsection{パーセプトロン}
+
+\subsection{ニューラルネットワーク}
+\subsubsection{活性化関数}
+\subsubsection{損失関数}
 
 \section{機械学習を用いたCWの作成}
 \subsection{入力データに対する事前処理}
+・磁場構造に考慮した領域分け\\
+・ヒットマップクリーナ
 \subsection{機械学習モデル}
+・Tensorflow\\
+・モデルのトレーニング\\
+・パラメータ
 \subsection{ミューオン運動量の閾値の決定}
+・L1-Efficiency\\
+・0.1GeV刻みのEfficiency\\
+・fitting\\
+・threshould-ptの定義
 \subsection{性能評価}
+・Efficiency(v05 vs v06,v07)\\
+・TriggerRate
