@@ -27,7 +27,7 @@ MLP
 \begin{figure}[tb]
   \centering
   \includegraphics[clip, width=10cm]{fig/4/MLP.png}
-  \caption{Resolution}
+  \caption{MLP}
   \label{fig:Resolution}
 \end{figure}
 
@@ -40,30 +40,56 @@ MLP
 \begin{figure}[tb]
   \centering
   \includegraphics[clip, width=7cm]{fig/4/c1_withMag.pdf}
-  \caption{Resolution}
-  \label{fig:Resolution}
+  \caption{磁場構造に考慮するための学習領域の分け方}
+  \label{fig:Mag}
 \end{figure}
 
 ・ヒットマップクリーナ＜クリーナー前後のhitmap＞
 \begin{figure}[tb]
   \centering
   \includegraphics[clip, width=14cm]{fig/4/cleaner.png}
-  \caption{Resolution}
-  \label{fig:Resolution}
+  \caption{ヒットマップクリーナーをかけた前後のミューオンヒットマップの例}
+  \label{fig:hitmapcleaner}
 \end{figure}
 
 
-\subsection{機械学習モデルのトレーニング}
+\subsection{機械学習モデルの設計方法とトレーニング}
 ・Tensorflow\\
-・モデルのトレーニング\\
-・パラメータ\\
-・機械学習としての性能評価
+\subsubsection{機械学習モデルの設計}
+\subsubsection{トレーニング}
+\subsubsection{機械学習モデルの性能評価}
+\begin{figure}[tb]
+  \centering
+  \rule{8cm}{6cm}
+  %\includegraphics[clip, width=14cm]{}
+  \caption{残差分布}
+  \label{fig:fit_def}
+\end{figure}
+
+\begin{figure}[tb]
+  \centering
+  \rule{8cm}{6cm}
+  %\includegraphics[clip, width=14cm]{}
+  \caption{trueに対するpredの分布}
+  \label{fig:fit_def}
+\end{figure}
+
+\begin{figure}[tb]
+  \centering
+  \rule{8cm}{6cm}
+  %\includegraphics[clip, width=14cm]{}
+  \caption{true-prepのpt分布}
+  \label{fig:fit_def}
+\end{figure}
+
 
 \subsection{出力データから CW の作成}
-look-up tableの形にする
+\subsubsection{出力データ}
+\subsubsection{fitting}
+
+
 4bit
-fit
-出力を閾値に変更
+
 
 ・Efficiencyに対するfitting　＜fittingの定義のプロット＞＜threshould＞＜Resolution＞＜プラトー＞\\
 \begin{figure}[tb]
@@ -80,7 +106,7 @@ fit
   \label{fig:Resolution}
 \end{figure}
 
-
+\subsubsection{出力データをPt閾値に変換}
 
 \subsection{作成した CW の評価}
 Run-2データを用いた評価

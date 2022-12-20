@@ -1,14 +1,33 @@
 \chapter{初段ミューオントリガーシステム}
-トリガーシステムの一つである初段ミューオントリガーシステムに着目し、本章では、Run-3におけるエンドキャプ部初段ミューオントリガーシステムについて述べる。
+本章では、ATLAS トリガーシステムの一つである初段ミューオントリガーシステムに着目し、Run-3におけるエンドキャプ部初段ミューオントリガーシステムについて述べる。
 
 \section{ATLAS トリガーシステムの概要}
+ATLAS実験では、LHCを用いて40MHzでの陽子陽子衝突の測定を行っている。しかし、データ記憶容量の制限が存在するためすべての衝突事象を保存することはできず、現在の制約では記憶するトリガーレートを約1kHzまで削減する必要がある。
+そのため、物理として興味のある事象のみを効率よく取得するトリガーシステムを用いて事象選別を行う。
+
+ATLAS 検出器では、ハードウェアにより高速にトリガー判定を行う初段の Level-1 Trigger (L1 Trigger)、ソフトウェアで詳細なトリガー判定を行う後段の High-Level Trigger (HLT) で構成される2段階のトリガーシステムを用いている。
+
+\begin{figure}[tb]
+  \centering
+  \rule{8cm}{6cm}
+  %\includegraphics[clip, width=14cm]{}
+  \caption{ATLAS トリガーシステムの全体像}
+  \label{fig:fit_def}
+\end{figure}
+
 \subsubsection{Level1 Trigger}
+初段トリガーである Level-1 Trigger では、ATLAS 検出器から送られてくる40MHzの衝突事象を2.5 $\mu s$ 以内にトリガー判定を行い、イベントレートを100 kHzまで落とす必要がある。このような高速でのデータ処理を行うために、L1 Trigger は Application Specific Integrated Circuit (ASIC)や Field Programmable Gate Array (FPGA) で構成されるハードウェアに実装されている。
+ASIC と FPGA は
+
+
+
+
 ・L1Calo\\
 ・L1Muon\\
 \begin{figure}[tb]
   \centering
   \includegraphics[clip, width=10cm]{fig/3/muon_trigger_overview.png}
-  \caption{初段ミューオントリガー}
+  \caption{初段ミューオントリガーに用いる検出器の設置位置}
   \label{fig:muon}
 \end{figure}
 
@@ -57,7 +76,7 @@ ROIの話
 \begin{figure}[tb]
   \centering
   \includegraphics[clip, width=10cm]{fig/4/zure.png}
-  \caption{Resolution}
+  \caption{Run-2での検出器のズレの測定図}
   \label{fig:Resolution}
 \end{figure}
 ・検出器アライメント
