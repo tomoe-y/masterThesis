@@ -7,9 +7,24 @@
 機械学習を使う方針を述べる
 MC Dataを分けて学習\\
 
+\begin{figure}[tb]
+  \centering
+  \rule{8cm}{6cm}
+  \caption{本研究の方針}
+  \label{fig:fit_def}
+\end{figure}
+
 \section{機械学習}
 機械学習とは、データからコンピュータが自動で特徴量やルールを学習し、学習した結果に基づいて新たなデータに対し分類や予測を行う分析手法の一つである。
 そのため、人がコンピュータにルールを明示的に与える代わりに、学習するためのデータを与えることでコンピュータが自動的にデータからルールを獲得することができるのである。
+
+\begin{figure}[tb]
+  \centering
+  \rule{8cm}{6cm}
+  \caption{回帰、分類の図}
+  \label{fig:fit_def}
+\end{figure}
+
 \subsubsection{・回帰問題}
 \subsubsection{・分類問題}
 
@@ -22,6 +37,13 @@ MC Dataを分けて学習\\
 \subsection{機械学習モデル}
 MLP
 \subsubsection{パーセプトロン}
+\begin{figure}[tb]
+  \centering
+  \rule{8cm}{6cm}
+  \caption{パーセプトロン}
+  \label{fig:fit_def}
+\end{figure}
+
 \subsubsection{ニューラルネットワーク}
 ニューラルネットワークは入力に対し、線形変換と非線形変換を繰り返し適応することで、入力から予測値を計算することができる。
 \begin{figure}[tb]
@@ -56,13 +78,15 @@ MLP
 \subsection{機械学習モデルの設計方法とトレーニング}
 ・Tensorflow\\
 \subsubsection{機械学習モデルの設計}
+
 \subsubsection{トレーニング}
+
 \subsubsection{機械学習モデルの性能評価}
 \begin{figure}[tb]
   \centering
   \rule{8cm}{6cm}
   %\includegraphics[clip, width=14cm]{}
-  \caption{残差分布}
+  \caption{残差分布(MC)}
   \label{fig:fit_def}
 \end{figure}
 
@@ -70,7 +94,7 @@ MLP
   \centering
   \rule{8cm}{6cm}
   %\includegraphics[clip, width=14cm]{}
-  \caption{trueに対するpredの分布}
+  \caption{trueに対するpredの分布(MC)}
   \label{fig:fit_def}
 \end{figure}
 
@@ -78,7 +102,31 @@ MLP
   \centering
   \rule{8cm}{6cm}
   %\includegraphics[clip, width=14cm]{}
-  \caption{true-prepのpt分布}
+  \caption{true-prepのpt分布(MC)}
+  \label{fig:fit_def}
+\end{figure}
+
+\begin{figure}[tb]
+  \centering
+  \rule{8cm}{6cm}
+  %\includegraphics[clip, width=14cm]{}
+  \caption{残差分布(Data)}
+  \label{fig:fit_def}
+\end{figure}
+
+\begin{figure}[tb]
+  \centering
+  \rule{8cm}{6cm}
+  %\includegraphics[clip, width=14cm]{}
+  \caption{trueに対するpredの分布(Data)}
+  \label{fig:fit_def}
+\end{figure}
+
+\begin{figure}[tb]
+  \centering
+  \rule{8cm}{6cm}
+  %\includegraphics[clip, width=14cm]{}
+  \caption{true-prepのpt分布(Data)}
   \label{fig:fit_def}
 \end{figure}
 
