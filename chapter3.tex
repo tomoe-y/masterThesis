@@ -79,7 +79,7 @@ TGC のトリガー判定に用いられる単位の模式図を図\ref{fig:RoI}
   \label{fig:trigger-scheme}
 \end{figure}
 
-\subsubsection{Coincidence Window (CW)}
+\subsection{Coincidence Window (CW)}\label{section:CW}
 $dR$、$d\phi$ と $p_T$ の参照表は Coincidence Window (CW) と呼ばれており、
 あらかじめ MC サンプルや実際の測定データを用いて$dR$、$d\phi$に対応する $p_T$ を算出し、図\ref{fig:CW}のような形で保存されている LUT である。
 実際の運用では CW は FPGA に LUT 上に実装されており、L1 Trigger でのトリガー判定の際に参照することで高速なトリガー判定を可能にしている。
@@ -110,37 +110,89 @@ Run-3で使用される CW は図\ref{fig:CW}のように 15 個に分類され�
 
 
 
-・現行CWの作成手法
-
-
 \section{2022年 Run-3 における初段ミューオントリガーの性能}
 本節では2022年 Run-3 で使用されている CW のトリガー性能について述べる。
-まず、トリガー効率$\epsilon$について式\ref{equ:Eff}を用いて評価を行う。
-ここで評価するトリガー効率$\epsilon$は、オフラインで再構成されるミューオンに対してL1 Trigger を発行した割合と定義し、オフラインとは全てのトリガーシステムで処理が
-完了し、物理解析で使用するために保存されたデータを示す。この評価を行うときにTag&Probe 法と呼ばれる手法を用いる。
 
+\subsection{解析手法}
+実際の実験データはトリガーによって選別された粒子の情報のみが保存されているため、そのままのデータを用いてトリガーの性能評価や解析を行うとバイアスがかかる可能性がある。そこで解析の手法として Tag$\&$Probe 法を用いる。
+
+本研究では、内部飛跡検出器とミューオン検出器でそれぞれ独立に再構成され、その後飛跡が結合できたZ ボソン由来のミューオン候補を用いて評価を行う。1回の衝突事象に対し、2 つ以上のミューオン候補が存在するイベントのみを用いる。それらのミューオン候補のうち、任意の2つの電荷が異符号となっているミューオンペアを選び出し、不変質量を再構成する。再構成の条件は、$80 GeV < M_Z < 100 GeV$ とする。
+これらのミューオンのうち、一方を Tag ミューオン、もう一方を Probe ミューオンと定義する。
+まず、Tag ミューオンがトリガーを発行したかどうかを判定する。Run-2 での実験データを解析に使用する際のトリガー判定には、HLT のシングルミューオントリガーである 「HLT$\_$mu26$\_$ivarmeduium」 を使用する。
+ここでトリガー発行の判定を行うために $\Delta R = \sqrt{(\Delta \eta)2 + (\Delta \phi)2}$ を定義する。ここで $\Delta \eta$, $\Delta \phi$ はそれぞれデータの保存されているトリガーを発行した飛跡と Tag ミューオンの $\eta$ 方向、$\phi$ 方向の差である。図\ref{fig:tag_HLT}にTag ミューオンと HLT の $\Delta R$ 分布を示す。本研究では$\Delta R < 0.001$ を満たせば Tag ミューオンがトリガーを発行したとみなす。Tag ミューオンが HLT を発行しているとみなされた時、もう一つのミューオンを Probe ミューオンとして解析に使用する。
+
+\begin{figure}[tb]
+  \centering
+  \rule{8cm}{6cm}
+  \caption{Tag ミューオンと HLT の $\Delta R$ 分布。$\Delta R < 0.005$ ならば Tag ミューオンが HLT を発行したものとする。}
+  \label{fig:tag_HLT}
+\end{figure}
+
+Probe ミューオンは正しく再構成され、発行されたトリガーとは独立なミューオンである。
+Probe ミューオンを使用してエンドキャプ部のトリガー性能を評価するために、Probe ミューオンと TGC のヒット情報を一致させる。図\ref{fig:Probe_TGC}に Probe ミューオンと TGC のヒット情報 の $\Delta R$ 分布を示す。本研究では$\Delta R < 0.04$ を満たせば Probe ミューオンが TGC のヒット情報と一致したものとする。
+Probe ミューオンの情報とこのミューオンと一致したTGC のヒット情報を使って解析を行う。
+
+\begin{figure}[tb]
+  \centering
+  \rule{8cm}{6cm}
+  \caption{Probe ミューオンと TGC のヒット情報との $\Delta R$ 分布。$\Delta R < 0.005$ ならば Probe ミューオンが TGC のヒット情報と一致したものとする。}
+  \label{fig:Probe_TGC}
+\end{figure}
+
+
+\subsection{トリガーの効率の算出}
+トリガー効率$\epsilon$について式\ref{equ:Eff}を用いて評価を行う。
+ここで、全ミューオン数はTGC にヒットした全オフラインミューオンと定義し、その中でトリガーを発行したミューオンの数を調べ、トリガー効率を計算する。
 \begin{equation}
 　\epsilon=\frac{トリガーを発行したミューオンの数}{全ミューオンの数}
 　\label{equ:Eff}
 \end{equation}
 
-
+シングルミューオンのシミュレーションサンプルに対してトリガー効率を計算し、2022年Run-3 で使用されているトリガーの各閾値におけるトリガー効率を pT の関数として表した結果を図\ref{fig:Run3_15_MC}に示す。
 
 \begin{figure}[tb]
   \centering
   \includegraphics[clip, width=15cm]{fig/3/PLOT-TRIG-2020-01-fig1.pdf}
-  \caption{Run-3 における15段階閾値のTurn-on curve。}
-  \label{fig:fit_def}
+  \caption{Run-3 における15段階閾値のTurn-on curve。シングルミューオンのシミュレーションサンプルに対してのトリガー効率を示している。}
+  \label{fig:Run3_15_MC}
 \end{figure}
-・Rate
+
+また、Run-3 の実データに対してトリガー効率を計算し、各閾値におけるトリガー効率を pT の関数として表した結果を図\ref{fig:Run3_15_Data}に示す。
+
 \begin{figure}[tb]
   \centering
   \rule{8cm}{6cm}
-  \caption{Rate}
-  \label{fig:fit_def}
+  \caption{Run-3 における15段階閾値のTurn-on curve。Run-3 の実データに対してのトリガー効率を示している。}
+  \label{fig:Run3_15_Data}
 \end{figure}
 
-・電荷
+さらに、各チェンバーごとの各閾値におけるトリガー効率を図\ref{fig:Run3_15_Data_chamber1}に示す。
+
+\begin{figure}
+    \centering
+    \begin{minipage}[b]{0.4\linewidth}
+        \centering
+        %\includegraphics[clip, width=7cm]{fig/2/IBdl.pdf}
+        \rule{6cm}{4cm}
+        \vspace{10pt}
+        \subcaption{}
+        \label{}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.4\linewidth}
+        \centering
+        %\includegraphics[clip, width=6cm]{fig/2/FMBmap.pdf}
+        \rule{6cm}{4cm}
+        \vspace{10pt}
+        \subcaption{}
+        \label{}
+    \end{minipage}
+    \caption{Run-3 における15段階閾値のTurn-on curve。Run-3 の実データに対しての各チェンバーごとトリガー効率を示している。(1-48個作る)}
+    \label{fig:Run3_15_Data_chamber1}
+\end{figure}
+
+ミューオンの電荷依存に対する評価
+
 \begin{figure}[tb]
   \centering
   \rule{8cm}{6cm}
@@ -148,29 +200,63 @@ Run-3で使用される CW は図\ref{fig:CW}のように 15 個に分類され�
   \label{fig:fit_def}
 \end{figure}
 
-・位置
-
-・問題点
 
 
-\subsubsection{Run-2における最適化手法}
-・検出器のズレ＜Run-2での検出器のズレの測定図＞
+\subsection{トリガーレートの算出}
+トリガーレートとは、実験データにおけるトリガーが発行された事象数である。ここでは HLT でのトリガー発行のバイアスを防ぐために、L1 Trigger のみを要求し、HLT は passthrough のトリガーである 「HLT$\_$noalg$\_$L1MU20」を要求する。 は 2016 年で取得されたデータを用いて算出したトリガーレートの $\eta$ 依存性である。
+
+\begin{figure}[tb]
+  \centering
+  \rule{8cm}{6cm}
+  \caption{Rate}
+  \label{fig:Run3_rate}
+\end{figure}
+
+\subsection{現行のCWの問題点}
+2022年 Run-3 で使用されている CW にはいくつかの問題点がある。
+・電荷
+
+
+・検出器アライメントを行っていないことによるEfficiencyの低下
+
+
+
+\section{CW の最適化手法}\label{section:最適化}
+Run-2 で行われたTGC 検出器の設置位置のズレや歪みを考慮した CW の最適化を行う方法について述べる。
+
+\subsection{TGC 検出器の設置位置による影響}
+シミュレーション上では TGC 検出器などの検出器は設計通りの位置に設置されている。そのため、シミュレーションサンプルを用いて作成されている CW は検出器のズレや歪みを考慮できていない。設置位置が設計位置からズレている場合、想定されていたミューオンの飛跡から外れてしうため、 CW を用いた運動量判定に影響が出てしまい、トリガーの運動量分解能の低下を招く。
+
+TGC のアライメントのズレの測定方法はこれまでの研究で既に確立されている。
+図\ref{fig:ズレ}に Run-2 での実データを用いた TGC 検出器の設置位置のズレを示す。
+
 \begin{figure}[tb]
   \centering
   \includegraphics[clip, width=10cm]{fig/4/zure.png}
   \caption{Run-2での検出器のズレの測定図}
-  \label{fig:Resolution}
+  \label{fig:ズレ}
 \end{figure}
+
+
+\subsection{検出器アライメント}
+CW に対して検出器のズレを補正し最適化することで、トリガー効率を維持しつつ、トリガーレート削減を目指す。
+Run-2で行われたシミュレーションを用いて作成した CW に対する TGC アライメントの補正方法について以下に述べる。
+
+
+Run-2 では
+2015 年 Run-2 の実データを用いた
+この CW を cell 毎に判定する方法を CW optimization と呼ぶ。
+
+
 ・検出器アライメント
 ＜山内さんの手法＞
 ＜木戸さんの手法の説明＞
 
 
 \section{本研究の目的}
-Run-3における初段ミューオントリガーの性能を向上させるために CW の最適化を行う必要がある。しかし、Run-2で行われていた最適化手法は、各CWごとに1マスずつ閾値を確認する手法のため膨大な作業量が必要であり、
+Run-3における初段ミューオントリガーの性能を向上させるためには Run-2 と同様に CW の最適化を行う必要がある。しかし、\ref{section:最適化}節で述べたような Run-2 で行われていた最適化手法は、各CWごとに1マスずつ6段階の閾値を一段階ずつ確認する手法のため膨大な作業量が必要である。そのため、Run-3 で15段階に増設された閾値を持つ CW に対して　Run-2　での最適化手法を行うことは現実的でない。
+そこで、本研究では近年急速に発展している機械学習に着目し、新たな CW の最適化手法の開発を行う。
 
-・作業量が膨大
-・機械学習に注目
 
 
 
