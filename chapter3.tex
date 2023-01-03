@@ -84,13 +84,13 @@ $dR$、$d\phi$ と $p_T$ の参照表は Coincidence Window (CW) と呼ばれて
 あらかじめ MC サンプルや実際の測定データを用いて$dR$、$d\phi$に対応する $p_T$ を算出し、図\ref{fig:CW}のような形で保存されている LUT である。
 実際の運用では CW は FPGA に LUT 上に実装されており、L1 Trigger でのトリガー判定の際に参照することで高速なトリガー判定を可能にしている。
 エンドキャップ部のトロイド磁場や TGC は理想的には 8 回対称だが、磁場の向きや TGC チェンバーの設置位置のずれなどがあるため、CW は TGC BW のすべての単位位置情報 (RoI) ごとに作成されている。
-Run-3 で使用される CW は図\ref{fig:CW}のように 15 個に分類されており、これが 15 段階の $p_T$ 閾値に対応しており、各 $p_T$ 閾値に付された符号はミューオンの電荷に対応している。図のマスの中の数字は表\ref{pt_number} に示す pt number と対応している。
+Run-3 で使用される CW は図\ref{fig:CW}のように 15 個に分類されている。この各色が 15 段階の $p_T$ 閾値に対応しており、各 $p_T$ 閾値に付された符号はミューオンの電荷に対応している。図\ref{fig:CW}のマスの中の数字は表\ref{pt_number} に示す pt number と対応している。
 
 
 \begin{figure}[tb]
   \centering
   \includegraphics[clip, width=7cm]{fig/3/cw_run3_shiomi.png}
-  \caption{Run-3 での TGC における Coincidence Window の例。ミューオンのヒットがあった時にそれぞれの RoI の CW を参照し、$dR$、$dφ$ から $p_T$ を見積もる。}
+  \caption{Run-3 での TGC における Coincidence Window の例。ミューオンのヒットがあった時にそれぞれの RoI の CW を参照し、$dR$、$dφ$ からミューオンの $p_T$ を 15 段階で見積もる。}
   \label{fig:CW}
 \end{figure}
 

@@ -1,74 +1,153 @@
 \chapter{機械学習を用いた Coincidence Window の作成手法}
-本章では機械学習を用いた CW の作成手法について述べる。
-本研究では、シミュレーションで用いるトリガー用の CW と実際の測定で用いるトリガー用の CW をそれぞれ作成している。
+本章では本研究の主題である機械学習を用いた CW の作成手法について述べる。
+シミュレーションで用いるトリガー用の CW と実際の測定で用いるトリガー用の CW をそれぞれ作成し、評価を行う。
 
 \section{作成手法の方針}
-作成手法の方針について述べる。
-\ref{section:CW}節で述べたように、初段ミューオントリガーではミューオンの飛跡の曲がり具合を$\Delta R$,$\Delta \phi$として測定し、ヒット位置における CW を参照することでミューオンの運動量を算出している。
+本節では本研究で行う CW の作成手法の方針について述べる。
+\ref{section:CW}節で述べたように、初段ミューオントリガーでは TGC でのヒット情報をもとにミューオンの飛跡の曲がり具合を $\Delta R$, $\Delta \phi$ として測定し、TGC$\_$W M3 でのヒット位置における CW を参照することでミューオンの運動量を算出している。
+この CW はシミュレーションデータを用いたミューオンの運動量分布から統計的に作成する。そして、実際のデータをもとに、ある運動量を持つミューオンのヒットマップを作成し、ヒットマップと CW を比較することで検出器アライメントの補正値を判断して CW の最適化を行っている。
+このように従来の CW の作成から最適化までの作業では、大量のシミュレーションデータや実際のデータの傾向を CW に反映させることを手動で行っていた。
+機械学習は、膨大な学習データから特徴量を見出し、新たな入力値に対して予測することができるといった特徴がある。
+学習に必要な学習データとして Run-3 までの膨大なデータが存在することや、今後 CW の作り直しが生じた場合に迅速に対応が必要なことを踏まえて、本研究では学習データから自動的に特徴量を抽出することができる機械学習を用いて従来の手法 CW の作成手法を開発する。
 
 
-そこで、膨大な統計を活用できる手法として近年発展が著しい機械学習に着目する。機械学習の中でも、回帰分類を行うことのできるMultilayer perceptron (MLP) に注目する。
+
+
+
+
+
+
+また、従来の手法ではシミュレーションデータをもとに、ある RoI にヒットするミューオンの運動量分布を算出することで統計的に CW の $p_T$ の値を判断している。
+検出器アライメントの補正でも同様に、実際のデータをもとにある RoI にヒットするミューオンの運動量分布を作成し、統計的に補正を行っている。
+
+以上の CW の使用方法及び CW の作成、補正手法
+このように、初段ミューオントリガーでは ($\Delta R$, $\Delta \phi$, RoI, トリガーセクター) といった 4 つの情報からミューオンの横方向運動運動量 ($p_T$) を算出しており、運動量分布から統計的に設定し補正を行っている。
+Run-3 までの膨大な統計量のデータが揃っていることをふまえて、近年発展が著しい機械学習に着目する。
+
+機械学習の中でも、回帰分類を行うことのできるMultilayer perceptron (MLP) に注目する。
 本研究では機械学習を用いて CW を作成することを目的とする。
-
-MC Dataを分けて学習\\
 
 \begin{figure}[tb]
   \centering
-  \rule{8cm}{6cm}
-  \caption{本研究の方針}
-  \label{fig:fit_def}
+  \includegraphics[clip, width=14cm]{fig/4/MLPoverview.png}
+  \caption{機械学習を用いた CW 作成の流れ}
+  \label{fig:MLP_over}
 \end{figure}
 
 \section{機械学習}
-機械学習とは、データからコンピュータが自動で特徴量やルールを学習し、学習した結果に基づいて新たなデータに対し分類や予測を行う分析手法の一つである。
-そのため、人がコンピュータにルールを明示的に与える代わりに、学習するためのデータを与えることでコンピュータが自動的にデータからルールを獲得することができる。
-
-
+機械学習は、近年大きな注目を集めている「AI」や「人工知能」、「ディープラーニング」といった分野と非常に深い関わりがある。これらの最新技術は、どれもシステムを用いることでこれまで以上に効率的な業務や社会を実現することを目的としており、本研究の目的である CW　の作成作業の効率化に対する解決案として期待できる。
+ここで機械学習とは、データからコンピュータが自動で特徴量やルールを学習し、学習した結果に基づいて新たなデータに対し分類や予測を行う分析手法の一つである。
+そのため、人がコンピュータにルールを明示的に与える代わりに、学習するためのデータを与えることでコンピュータが自動的にデータからルールを獲得することができ、大量のデータを自動的に分析することが可能となる。
+代表的な分析手法として「回帰分析」と「クラス分類」がよく知られている。
+回帰の主な目的は、連続値などの値を傾向をもとに予測することである。過去の気温から明日の気温を予測することや企業における売り上げの予測などが回帰に当てはまる。回帰分析には、線形回帰、多項式回帰などが存在し、図\ref{fig:regre}に線形回帰の概要図を示す。
+一方で分類は、分析したいデータが属するカテゴリーやクラス、種類が何なのかを判定する手法である。特に、予測するクラス数が 2 クラスの場合には 2 値分類と、2クラスより多い分類予測については多クラス分類と呼ばれる。図\ref{fig:class}にクラス分類の概要図を示す。
 \begin{figure}[tb]
   \centering
-  \rule{8cm}{6cm}
-  \caption{回帰、分類の図}
+    \begin{minipage}[b]{0.4\linewidth}
+        \centering
+        \includegraphics[clip, width=7cm]{fig/4/regression.png}
+        \vspace{10pt}
+        \subcaption{}
+        \label{fig:regre}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.4\linewidth}
+        \centering
+        \includegraphics[clip, width=7cm]{fig/4/classification.png}
+        \vspace{10pt}
+        \subcaption{}
+        \label{fig:class}
+    \end{minipage}
+  \caption{(a):回帰分析、(b):クラス分類の概要図}
   \label{fig:fit_def}
 \end{figure}
-
-\subsubsection{・回帰問題}
-回帰の主な目的は、連続値などの値の予測である。
-
-\subsubsection{・分類問題}
-分類の目的は、入力されたデータを複数のクラスに分類することである。
-
-
 
 \subsection{学習手法}
-機械学習には、教師あり学習、教師なし学習、強化学習といった代表的な学習手法がある。
-\subsubsection{・教師あり学習}
-教師あり学習の目標は、入力$x$から推定したい出力$y$を予測できるようなモデル$y = f(x；\theta)$を学習することである。
-教師あり学習では、入力$x$と出力$y$を
+機械学習の学習手法は、教師あり学習、教師なし学習、強化学習の 3 つに大きく分けられる。
+教師あり学習は正解の値を与えた状態で傾向を学習させる方法である。
+教師あり学習は、「学習」と「予測」といった 2 つのプロセスによって成り立っており、、正解のデータを用いてルールやパターンの学習を行った後、新しいデータに対して、これまでに学習したデータを用いて予測を行う。
+一方で教師なし学習は、正解の値を教えずに学習させる方法である。大量のデータを学習させることでデータの特徴やパターンなどを覚えるが、それが正解か否かを判断することを学ぶのが教師なし学習の特徴である。
+また強化学習では、出力される結果に点数をつけて、最も多くの点数を得るための行動を学習させる。教師なし学習と同じように正解の値を学習させないが、教師なし学習との違いは、機械が報酬を得るために最適な行動を自ら考え実行する点である。
 
-\subsection{機械学習モデル}
-MLP
-\subsubsection{パーセプトロン}
+\subsection{ニューラルネットワーク}
+機械学習には多くの種類があるが、その内の一つがニューラルネットワークを使った手法である。ニューラルネットワークとは、人間の脳内にある神経細胞（ニューロン）とそのつながり、つまり神経回路網を人工ニューロン（パーセプトロン）という数式的なモデルで表現したものである。一つひとつのパーセプトロンは単純な仕組みであるが、多数組み合わせる事で複雑な関数近似を行う事ができるのが、ニューラルネットワークの大きな特徴である。
+
+図\ref{fig:perce}に示すように、パーセプトロンは入力と出力の2層で構成され、 n 個の入力信号$x_i$とバイアス$b$に対し重み$w_i$を作用させ 1 個の信号$y$を出力する関数 $f( )$ を持ち、式\ref{equ:acctivation}で表すことができる。この $f( )$ の事を「活性化関数」と呼び、活性化関数には、sigmoid 関数、tanh 関数、 ReLU 関数(Rectified linear Unit)」、 softmax 関数などが良く使われている。 
+\begin{equation}
+    y = f(\sum^{n-1}_{i=1}(w_i・x_i) + b)
+    %f \begin{pmatrix}  \\ 2 & 3 \end{pmatrix}
+    \label{equ:acctivation}
+\end{equation}
 \begin{figure}[tb]
   \centering
-  \rule{8cm}{6cm}
+  \includegraphics[clip, width=13cm]{fig/4/parceptron.png}
   \caption{パーセプトロン}
-  \label{fig:fit_def}
+  \label{fig:perce}
 \end{figure}
-
-\subsubsection{ニューラルネットワーク}
-ニューラルネットワークは入力に対し、線形変換と非線形変換を繰り返し適応することで、入力から予測値を計算することができる。
+sigmoid 関数の概形を図\ref{fig:sigmoid}に示す。sigmoid 関数はニューラルネットワークでよく用いられてきた関数であり、式\ref{equ:sigmoid}のような関数で表される。
+\begin{equation}
+    y = \frac{1}{1+exp(-x)}
+    %f \begin{pmatrix}  \\ 2 & 3 \end{pmatrix}
+    \label{equ:sigmoid}
+\end{equation}
+近年では、sigmoid 関数に変わり、図\ref{fig:ReLU}に示すような ReLU 関数が多く用いられている。ReLU 関数は式\ref{equ:ReLU}のような関数で表される。
+\begin{equation}
+    y = max(0,x)
+    %f \begin{pmatrix}  \\ 2 & 3 \end{pmatrix}
+    \label{equ:ReLU}
+\end{equation}
+\begin{figure}
+    \centering
+    \begin{minipage}[b]{0.4\linewidth}
+        \centering
+        \includegraphics[clip, width=7cm]{fig/4/sigmoid.png}
+        \vspace{10pt}
+        \subcaption{}
+        \label{fig:sigmoid}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.4\linewidth}
+        \centering
+        \includegraphics[clip, width=7cm]{fig/4/ReLU.png}
+        \vspace{10pt}
+        \subcaption{}
+        \label{fig:ReLU}
+    \end{minipage}
+    \caption{機械学習で用いられる活性化関数の例。(a): sigmoid 関数、(b): ReLU 関数。}
+    \label{fig:acctivation}
+\end{figure}
+単一のパーセプトロンでの解析は単純なものであれば問題ないが、複雑な事象を扱うことは難しい。そこで、このパーセプトロンを複数組み合わせることにより多層化することで、複雑な表現を可能とした多層パーセプトロン (MLP : Multilayer perceptron) が考案された。
+単一のパーセプトロンは入力と出力のみであったのに対し、図\ref{fig:MLP}に示すように、MLP は隠れ層と呼ばれる層が複数追加されたネットワーク構造を持ち、各層間は全て結合しているような構造になっている。この様な構造を持つニューラルネットワークの事を「全結合型ニューラルネットワーク」と呼ぶ。出力層においてよく使われる主な活性化関数としては、2種類の分類問題に対しては sigmoid 関数、多クラスの分類問題に対しては softmax 関数、回帰問題に対しては linear 関数などが用いられる。
 \begin{figure}[tb]
   \centering
-  \includegraphics[clip, width=10cm]{fig/4/MLP.png}
-  \caption{MLP}
-  \label{fig:Resolution}
+  \includegraphics[clip, width=10cm]{fig/4/MLP_re.png}
+  \caption{MLP の概形。パーセプトロンを複数組み合われており、ある層のパーセプトロンからの出力は全結合されて次の層の各パーセプトロンに入力される。}
+  \label{fig:MLP}
 \end{figure}
 
-\subsubsection{・活性化関数}
-\subsubsection{・損失関数}
+出力された予測値は損失関数を用いて評価が行われる。これは、入力値 $x_n$ に対してとある重み $w$ を設定して予測値 $y$ を導出し、その予測値 $y$ に対し目標値 $t$ との誤差 $L$ が最小になるようにそれぞれの重みやバイアスなどのパラメータの値を少しだけ増減させ調整を行う方法である。この調整を繰り返すことによって予測の精度を向上させていく。図\ref{fig:lossfunction}にパラメータの更新の流れを示す。
+この調整の際に使用される誤差を計算する関数は「損失関数」と呼ばれ、特に式\ref{equ:MSE}に示すような関数で表される平均二乗誤差（MSE : Mean Squared Error）が多く用いられる。他には、平均絶対誤差（MAE : Mean Absolute Error））や平均二乗誤差の平方根（RMSE : Root Mean Squared Error）などが用いられる。
+\begin{equation}
+    L = \frac{1}{n}\sum^{n}_{i=1}(y_i-t_i)^2
+    %f \begin{pmatrix}  \\ 2 & 3 \end{pmatrix}
+    \label{equ:MSE}
+\end{equation}
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[clip, width=10cm]{fig/4/lossfunc_laerning.png}
+  \caption{損失関数 $L$ の最小化の流れ。ある重み $w_i$ の時の勾配 $\frac{\partial L}{\partial w}$ を計算し、この勾配が小さくなるように重みを更新することを繰り返す。この際、更新量を調整するために学習率 $\eta$ を設定する。バイアス $b$ に対しても同様に最小化を行う。}
+  \label{fig:lossfunction}
+\end{figure}
+
+
 
 \section{機械学習を用いた CW 作成}
+本節では機械学習の学習方法及び実際に CW を作成する手法について述べる。
+
 \subsection{入力データに対する事前処理}
+本節では学習に用いる入力データに対する事前処理について述べる。
+
 ・磁場構造に考慮した領域分け＜学習領域の図＞\\
 \begin{figure}[tb]
   \centering
