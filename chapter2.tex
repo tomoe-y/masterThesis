@@ -268,6 +268,46 @@ Micromegas (MM) は、ワイヤーを用いないガス検出器である。図\
 
 
 
+\section{ATLAS トリガーシステム}
+ATLAS 実験では、LHC を用いて 40 MHz での陽子陽子衝突の測定を行っている。しかし、データ記憶容量の制限が存在するためすべての衝突事象を保存することはできず、現在の制約ではトリガーレートを約 1 kHz まで削減する必要がある。
+そのため、膨大なデータの中から物理として興味のある事象のみを効率よく取得するトリガーシステムを用いて事象選別を行っている。
+
+ATLAS 検出器では、ハードウェアにより高速にトリガー判定を行う初段の Level-1 Trigger (L1 Trigger)、ソフトウェアで詳細なトリガー判定を行う後段の High-Level Trigger (HLT) で構成される2段階のトリガーシステムを用いている。
+
+\subsubsection{Level-1 Trigger}
+初段トリガーである Level-1 Trigger では、ATLAS 検出器から送られてくる 40 MHz イベントレートの事象を 2.5 $\mu s$ 以内にトリガー判定を行い、100 kHz まで落とす必要がある。L1 Trigger は高速でのデータ処理を行うために Application Specific Integrated Circuit (ASIC)や Field Programmable Gate Array (FPGA) で構成されるハードウェアに実装されている。
+ASIC と FPGA は共に半導体集積回路 (IC) の一種であり、高速・低消費電力で特定の処理を行うように設計が可能である。
+ASIC は特定の用途向けに複数の回路を１つにまとめたもので、高速な動作速度や低い消費電力を実現できる。FPGA は ASIC と同様に特定の処理を行うように設計可能で何度でも書き換え可能な集積回路である。
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[clip, width=14cm]{fig/3/trigger-nagare2.pdf}
+  \caption{Run-3 における ATLAS トリガーシステム及びデータ読み出しの流れ。L1 には L1Calo、L1Muon、L1Topo の 3種類が存在する}
+  \label{fig:トリガーの全体像}
+\end{figure}
+
+図\ref{fig:トリガーの全体像}に示すように、L1 はカロリメータの情報を用いてトリガー判定を行う L1Calo、ミューオン検出器の情報を用いてトリガー判定を行う L1Muon に加え、これらを組み合わせた複合的なトリガーである Central Trigger から構成されている。L1 では、初めにカロリメータとミューオン検出器の情報からそれぞれ単独にトリガー判定を行う。
+
+L1Calo は電磁カロリメータとハドロンカロリメータの情報を統合してトリガー判定を行う。
+カロリメータからの信号は electron FEX (eFEX)、jet FEX (jFEX) 及び global FEX (gFEX) へと送られる。送られた信号はそれぞれ処理が行われ、電子/光子と τ 候補、ジェット候補の判定を行う。
+
+L1Muon はバレル部の RPC とエンドキャップ部の TGC から情報を受け取り、それぞれ独立にトリガー判定を行う。バレル部とエンドキャップ部で独立に判定された L1Muon の情報はMuon-to-CTP interface (MUCTPI) で統合される。
+
+その後、L1Calo と L1Muon からの情報は Central Trigger Processor (CTP) に送られるのと同時に、TopologyProcessor (L1Topo) に送られる。L1Topo では L1Muon と L1Calo の情報を組み合わせて、それぞれの情報から複合的なトリガーを発行する。
+最後に L1Muon、L1Calo、L1Topo の情報は CTP に集められ、100 kHz に収まるようにプリスケールをかけられた後に L1Accept （L1A）としてトリガー発行される。
+
+L1 Trigger では、衝突事象が起きてからトリガーの判定を行うまでの間、フロントエンド回路上の buffer で常に一定の時間データを保持している。
+L1A 信号を受け取った場合にはデータを後段の ReadOut Driver (ROD) に送られる仕組みとなっている。
+
+L1 Trigger は発行されたトリガーの位置情報 (η, φ) を含む Region of Interest (RoI) を後段の HLT に出力する。HLT では送られてきた RoI の情報から検出器情報を読み出し、より精密なトリガーの判定を行う。
+
+\subsubsection{High-Level Trigger}
+High-Level Trigger (HLT) は、L1 Trigger で出力された RoI の情報を用いて、ソフトウェアを用いたオフライン解析に近いアルゴリズムで粒子の再構成することにより、Level-1 Trigger より精密なトリガー判定を行う。
+HLT では、L1 Trigger で用いられなかった内部飛跡検出器の情報、MDT や CSC などの精密測定用のミューオン検出器の情報、L1Calo のカロリメータの情報などを用いて、飛跡再構成やより高精度な $E_T$、$p_T$ の計算を行う。トリガーレートは HLT を用いて最終的に数 kHz まで削減される。
+
+\section{ATLAS トリガーシステム}
+トリガーメニュー
+
 
 
 
