@@ -8,14 +8,14 @@ LHC は 2018 年に Run-2 を終了し、2019 年から 2021 年にかけて LHC
 
 \section{LHC加速器}
 \label{section2-1}
-Large Hadron Collider (LHC)は、スイスのジュネーブ郊外にある欧州素粒子原子核研究機構 (CERN) の地下に建設された周長約 27 km の世界最大の大型ハドロン衝突型加速器である。LHC の全体像を図\ref{fig:LHC加速器}に示す。
+Large Hadron Collider (LHC)は、スイスのジュネーブ郊外にある欧州素粒子原子核研究機構 (CERN) の地下に建設された周長約 27 km の世界最大の大型ハドロン衝突型加速器である。LHC の全体像を図\ref{fig:LHC_overview}に示す。
 LHC は重心系エネルギー 14 TeV、瞬間ルミノシティ $1.0\times10^{34}$ cm$^{-2}$s${^-1}$ で陽子-陽子衝突が可能なように設計されている。
 
 \begin{figure}[tb]
   \centering
-  \includegraphics[clip]{fig/2/accel_complex-v2022_complex.png}
-  \caption{LHC加速器の概略図}
-  \label{fig:LHC加速器}
+  \includegraphics[clip, width=14cm]{fig/2/LHC_overview.pdf}
+  \caption{LHC加速器の全体図。}
+  \label{fig:LHC_overview}
 \end{figure}
 
 \begin{figure}[tb]
@@ -29,9 +29,16 @@ LHC は2010年から本格的に実験を開始し、2010年から2012年にか�
 Run-1 では重心系エネルギー7-8 TeV、瞬間最高ルミノシティ$0.77\times10^{34}$ cm$^{-2}$s${^-1}$での運転を行い、Run-2 では重心系エネルギー13 TeV、瞬間最高ルミノシティ$2.0\times10^{34}$ cm$^{-2}$s${^-1}$での運転を行った。
 2019年から2021年初旬までに期間に加速器のアップグレードが行われ、2022年初旬から2025年にかけて行われる Run-3 では陽子-陽子衝突の重心系エネルギーを 13.6 TeV、瞬間ルミノシティ 2.0$\times$10$^{34}$ cm$^{−2}$s$^{−1}$ での運転を行い、Run-2 で取得したデータと合わせて積分ルミノシティ 350 fb$^{−1}$ のデータを取得する予定である。
 
-LHCでは陽子を衝突させるまでに、いくつかの前段加速器を使用し TeV スケールのエネルギーまで陽子を加速している。
-初めに水素原子に強い電場をかけることで、衝突実験で使用する陽子を得る。
-この陽子は線形加速器である LINAC2 で50 MeV まで加速される。次に、Proton Synchrotron Booster (PSB) で 1.4 GeVまで加速された後、Proton Synchrotron (PS) で陽子を26GeVまで加速し、40 MHzのバンチ構造を持った陽子ビームを形成する。
+\begin{figure}[tb]
+  \centering
+  \includegraphics[clip, width=14cm]{fig/2/CCC-v2022.pdf}
+  \caption{CERN に設置されている加速器群。}
+  \label{fig:LHC加速器}
+\end{figure}
+
+
+LHCでは陽子を衝突させるまでに、いくつかの前段加速器を使用し TeV スケールのエネルギーまで陽子を加速している。図\ref{fig:LHC加速器}に概略図を示す。
+初めに負水素イオン（H-、水素原子に電子を加えたもの）を線形加速器である LINAC4 で 160 MeV まで加速する。次に、強い電場をかけることで負水素イオンから2 個の電子を剥ぎ取り、陽子だけの状態にする。そして、Proton Synchrotron Booster (PSB) に入射し 1.4 GeVまで加速された後、Proton Synchrotron (PS) で陽子を26GeVまで加速し、40 MHzのバンチ構造を持った陽子ビームを形成する。
 その後、Super Proton Synchrotron (SPS) で450 GeVまで加速された後、陽子ビームは LHC に入射され最大で7 TeV まで加速される。
 LHCの衝突実験で使用される陽子ビームはバンチと呼ばれる 10${^11}$ 個の陽子のかたまりで構成されており、LHCの一周あたりに 25 ns のバンチ間隔で入射されているため、陽子-陽子衝突を起こす際の各バンチの衝突頻度は 40 MHz となっている。
 
@@ -79,7 +86,7 @@ ATLAS 検出器は円筒形をしており、側面部分と底面部分に配�
   \label{fig:a}
 \end{figure}
 
-\subsection{マグネットシステム}
+\subsection{マグネットシステム}\label{magnetic_filed}
 ATLAS 実験では、荷電粒子の運動量測定のために超伝導磁石を用いて磁場をかけている。超伝導磁石は 2 種類あり、1 つは衝突点付近で発生した荷電粒子の運動量測定のために用いられるソレノイド磁石、もう 1 つはミューオンの運動量測定のために用いられるトロイド磁石である。
 図\ref{fig:磁石}に ATLAS 検出器に設置されている超電導磁石の配置を示す。
 トロイド磁石はバレル部とエンドキャップ部に分けられ、それぞれ$\phi$ 方向に 8 つずつ等間隔で配置されている。

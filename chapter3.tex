@@ -38,15 +38,17 @@ L1 Trigger は発行されたトリガーの位置情報 (η, φ) を含む Regi
 High-Level Trigger (HLT) は、L1 Trigger で出力された RoI の情報を用いて、ソフトウェアを用いたオフライン解析に近いアルゴリズムで粒子の再構成することにより、Level-1 Trigger より精密なトリガー判定を行う。
 HLT では、L1 Trigger で用いられなかった内部飛跡検出器の情報、MDT や CSC などの精密測定用のミューオン検出器の情報、L1Calo のカロリメータの情報などを用いて、飛跡再構成やより高精度な $E_T$、$p_T$ の計算を行う。トリガーレートは HLT を用いて最終的に数 kHz まで削減される。
 
+トリガーメニュー
 
 
+\section{エンドキャプ部初段ミューオントリガー}
+概念、全体像
 
-\section{Run-3におけるエンドキャプ部初段ミューオントリガー}
 ATLAS 検出器でのミューオントリガーは、図\ref{fig:muon}に示すように RPC を用いるバレル部と TGC を用いるエンドキャップ部に分かれている。以下では TGC を用いるエンドキャップ部でのトリガーシステムについて説明する。エンドキャプ部はさらに2つの領域に分けられ、$1.05 < |\eta| < 1.9$ をエンドキャップ領域、$1.9 < |\eta| < 2.4$ をフォワード領域と呼ぶ。
 
 \begin{figure}[tb]
   \centering
-  \includegraphics[clip, width=14cm]{fig/3/muon_trigger_overview.png}
+  \includegraphics[clip, width=14cm]{fig/2/ch01_fig_03a.pdf}
   \caption{初段ミューオントリガーに用いる検出器の設置位置。}
   \label{fig:muon}
 \end{figure}
@@ -123,7 +125,7 @@ Run-3 で使用される CW は図\ref{fig:CW}のように 15 個に分類され
 \begin{figure}[tb]
   \centering
   \rule{8cm}{6cm}
-  \caption{Tag ミューオンと HLT の $\Delta R$ 分布。$\Delta R < 0.005$ ならば Tag ミューオンが HLT を発行したものとする。}
+  \caption{Tag ミューオンと HLT の $\Delta R$ 分布。$\Delta R < 0.001$ ならば Tag ミューオンが HLT を発行したものとする。}
   \label{fig:tag_HLT}
 \end{figure}
 
