@@ -272,7 +272,7 @@ Micromegas (MM) は、ワイヤーを用いないガス検出器である。図\
 ATLAS 実験では、LHC を用いて 40 MHz での陽子陽子衝突の測定を行っている。しかし、データ記憶容量の制限が存在するためすべての衝突事象を保存することはできず、現在の制約ではトリガーレートを約 1 kHz まで削減する必要がある。
 そのため、膨大なデータの中から物理として興味のある事象のみを効率よく取得するトリガーシステムを用いて事象選別を行っている。
 
-ATLAS 検出器では、ハードウェアにより高速にトリガー判定を行う初段の Level-1 Trigger (L1 Trigger)、ソフトウェアで詳細なトリガー判定を行う後段の High-Level Trigger (HLT) で構成される2段階のトリガーシステムを用いている。
+ATLAS 検出器では、ハードウェアにより高速にトリガー判定を行う初段トリガーの Level-1 Trigger (L1 Trigger)、ソフトウェアで詳細なトリガー判定を行う後段トリガーの High-Level Trigger (HLT) で構成される2段階のトリガーシステムを用いている。
 
 \subsubsection{Level-1 Trigger}
 初段トリガーである Level-1 Trigger では、ATLAS 検出器から送られてくる 40 MHz イベントレートの事象を 2.5 $\mu s$ 以内にトリガー判定を行い、100 kHz まで落とす必要がある。L1 Trigger は高速でのデータ処理を行うために Application Specific Integrated Circuit (ASIC)や Field Programmable Gate Array (FPGA) で構成されるハードウェアに実装されている。
@@ -299,14 +299,11 @@ L1Muon はバレル部の RPC とエンドキャップ部の TGC から情報を
 L1 Trigger では、衝突事象が起きてからトリガーの判定を行うまでの間、フロントエンド回路上の buffer で常に一定の時間データを保持している。
 L1A 信号を受け取った場合にはデータを後段の ReadOut Driver (ROD) に送られる仕組みとなっている。
 
-L1 Trigger は発行されたトリガーの位置情報 (η, φ) を含む Region of Interest (RoI) を後段の HLT に出力する。HLT では送られてきた RoI の情報から検出器情報を読み出し、より精密なトリガーの判定を行う。
+L1 Trigger は発行されたトリガーの位置情報 (η, φ) を後段の HLT に出力する。HLT では送られてきた位置情報から検出器情報を読み出し、より精密なトリガーの判定を行う。
 
 \subsubsection{High-Level Trigger}
-High-Level Trigger (HLT) は、L1 Trigger で出力された RoI の情報を用いて、ソフトウェアを用いたオフライン解析に近いアルゴリズムで粒子の再構成することにより、Level-1 Trigger より精密なトリガー判定を行う。
+High-Level Trigger (HLT) は、L1 Trigger で出力された位置情報を用いて、ソフトウェアを用いたオフライン解析に近いアルゴリズムで粒子の再構成することにより、Level-1 Trigger より精密なトリガー判定を行う。
 HLT では、L1 Trigger で用いられなかった内部飛跡検出器の情報、MDT や CSC などの精密測定用のミューオン検出器の情報、L1Calo のカロリメータの情報などを用いて、飛跡再構成やより高精度な $E_T$、$p_T$ の計算を行う。トリガーレートは HLT を用いて最終的に数 kHz まで削減される。
-
-\section{ATLAS トリガーシステム}
-トリガーメニュー
 
 
 
