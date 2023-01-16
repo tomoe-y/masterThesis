@@ -1,4 +1,4 @@
-\chapter{機械学習を用いた Coincidence Window の作成手法}
+\chapter{機械学習を用いた Coincidence Window の作成手法}\label{chapter4}
 本章では本研究の主題である機械学習を用いた CW の作成手法について述べる。
 
 \section{機械学習}\label{回帰分析}
@@ -37,10 +37,10 @@
 \subsection{ニューラルネットワーク}
 機械学習には多くの種類があるが、その内の一つがニューラルネットワークを使った手法である。ニューラルネットワークとは、人間の脳内にある神経細胞（ニューロン）とそのつながり、つまり神経回路網を人工ニューロン（パーセプトロン）という数式的なモデルで表現したものである。個々のパーセプトロンは単純な仕組みであるが、多数組み合わせる事で複雑な関数近似を行う事ができるのが、ニューラルネットワークの大きな特徴である。
 
-図\ref{fig:perce}に示すように、パーセプトロンは入力と出力の2層で構成され、 n 個の信号$x_i$に対し重み$w_i$を作用させバイアス b　とともに入力し、 1 個の信号$y$を出力する関数 $f(x_i, w_i)$ を持ったモデルである。式\eqref{equ:acctivation}で表すことができる。この $f(x_i, w_i)$ の事を「活性化関数」と呼び、活性化関数には、sigmoid 関数、tanh 関数、 ReLU 関数(Rectified linear Unit)」、 softmax 関数などが良く使われている。 
+図\ref{fig:perce}に示すように、パーセプトロンは入力と出力の2層で構成され、 n 個の信号$x_i$に対し重み$w_i$を作用させバイアス b　とともに入力し、 1 個の信号$y$を出力する関数 $f(x_i; w_i)$ を持ったモデルである。式\eqref{equ:acctivation}で表すことができる。この $f(x_i; w_i)$ の事を「活性化関数」と呼び、活性化関数には、sigmoid 関数、tanh 関数、 ReLU 関数(Rectified linear Unit)」、 softmax 関数などが良く使われている。 
 \begin{equation}
-    y = f(\Vec{w}・\Vec{x} + b)
-    %y = f(\sum^{n-1}_{i=1}(w_i・x_i) + b)
+    %y = f(\Vec{w}・\Vec{x} + b)
+    y = f(x_i; w_i) = \sum^{n-1}_{i=1}(w_i・x_i) + b
     %f \begin{pmatrix}  \\ 2 & 3 \end{pmatrix}
     \label{equ:acctivation}
 \end{equation}
@@ -122,9 +122,38 @@ sigmoid 関数及びReLU 関数の概形を図\ref{fig:sigmoid},図\ref{fig:ReLU
 \end{figure}
 
 \subsection{入力データに対する事前処理}
-本節では学習に用いる入力データに対する事前処理について述べる。
+本節では学習に用いるシミュレーションデータおよび実際のデータに対して処理を行い、本研究の機械学習に適した形式に変換する方法について述べる。
 
-シミュレーション用の機械学習のトレーニングには、1 イベントにミューオンが 1 個存在するシミュレーションサンプル（シングルミューオンサンプル）を使用し、実際の測定用の機械学習のトレーニングには、2018年 Run-2 のデータを用いた。
+シミュレーションに使用する CW 用の機械学習のトレーニングには、1 イベントにミューオンが 1 個存在するシミュレーションサンプル（シングルミューオンサンプル）を使用する。
+イベントのミューオンの内、TGC M3 に外挿されたヒット情報が存在し、 $0 GeV < p_T < 50 GeV$ の運動量を持ったミューオンを学習に使用する。
+
+\begin{figure}[thb]
+  \centering
+  \rule{8cm}{6cm}
+  %\includegraphics[clip, width=14cm]{}
+  \caption{深層学習モデルのトレーニングに用いたシングルミューオンサンプルの $p_T$ 分布。}
+  \label{fig:mu_pt_forMC}
+\end{figure}
+
+実際の測定に使用する CW 用の機械学習のトレーニングには、2018年 Run-2 のデータを用いる。使用するイベントには HLT のシングルミューオントリガーである 「HLT$\_$mu26$\_$ivarmeduium」を要求する。取得されたイベントのミューオンの内、TGC M3 に外挿されたヒット情報が存在し、 $0 GeV < p_{T} < 100 GeV$ の運動量を持ったミューオンを学習に使用する。
+
+\begin{figure}[thb]
+  \centering
+  \rule{8cm}{6cm}
+  %\includegraphics[clip, width=14cm]{}
+  \caption{深層学習モデルのトレーニングに用いたミューオンの $p_T$ 分布。}
+  \label{fig:mu_pt_forData}
+\end{figure}
+
+\subsubsection{TGC の位置情報のナンバリングの変換}
+学習には、TGC のヒット位置の情報として RoI の番号とトリガーセクターの番号を使用する。
+＜RoI トリガーセクターのナンバリングの図を貼る＞
+RoI はトリガーセクターごとに設定された番号が与えられており、あるトリガーセクターの一番端の RoI の番号は隣のトリガーセクターの RoI の番号と関連性がない。
+学習するにあたって、隣り合った場所に位置する RoI は似通った磁場構造を持っているので関係性を利用したい。そこで、隣り合った RoI の番号が連続するようなナンバリングに変換する。
+
+本研究では、TGC のヒット位置の情報の RoI の番号とトリガーセクターの番号を新たに (TGC-R-index, TGC-phi-index) という 2 変数に変換する。
+＜新しいRoI ナンバリングを貼る＞
+
 
 \subsubsection{磁場構造を考慮した学習領域の分割}
 \ref{magnetic_filed}節で述べたように、トロイド磁石が 8 回転対象に設置されていることにより TGC$\_$BW における磁場構造は図\ref{fig:Mag}に示すように一様ではない。そのため、本研究では TGC$\_$BW 全体を一括で学習させるのではなく、図\ref{fig:Mag}で示すように、入力データとして使用する領域を分割して学習を行う。
@@ -169,20 +198,20 @@ MLP の各隠れ層は以下の表\ref{table:hibben}に示す要素から構成�
    \item Activation unit：活性化関数を設定する層。本研究では Sigmoid 関数を選した。
    %\caption{隠れ層を構成する要素。}
 \end{enumerate}
-出力層には ReLU 関数を活性化関数として使用する。これは、目的とする $p_T$ の値が必ず正の値を取ることが確定しているためである。
+出力層には ReLU 関数を活性化関数として使用する。これは、目的とする出力の $p_T$ の値が必ず正の値を取るためである。
 誤差逆伝搬法には RMSprop optimizer を用いて勾配降下法を行っている。
 
 \subsubsection{ハイパーパラメータ}
 隠れ層の数、ノード数、ドロップアウト率、損失関数、学習率の 5 個のハイパーパラメータを表\ref{table:hyper}のように変化させることで評価を行い最適なモデルを選択した。評価にはPreferred Networks社が開発したハイパーパラメータの最適化を自動で行うフレームワークである Optuna \cite{article:optuna}を使用した。
 \begin{enumerate}\label{table:hyper}
-   \item 隠れ層の数：3層 \~ 7層
+   \item 隠れ層の数：3層 から 6層
    \item ノード数：128, 256, 512, 1024
    \item ドロップアウト率：0.1, 0.2, 0.3, 0.4, 0.5
-   \item 損失関数：MSE, MAS
+   \item 活性化関数：Sigmoid 関数、tanh 関数
    \item 学習率：0.01, 0.001, 0.0001
    %\caption{変化させるハイパーパラメータの一覧。}
 \end{enumerate}
-評価を行った結果、いくつかの組み合わせで同等の性能が得られることがわかった。これらのうち、学習可能なパラメータの数が最も少ないネットワークが選ばれた。パラメータとその値は、ドロップアウト率 0.2、損失関数 MSE、学習率 0.001, そして、5つの隠れ層と [512, 512, 512, 512, 512] のノード数を選択する。
+評価を行った結果、いくつかの組み合わせで同等の性能が得られることがわかった。これらのうち、学習可能なパラメータの数が最も少ないネットワークが選ばれた。パラメータとその値は、ドロップアウト率 0.2、活性化関数 Sigmoid、学習率 0.001, そして、5つの隠れ層と [512, 512, 512, 512, 512] のノード数を選択する。
 
 \begin{figure}[tb]
   \centering
@@ -197,29 +226,10 @@ MLP の各隠れ層は以下の表\ref{table:hibben}に示す要素から構成�
 
 
 
-\begin{figure}[tb]
-  \centering
-  \rule{8cm}{6cm}
-  %\includegraphics[clip, width=14cm]{}
-  \caption{深層学習モデルのトレーニングに用いたミューオンサンプルの $p_T$ 分布。}
-  \label{fig:mu_pt_forMC}
-\end{figure}
-
-\begin{figure}[tb]
-  \centering
-  \rule{8cm}{6cm}
-  %\includegraphics[clip, width=14cm]{}
-  \caption{深層学習モデルのトレーニングに用いたミューオンサンプルの $p_T$ 分布。}
-  \label{fig:mu_pt_forData}
-\end{figure}
-
-トレーニングの際に設定した
-
-
 
 \subsubsection{機械学習モデルの性能評価}
-
-
+本節では、トレーニングを行った機械学習モデルの性能評価を行う。
+2018 年 Run-2 のデータを用いて、MLP で予測した$p_{T}^{pred}$ と正解値 $p_{T}^true$ の残差分布の比較を行った。
 
 \begin{figure}[tb]
   \centering
@@ -270,28 +280,59 @@ MLP の各隠れ層は以下の表\ref{table:hibben}に示す要素から構成�
 \end{figure}
 
 
-\subsection{出力データから CW の作成}
-\subsubsection{出力データ}
-\subsubsection{fitting}
 
 
-4bit
-
-
-・Efficiencyに対するfitting　＜fittingの定義のプロット＞＜threshould＞＜Resolution＞＜プラトー＞\\
+\subsection{出力データをPt閾値に変換}
+\subsubsection{フィッティング関数の定義}\label{section:fitting}
+式\eqref{equ:fitting}を用いて Turn-on curve にフィッティングを行うことでトリガー効率を定量的に評価する。
+\begin{equation}
+    f(p_T) = \frac{p_0}{exp(\frac{p_T-p_1}{p_2})+1}
+　\label{equ:fitting}
+\end{equation}
+ここで、トリガーの性能を表す 3 つのパラメータ $p_0$, $p_1$, $p_2$ を以下のように定義する。図\ref{fig:fiting}に
 \begin{figure}[tb]
   \centering
   \includegraphics[clip, width=14cm]{fig/4/fitting_def.png}
-  \caption{fittingの定義}
-  \label{fig:fit_def}
+  \caption{Turn-on curve に対するfittingの例。$p_0$ を Plateau efficiency、$p_1$ を Effective threshold、$p_2$ を Resolution と定義する。}
+  \label{fig:fiting}
 \end{figure}
 
+\begin{enumerate}\label{table:fitting}
+   \item $p_0$:Plateau efficiency\\
+   Turn-on curve が横這いになった時のトリガー効率を表す。トリガー閾値以上の pT を持つミューオンに対するトリガー効率を表すため、その値が 1 に近い方が高性能である。
+   \item $p_1$:Effective threshold\\
+   トリガーの実効的な $p_T$ の閾値を表す。トリガー効率が Plateau efficiency の値の 50\% となる時の $p_T$ の値である。
+   \item $p_2$:Resolution\\
+   トリガーの運動量の分解能を表す。Turn-on curve の立ち上がりの鋭さに対応すしており、Resolution の値が大きくなると Turn-on curve の立ち上がりが緩くなるため、、トリガーの運動量分解能が悪くなる。
+\end{enumerate}
+
+\subsubsection{15段階閾値への変換}
+目的とする $p_T$ の値は MLP から連続値として出力される。そのため、任意の値で $p_T$ を区切り15段階の $p_T$ 閾値に変換を行う。
+方法としては、任意の値で $p_T$ を区切った時のトリガー効率を求め、Turn-on curve に対し\eqref{equ:fitting}を用いてフィッティングを行う。フィッティングから Effective threshold を求め、\ref{section:CW}で述べた Run-3 における 15 段階閾値となる任意の値を導出する。
+本研究では出力された $p_T$ を 1 GeV から 30 GeV まで 0.1 GeV 刻みで区切り、それぞれの Turn-on curve に対してのフィッティング結果から 15 段階の $p_T$ 閾値に変換を行った。
+図\ref{fig:Effictive_thr_v1}に出力データを 0.1 GeV 刻みで区切った時の Effective threshold を示す。
 \begin{figure}[tb]
   \centering
-  \includegraphics[clip, width=14cm]{fig/4/resolution_v07_v05.png}
-  \caption{Resolution}
-  \label{fig:Resolution}
+  \includegraphics[clip, width=14cm]{fig/4/Effictive_thr_v1.pdf}
+  \caption{出力された $p_T$ を 0.1 GeV 刻みで区切った時のTurn-on curve における Effective threshold。}
+  \label{fig:Effictive_thr_v1}
 \end{figure}
+フィッティング結果から表\ref{Effective_number}のように 15 段階閾値に区切る値を決定した。
+\begin{table}[thb]
+\centering
+    \caption{Run-3 初段ミューオントリガーにおける 15 段階の $p_T$ の値。}
+    \label{Effective_number}
+    
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        $p_t$ number & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15\\
+        \hline
+        出力された $p_T$ [GeV] & 1.0 & 2.0 & 3.0 & 4.7 & 6.2 & 7.4 & 8.4 & 9.6 & 10.6 & 11.7 & 12.8 & 13.9 & 15.0 & 21.7 & 25.1\\
+        \hline
+    \end{tabular}
+\end{table}
 
-\subsubsection{出力データをPt閾値に変換}
+
+
+
 

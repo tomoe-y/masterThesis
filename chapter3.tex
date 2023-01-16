@@ -1,8 +1,9 @@
 \chapter{初段ミューオントリガーシステム}
-本章では、ATLAS トリガーシステムの一つである初段ミューオントリガーシステムに着目し、Run-3 におけるエンドキャプ部初段ミューオントリガーシステムについて述べる。
+ATLAS 実験におけるミューオントリガーは、RPC を用いるバレル部と TGC を用いるエンドキャップ部に分かれている。
+本章では、Run-3 におけるエンドキャプ部初段ミューオントリガーシステムについて述べる。
 
 \section{エンドキャプ部初段ミューオントリガー}
-ATLAS 検出器でのミューオントリガーに用いる検出器は、図\ref{fig:muon}に示すように RPC を用いるバレル部と TGC を用いるエンドキャップ部に分かれている。以下では TGC を用いるエンドキャップ部でのトリガーシステムについて説明する。エンドキャプ部はさらに2つの領域に分けられ、$1.05 < |\eta| < 1.9$ をエンドキャップ領域、$1.9 < |\eta| < 2.4$ をフォワード領域と呼ぶ。
+ATLAS 実験におけるミューオントリガーに用いる検出器は、図\ref{fig:muon}に示すように RPC を用いるバレル部と TGC を用いるエンドキャップ部に分かれている。以下では TGC を用いるエンドキャップ部でのトリガーシステムについて説明する。エンドキャプ部はさらに2つの領域に分けられ、$1.05 < |\eta| < 1.9$ をエンドキャップ領域、$1.9 < |\eta| < 2.4$ をフォワード領域と呼ぶ。
 \begin{figure}[tb]
   \centering
   \includegraphics[clip, width=14cm]{fig/2/ch01_fig_03a.pdf}
@@ -10,24 +11,29 @@ ATLAS 検出器でのミューオントリガーに用いる検出器は、図\r
   \label{fig:muon}
 \end{figure}
 
-\subsection{エンドキャップ部ミューオントリガーの概要}\label{section:CW}
-エンドキャップ部初段ミューオントリガーで用いられるトリガー判定の概要を図\ref{fig:trigger-scheme}に示す。
+\subsection{ミューオントリガーの概要}\label{section:CW}
+エンドキャップ部の初段ミューオントリガーで用いられるトリガー判定の概要を図\ref{fig:trigger-scheme}に示す。
 衝突点で生成されたミューオンはトロイド磁石の磁場領域より内側にある検出器を通過した後、トロイド磁場領域を通り TGC に到達する。トロイド磁石による磁場は $\phi$ 方向にかかっているため、ミューオンの飛跡はトロイド磁場中で$\eta$ 方向に曲げられる。さらに、衝突点付近のソレノイド磁石で生じる $z$ 方向の磁場成分と、トロイド磁石付近で生じた $R$ 方向の磁場成分によって、ミューオンの飛跡は $\phi$ 方向にも曲げられる。ミューオンの飛跡の曲がり具合は 横方向運動量$p_T$ の大きさによって変化するため、飛跡情報からミューオンの$p_T$を算出することができ、トリガー判定に使用することができる。
 
-トロイド磁場によって曲げられたミューオンは TGC BW の M1, M2, M3 にヒットを残す。ここで、衝突点と M3 のヒット位置を結んだ直線をミューオンが無限運動量で通過したと仮定した場合の飛跡として扱う。この無限運動量を持つミューオンの飛跡と磁場によって曲げられた実際の飛跡を比較し、M1 におけるヒット位置の $R$ 方向と $\phi$ 方向のずれ $dR$、$d\phi$ を計算する。
-そして、あらかじめ $dR$、$d\phi$ に対応する $p_T$ を Look-Up Table (LUT) として作成しておき、参照する事で短時間で $p_T$ を出力を可能としている。
+トロイド磁場によって曲げられたミューオンは TGC BW の M1, M2, M3 を通過し、ヒット情報から飛跡を再構成される。ここで、衝突点と M3 のヒット位置を結んだ直線をミューオンが無限運動量で通過したと仮定した場合の飛跡として扱う。この無限運動量を持つミューオンの飛跡と磁場によって曲げられた実際の飛跡を比較し、M1 におけるヒット位置の $R$ 方向と $\phi$ 方向のずれ ($dR$, $d\phi$) を計算する。この ($dR$, $d\phi$) は磁場による飛跡の曲がり具合を表している。
+この $dR$ と $d\phi$ の値が大きいミューオンは、磁場中で大きく曲げられたことを意味しており、小さい $p_T$ として判定される。逆に $dR$ と $d\phi$ の値がが小さいほど、磁場中ではあまり曲がらないミューオンの飛跡であるため、大きな $p_T$ として判定される。
+そして、事前に ($dR$, $d\phi$) に対応する $p_T$ の関係を Look-Up Table (LUT) として保存しておき、トリガー判定の際に LUT を参照する事で短時間での $p_T$ の出力を可能としている。
 
 \begin{figure}[tb]
   \centering
   \includegraphics[clip, width=15cm]{fig/3/akatsuka_mt_trigger_scheme.pdf}
-  \caption{ATLAS検出器エンドキャップ領域におけるトリガースキームの概念図\cite{article:akatsuka-mron}。無限大の運動量を持つミューオンを仮定し、磁場によって曲げられたミューオンとの位置の差を用いて$p_T$を計算する。}
+  \caption{ATLAS検出器エンドキャップ領域におけるトリガースキームの概念図\cite{article:akatsuka-mron}。無限大の運動量を持つミューオンを仮定し、磁場によって曲げられたミューオンとの位置の差 ($dR$, $d\phi$) を用いて$p_T$を計算する。}
   \label{fig:trigger-scheme}
 \end{figure}
 
-LUT とは入力データに対応する出力データを参照するための表のことを指し、$dR$、$d\phi$ を入力として $p_T$ を出力する LUT を FPGA に保存している。
-この LUT は Coincidence Window (CW) と呼ばれており、あらかじめ MC サンプルや実際の測定データを用いて$dR$、$d\phi$に対応する $p_T$ を算出し、図\ref{fig:CW}のような形で保存されている。
-エンドキャップ部のトロイド磁場や TGC は理想的には 8 回対称だが、磁場の向きや TGC チェンバーの設置位置のずれなどがあるため、CW は TGC BW のすべてのトリガー判定を行う位置ごとに作成されている。
-Run-3 で使用される CW は図\ref{fig:CW}のように 15 個に分類されている。この各色が 15 段階の $p_T$ 閾値に対応しており、各 $p_T$ 閾値に付された符号はミューオンの電荷に対応している。図\ref{fig:CW}のマスの中の数字は表\ref{pt_number} に示す pt number と対応している。
+LUT とは入力データに対応する出力データを参照するための表のことを指し、初段ミューオントリガーでは、($dR$, $d\phi$) を入力として $p_T$ を出力する LUT を FPGA に保存している。
+
+\subsubsection{coincidence Window}
+この LUT は Coincidence Window (CW) と呼ばれており、初段ミューオントリガーでは事前にシミュレーションデータを用いて ($dR$, $d\phi$) に対応する $p_T$ を算出し、Run-3では図\ref{fig:CW}のように 15 段階の $p_T$ 閾値を判定できる形式でで FPGA に保存している。
+
+Run-3 で使用される CW は図\ref{fig:CW}の色のように 15 個に分類されている。この各色が 15 段階の $p_T$ 閾値に対応しており、マスの中の数字は表\ref{pt_number} に示す $p_T$ number と対応している。また、各 $p_T$ 閾値の符号はミューオンの電荷に対応している。図\ref{fig:CW}の
+エンドキャップ部のトロイド磁場や TGC は理想的には 8 回対称であるが、磁場の向きや TGC チェンバーの設置位置のズレなどがあるため、CW は TGC-BW のトリガー判定に用いられる単位位置情報ごとに独立に作成されている。
+
 
 \begin{figure}[tb]
   \centering
@@ -36,18 +42,57 @@ Run-3 で使用される CW は図\ref{fig:CW}のように 15 個に分類され
   \label{fig:CW}
 \end{figure}
 
-\begin{table}[tb]
-    \caption{Run-3 初段ミューオントリガーにおける 15 段階の $p_T$ の値。}
+\begin{table}[]
+    \caption{Run-3 初段ミューオントリガーにおける 15 段階の $p_T$ 閾値。}
     \label{pt_number}
     \centering
-    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+    %\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+    \begin{tabular}{|c|c|c|c|}
         \hline
-        $p_t$ number & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15\\
+        $p_T$ number & Threshould name & Status\\
         \hline
-        $p_T$ [GeV] & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 18 & 20\\
+        1 & L1$\_$MU3 & $p_T \geq$ 3 GeV \\
         \hline
+        2 & L1$\_$MU4 & $p_T \geq$ 4 GeV \\
+        \hline
+        3 & L1$\_$MU5 & $p_T \geq$ 5 GeV \\
+        \hline
+        4 & L1$\_$MU6 & $p_T \geq$ 6 GeV \\
+        \hline
+        5 & L1$\_$MU7 & $p_T \geq$ 7 GeV \\
+        \hline
+        6 & L1$\_$MU8 & $p_T \geq$ 8 GeV \\
+        \hline
+        7 & L1$\_$MU9 & $p_T \geq$ 9 GeV \\
+        \hline
+        8 & L1$\_$MU10 & $p_T \geq$ 10 GeV \\
+        \hline
+        9 & L1$\_$MU11 & $p_T \geq$ 11 GeV \\
+        \hline
+        10 & L1$\_$MU12 & $p_T \geq$ 12 GeV \\
+        \hline
+        11 & L1$\_$MU13 & $p_T \geq$ 13 GeV \\
+        \hline
+        12 & L1$\_$MU14 & $p_T \geq$ 14 GeV \\
+        \hline
+        13 & L1$\_$MU15 & $p_T \geq$ 15 GeV \\
+        \hline
+        14 & L1$\_$MU18 & $p_T \geq$ 18 GeV \\
+        \hline
+        15 & L1$\_$MU20 & $p_T \geq$ 20 GeV \\
+        \hline
+        %$p_t$ number & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15\\
+        %\hline
+        %$p_T$ Threshould[GeV] & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 18 & 20\\
+        %$p_T$ Threshould & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 18 & 20\\
+        %\hline
     \end{tabular}
 \end{table}
+
+また、CW にはコインシデンスのタイプによって 4 種類存在する。
+一つ目は M1 から M3 まで 3 つのステーション (M1, M2, M3) 全てにおいてワイヤーとストリップともにヒットが確認された 3-3 ステーションコインシデンス、二つ目がワイヤーは 3 ステーションにヒットが確認されたが、ストリップに関しては 2 ステーション (M2, M3) のヒットのみしか確認できなかった 3-2 ステーションコインシデンス、三つ目がワイヤーは2 ステーション  にしかヒットが確認されなかったが、ストリップでは 3 ステーションにヒットが確認された 2-3 ステーションコインシデンス、四つ目がワイヤーとストリップともに 2 ステーションしかヒットが確認できなかった 2-2 ステーションコインシデンスである。
+3 ステーションコインシデンスフラグはストリップ、ワイヤー共に 3 ステーションでヒットがあった場合に立つフラグである。2 ステーションコインシデンスか 3 ステーションコインシデンスかでズレを計算するヒット位置がM2-M3 か、M1-M3 か変わってくるため、dR、dφ の範囲も変わってくる。2 ステーションの場合、$−7 \geq dR \geq 7$、$−3 \geq d\phi \geq 3$、3 ステーションの場合、$−15 \geq dR \geq 15$、$−7 \geq d\phi \geq 7$ の範囲で定義される。
+
 
 \subsubsection{トリガーセクター}
 TGC のトリガー判定に用いられる単位の模式図を図\ref{fig:RoI}に示す。TGC のトリガー判定はトリガーセクターごとに行われ、領域内のミューオンの情報から判定結果が出される。
@@ -60,6 +105,18 @@ TGC のトリガー判定に用いられる単位の模式図を図\ref{fig:RoI}
   \includegraphics[clip, width=10cm]{fig/3/RoI.png}
   \caption{TGC におけるトリガーセクターと RoI の模式図。緑の線で囲まれた領域が 1 つのトリガーセクターを表し、赤の線で囲まれたマスが 1 つの RoI を表す。}
   \label{fig:RoI}
+\end{figure}
+
+\subsubsection{インナーコインシデンス}
+エンドキャップ領域ミューオントリガーには衝突点由来でない荷電粒子により発行されたトリガー (フェイクトリガー) が存在し、レートを上げる要因になっている。Run-2 では TGC-EI/FI と Tile カロリメータとコインシデンス (インナーコインシデンス) を取ることでフェイクトリガーを大きく削減することができた。しかし、$1.9 < |\eta| < 2.4$ の領域ではインナーコインシデンスをとるためのトリガー用検出器がないためフェイクトリガーが多く残っている。
+Run-3 からは NSW と RPC BIS78 の導入により、より広範囲のインナーコインシデンスをとることが可能になるため、フェイクトリガーをより削減できる。
+Tile カロリメータとコインシデンスだけでなく、新たに導入される NSW や RPC BIS78 を用いた場合に期待されるトリガー発行数の分布を図\ref{fig:Rate_innercoincidence}に示す。
+
+\begin{figure}[tb]
+  \centering
+    \includegraphics[clip, width=14cm]{fig/3/ATL-COM-DAQ-2018-033-fig2.pdf}
+  \caption{Run-3 で期待される $p_T$ 閾値 20 GeV におけるトリガー発行数の $\eta$ 分布。白色、水色、黄色の領域はそれぞれ Tile カロリメータ、RPC BIS78、NSW を用いたインナーコインシデンスを導入した場合に削減できるトリガー発行数を示す。青色の領域は Run-3で期待されるトリガー発行数、赤色の領域は発行されたトリガーのうちオフラインで再構成されるミューオンの数を示す。緑の分布はオフラインで再構成されたミューオンのうち、$p_T$ が 20 GeV 以上のミューオンの数を示す。}
+  \label{fig:Rate_innercoincidence}
 \end{figure}
 
 \subsection{初段ミューオントリガーにおけるエレクトロニクス}
@@ -147,60 +204,10 @@ Probe ミューオンの情報とこのミューオンと一致したTGC のヒ�
 また、Run-3 の実データに対してトリガー効率を計算し、各閾値におけるトリガー効率を pT の関数として表した結果を図\ref{fig:Run3_15_Data}に示す。
 \begin{figure}[tb]
   \centering
-  \rule{8cm}{6cm}
+  \includegraphics[clip, width=15cm]{fig/3/PLOT-TRIG-2020-01-fig1.pdf}
   \caption{Run-3 における15段階閾値のTurn-on curve。Run-3 の実データに対してのトリガー効率を示している。}
   \label{fig:Run3_15_Data}
 \end{figure}
-さらに、各チェンバーごとの各閾値におけるトリガー効率を図\ref{fig:Run3_15_Data_chamber1}に示す。
-\begin{figure}
-    \centering
-    \begin{minipage}[b]{0.4\linewidth}
-        \centering
-        %\includegraphics[clip, width=7cm]{fig/2/IBdl.pdf}
-        \rule{6cm}{4cm}
-        \vspace{10pt}
-        \subcaption{}
-        \label{}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.4\linewidth}
-        \centering
-        %\includegraphics[clip, width=6cm]{fig/2/FMBmap.pdf}
-        \rule{6cm}{4cm}
-        \vspace{10pt}
-        \subcaption{}
-        \label{}
-    \end{minipage}
-    \caption{Run-3 における15段階閾値のTurn-on curve。Run-3 の実データに対しての各チェンバーごとトリガー効率を示している。(1-48個作る)}
-    \label{fig:Run3_15_Data_chamber1}
-\end{figure}
-
-定量的な評価を行うために、式\ref{equ:fitting}を用いて Turn-on curve にフィッティングを行う。
-\begin{equation}
-    f(p_T) = \frac{p_0}{exp(\frac{p_T-p_1}{p_2})+1}
-　\label{equ:fitting}
-\end{equation}
-ここで、トリガーの性能を表す 3 つのパラメータ $p_0$, $p_1$, $p_2$ を以下のように定義する。
-\begin{enumerate}\label{table:fitting}
-   \item $p_0$:Plateau efficiency\\
-   Turn-on curve が横這いになった時のトリガー効率を表す。トリガー閾値以上の pT を持つミューオンに対するトリガー効率を表すため、その値が 1 に近い方が高性能である。
-   \item $p_1$:Effective threshold\\
-   トリガーの実効的な $p_T$ の閾値を表す。トリガー効率が Plateau efficiency の値の 50\% となる時の $p_T$ の値である。
-   \item $p_2$:Resolution\\
-   トリガーの運動量の分解能を表す。Turn-on curve の立ち上がりの鋭さに対応すしており、Resolution の値が大きくなると Turn-on curve の立ち上がりが緩くなるため、、トリガーの運動量分解能が悪くなる。
-\end{enumerate}
-
-
-ミューオンの電荷依存に対する評価
-
-\begin{figure}[tb]
-  \centering
-  \rule{8cm}{6cm}
-  \caption{電荷}
-  \label{fig:fit_def}
-\end{figure}
-
-
 
 \subsection{トリガーレートの算出}
 トリガーレートとは、実験データにおけるトリガーが発行された事象数である。ここでは HLT でのトリガー発行のバイアスを防ぐために、L1 Trigger のみを要求し、HLT は passthrough のトリガーである 「HLT$\_$noalg$\_$L1MU20」を要求する。 は 2016 年で取得されたデータを用いて算出したトリガーレートの $\eta$ 依存性である。
@@ -212,20 +219,40 @@ Probe ミューオンの情報とこのミューオンと一致したTGC のヒ�
   \label{fig:Run3_rate}
 \end{figure}
 
-\subsection{現行のCWの問題点}
-2022年 Run-3 で使用されている CW にはいくつかの問題点がある。
-・電荷
 
 
-・検出器アライメントを行っていないことによるEfficiencyの低下
+\subsection{CW の作成及び最適化手法}\label{section:最適化}
+\subsection{15段階閾値に対応した Coincidence Window の作成手法}
+Run-3 に向けた 15 段階の $p_T$ 閾値に対応した Coincidence Window (CW) は先行研究で作成されており、本節では先行研究で行われた作成手法について述べる。
+
+シングルミューオンの MC サンプルを用いてミューオンの運動量と TGC におけるヒット位置の関係から CW を作成する。ミューオンの $p_T$ を用いて 1 GeV から 40 GeV まで 1 GeV 刻みに CW を作成し、その中から 15 段階の CW を選定し $p_T$ を決定する。
 
 
 
-\section{CW の最適化手法}\label{section:最適化}
-Run-2 で行われたTGC 検出器の設置位置のズレや歪みを考慮した CW の最適化を行う方法について述べる。
 
-\subsection{TGC 検出器の設置位置による影響}
-TGC 検出器は検出器の入れ替えなどのために検出器の移動を行うことがあり、検出器のズレが生じてしまう。図\ref{fig:ズレ}に Run-2 での実データを用いて測定した TGC 検出器の設置位置のズレを示す。
+シミュレーションにおいて TGC は設計通りの位置に設置されているが、実際の検出器では、設置位置 (アライメント) にズレが生じている。CW はシミュレーションから作成するため、作成された CW には TGC の設置位置によるズレが考慮されていない。そのため、想定されていたミューオンの飛跡から外れてしまうため、 CW を用いた運動量判定に影響が出てしまい、トリガーの運動量分解能の低下を招く原因となる。さらに、背景事象によるトリガーレートの向上にも影響する。
+また、ミューオンの電荷にも影響がある。
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[clip, width=7cm]{fig/3/charge_14gev_phi2_eta11.pdf}
+  \caption{あるチェンバーにおける電荷別のTurn-on curveの例。赤が正電荷、青が負電荷のTurn-on curveである。}
+  \label{fig:fit_def}
+\end{figure}
+
+そこで、CW に対して検出器のズレを補正し最適化することで、トリガー効率を維持しつつ、トリガーレート削減を目指す。
+以下では、これまでの研究で確立されている Run-2 で行われたTGC 検出器の設置位置のズレや歪みを考慮した CW の最適化の方法について述べる。
+
+\subsection{TGC 検出器の設置位置の測定}
+TGC 検出器は検出器の入れ替えなどのために検出器の移動を行うことがあり、検出器のズレが生じてしまう。TGC の設置位置のズレの測定方法はこれまでの研究で既に確立されている。
+TGC 検出器のズレを示すパラメータを図\ref{fig:dr_para}のように定義し、図\ref{fig:ズレ}に Run-2 での実データを用いて測定した TGC 検出器の設置位置のズレを示す。
+\begin{figure}[tb]
+  \centering
+  \includegraphics[clip, width=7cm]{fig/3/drho_param_position_measurement.png}
+  \caption{TGC 検出器のズレを表すパラメータの定義。}
+  \label{fig:dr_para}
+\end{figure}
+
 \begin{figure}
     %\begin{tabular}{cc}
     \begin{minipage}[tb]{0.4\linewidth}
@@ -247,19 +274,20 @@ TGC 検出器は検出器の入れ替えなどのために検出器の移動を�
     \label{fig:ズレ}
     %\end{tabular}
 \end{figure}
-シミュレーション上では TGC 検出器などの検出器は設計通りの位置に設置されている。そのため、シミュレーションサンプルを用いて作成されている CW は検出器のズレや歪みを考慮できていない。設置位置が設計位置からズレている場合、想定されていたミューオンの飛跡から外れてしまうため、 CW を用いた運動量判定に影響が出てしまい、トリガーの運動量分解能の低下を招く。さらに、背景事象によるトリガーレートの向上にも影響する。
-そこで、Run-2 ではズレに対して検出器アライメントを行っていた。
 
 \subsection{検出器アライメント}
-CW に対して検出器のズレを補正し最適化することで、トリガー効率を維持しつつ、トリガーレート削減を目指す。
-Run-2で行われたシミュレーションを用いて作成した CW に対する TGC アライメントの補正方法について以下に述べる。
+Run-2 で行われたシミュレーションを用いて作成した CW に対する TGC のアライメントの補正方法について以下に述べる。
+
+RoI 毎に pT 閾値を境目としたミューオン分布を用いた CW の cell 毎に判定するパラメータ $x$ を定義する。
+\begin{equation}
+    x = \frac{N_{p_{T}>20GeV}}{\sqrt{N^2_{p_{T}>20GeV}+N^2_{p_{T}<20GeV}}}
+　\label{equ:fitting}
+\end{equation}
+
+
 
 \subsubsection{}
-
-\subsubsection{}
-Run-2 では
-2015 年 Run-2 の実データを用いた
-この CW を cell 毎に判定する方法を CW optimization と呼ぶ。
+Run-2 では2015 年 Run-2 の実データを用いたこの CW を cell 毎に判定する方法を CW optimization と呼ぶ。
 
 
 ・検出器アライメント
