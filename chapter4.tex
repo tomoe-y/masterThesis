@@ -82,6 +82,7 @@ sigmoid 関数及びReLU 関数の概形を図\ref{fig:sigmoid},図\ref{fig:ReLU
     \caption{機械学習で用いられる活性化関数の例。(a): sigmoid 関数、(b): ReLU 関数。}
     \label{fig:acctivation}
 \end{figure}
+\subsection{多層パーセプトロン}
 単一のパーセプトロンでの分析は単純なものであれば問題ないが、複雑な事象を扱うことは難しい。そこで、このパーセプトロンを複数組み合わせることにより多層化することで、複雑な表現を可能とした多層パーセプトロン (MLP : Multilayer perceptron) が考案された。
 単一のパーセプトロンは入力と出力のみであったのに対し、図\ref{fig:MLP}に示すように、MLP は隠れ層と呼ばれる層が複数追加されたネットワーク構造を持ち、各層間は全結合しているような構造になっている。この様な構造を持つニューラルネットワークの事を「全結合型ニューラルネットワーク」と呼ぶ。出力層においてよく使われる主な活性化関数としては、2種類の分類問題に対しては sigmoid 関数、多クラスの分類問題に対しては softmax 関数、回帰問題に対しては linear 関数などが用いられる。
 \begin{figure}[tb]
@@ -283,7 +284,7 @@ MLP の各隠れ層は以下の表\ref{table:hibben}に示す要素から構成�
 
 
 \subsection{出力データをPt閾値に変換}
-\subsubsection{フィッティング関数の定義}\label{section:fitting}
+\subsubsection{iフィッティング関数の定義}\label{section:fitting}
 式\eqref{equ:fitting}を用いて Turn-on curve にフィッティングを行うことでトリガー効率を定量的に評価する。
 \begin{equation}
     f(p_T) = \frac{p_0}{exp(\frac{p_T-p_1}{p_2})+1}
@@ -332,7 +333,7 @@ MLP の各隠れ層は以下の表\ref{table:hibben}に示す要素から構成�
     \end{tabular}
 \end{table}
 
-
+図\ref{}に本研究で作成したCWを示す。
 
 
 
