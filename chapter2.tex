@@ -72,7 +72,7 @@ ATLAS 検出器ではz軸が正の側を A-side、負の側を C-side と定義�
 
 また、ATLAS実験で使用される座標系として、
 \begin{equation}
-　\eta=-ln(\tan\frac{\theta}{2})
+　\eta=-\ln(\tan\frac{\theta}{2})
 　\label{ラピディティ}
 \end{equation}
 と定義される擬ラピディティ$\eta$が用いられる。
@@ -117,7 +117,7 @@ ATLAS 実験では、荷電粒子の運動量測定のために超伝導磁石�
         \subcaption{}
         \label{fig:磁場平面}
     \end{minipage}
-    \caption{トロイド磁石による磁場の$\eta$分布(a)\cite{Aad:1129811}とビーム軸から見た $x − y$ 平面での磁場の分布(b)\cite{article:ATLASMagneticField}。磁石の設置位置の影響により磁場構造が一様ではない。}
+    \caption{(a):トロイド磁石による磁場の$\eta$分布\cite{Aad:1129811}と、(b)：ビーム軸から見た $x − y$ 平面での磁場の分布\cite{article:ATLASMagneticField}。磁石の設置位置の影響により磁場構造が一様ではない。}
     \label{fig:磁場}
 \end{figure}
 
@@ -147,7 +147,7 @@ SCT はマイクロストリップと呼ばれる細長い有感領域をシリ�
         \subcaption{}
         \label{fig:内部飛跡検出器の概略図2}
     \end{minipage}
-    \caption{内部飛跡検出器の全体像及び断面図。(a): 全体像\cite{Aad:1129811}、(b): バレル部の断面図。内側から順に Pixel, SCT, TRT 検出器が設置されている。}
+    \caption{内部飛跡検出器の全体像及び断面図。(a): 全体像\cite{Aad:1129811}、(b): バレル部の断面図\cite{Collaboration:2723878}。内側から順に Pixel, SCT, TRT 検出器が設置されている。}
     \label{fig:内部飛跡検出器}
 \end{figure}
 
@@ -178,11 +178,16 @@ ATLASのカロリメータは、電磁カロリメータとハドロンカロリ
 ミューオン検出器はResistive Plate Chamber~(RPC)とThin Gap Chamber~(TGC) という2種類のトリガー検出器と、Monitored Drift Tube~(MDT)とCathode Strip Chamber~(CSC)の2種類の精密測定用の検出器によって構成される。
 図~\ref{fig:ミューオン}にミューオン検出器の配置図を示す。
 
+ミューオン検出器は、層状に設置されているステーションと呼ばれる単位で定義される。
+エンドキャップ部ではビーム軸に対して垂直に円盤状のステーションを、バレル部では筒状のステーションを構成している。
+エンドキャップ、バレル領域において検出器は3層構造であり、衝突点に近い方から Inner(I)、Middle(M)、Outer(O) と呼ぶ。
+またミューオン検出器はトロイド磁石と干渉しないように配置するため、$\phi$方向においてはLarge Chamber~(L)とSmall Chamber~(S)の2種類の検出器を組み合わせてステーションを構成している。
+
 \begin{figure}[tb]
   \centering
   %\includegraphics[clip, width=11cm]{fig/2/MuonSystem_d3.pdf}
   \includegraphics[clip, width=11cm]{fig/2/ch01_fig_03a.pdf}
-  \caption{ミューオンスペクトロメータの配置図。}
+  \caption{ミューオンスペクトロメータの配置図\cite{article:phase2}。}
   \label{fig:ミューオン}
 \end{figure}
 
@@ -191,23 +196,38 @@ RPCはバレル部のミューオントリガー判定に用いられるミュ�
 
 \begin{figure}[tb]
   \centering
-  \includegraphics[clip, width=11cm]{fig/2/RPC_structure.pdf}
-  \caption{RPCの構造図}
+  \includegraphics[clip, width=10cm]{fig/2/RPC_structure.pdf}
+  \caption{RPCの構造図\cite{Aad:1129811}}
   \label{fig:RPC}
 \end{figure}
 
+
+
+
 \subsubsection{Thin Gap Chambers (TGC)}
-TGCはエンドキャプ部に設置されているミューオン検出器である。図~\ref{fig:TGC_st}にTGC検出器の配置図を示す。TGC検出器はトロイド磁石による磁場領域より内側にEI~(Endcap Inner)、FI~(Forward Inner)と呼ばれる 2 つのステーション、磁場領域より外側にM1、M2、M3~(Middle 1,Middle 2,Middle 3)と呼ばれる3つのサブステーションが配置されている。
-図~\ref{fig:TGC}に示すように、磁場領域より外側にあるM1ステーションはTGC Tripletと呼ばれる3層構造であり、M2、M3ステーションはTGC Doubletと呼ばれる2層構造である。
-M1、M2、M3は図~\ref{fig:TGC_oc}のように円盤状にを配置しており、3つのステーションを合わせてTGC Big Wheel~(TGC BW)と呼ぶ。
-M1、M2、M3からのヒット情報をトリガー判定に使用し、M3はミューオントリガーの位置情報を決定するための基準として用いられているため、Pivot planeと呼ばれている。
-磁場領域より内側にあるEIステーションはTGC Doubletで構成されており、EIチェンバーはトロイド磁石と干渉しないように配置されている。
+TGCはエンドキャプ部の$1.05 < |\eta| < 2.7$の領域に設置されているミューオン検出器である。R-z平面における図~\ref{fig:TGC_st}にTGC検出器の配置図を示す。
+TGC は Multi Wire Proportional Chamber~(MWPC) の一種で、ワイヤーとストリップによる2 次元読み出しを行うことでミューオンのヒット位置を測定する。図~\ref{fig:MWPC}にTGCの構造を示す。
+アノードワイヤーには直径50$\mu$mの金メッキをしたタングステンワイヤーを用い、カソードには片面に表面抵抗1M$\Omega$のカーボンを塗布したガラスエポキシ板を用いている。反対側の面には銅で出来たストリップがワイヤーに直交するように張られている。ミューオンの位置情報のうちRをアノードワイヤーで、$\phi$をカソードストリップで測定することで2次元での読み出しが可能となっている。
+図~\ref{fig:TGC}に示すように、TGCを構成する検出器には2層構造のDoubletと3層構造のTripletの2種類がある。
+Doubletはワイヤー面2層とストリップ面2層から信号の読み出しを行う。Triplet は3層構造になっているが、真ん中の層にストリップ面はないためワイヤー面3層とストリップ面2層から信号の読み出しを行う。
+
+図~\ref{fig:TGC_st}に示すようにTGC検出器はトロイド磁石による磁場領域より内側にEI~(Endcap Inner)、FI~(Forward Inner)と呼ばれる2つのステーション、磁場領域より外側にM1、M2、M3~(Middle 1,Middle 2,Middle 3)と呼ばれる3つのサブステーションが配置されており、M!、M2、M3の3つのステーションを合わせてTGC Big Wheel~(TGC BW)と呼ぶ。。M1はTriplet構造であり、EI/FI、及びM2、M3はDoublet構造である。
+M1、M2、M3は図~\ref{fig:TGC_oc}のように複数のチェンバーを組み合わせた円盤状の検出器である。$1.05 < |\eta| < 1.92$ の領域をエンドキャップ領域、$1.92 < |\eta| < 2.4$ の領域をフォワード領域と呼ぶ。
+
 
 \begin{figure}[tb]
   \centering
   \includegraphics[clip, width=11cm]{fig/2/l1mue-schema.pdf}
-  \caption{TGC 検出器の配置図\cite{Aad:1129811}。磁場領域の内側に EI,FI 、外側に M1,M2,M3 が設置されている。}
+  \caption{TGC 検出器の配置図\cite{Aad:1129811}。磁場領域の内側に EI,FI 、外側にTGC-BWと呼ばれる3層のステーション(M1,M2,M3)が設置されている。}
   \label{fig:TGC_st}
+\end{figure}
+
+\begin{figure}[tb]
+  \centering
+    \includegraphics[clip, width=11cm]{fig/2/TGC_anode_wire.pdf}
+  \caption{TGC 検出器の構造\cite{Aad:1129811}。ガスギャップ2.8~mm、ワイヤー間隔2.8~mmのMWPC~(Multi
+Wired Proportional Chamber)の構造をしている。}
+  \label{fig:MWPC}
 \end{figure}
 
 \begin{figure}[tb]
@@ -243,7 +263,7 @@ NSWはエンドキャプ領域の$1.3 < |\eta| < 2.7$ の全$\phi$領域を覆�
 \begin{figure}[tb]
   \centering
   \includegraphics[clip, width=11cm]{fig/2/nsw-structure.png}
-  \caption{NSW の構造。Large Sector と Small Sector の2種類のチェンバーを交互に配置している。sTGC quadruplet の間に、4 層で構成されている MM が 2 つ挟まれており、合計 16 層で構成されている。}
+  \caption{NSW の構造\cite{article:NSW}。Large Sector と Small Sector の2種類のチェンバーを交互に配置している。sTGC quadruplet の間に、4 層で構成されている MM が 2 つ挟まれており、合計 16 層で構成されている。}
   \label{fig:NSW}
 \end{figure}
 
@@ -253,7 +273,7 @@ small-strip TGC~(sTGC)はTGCと同様の2.8~mmのガスギャップを持つMWPC
 \begin{figure}[tb]
   \centering
   \includegraphics[clip, width=10cm]{fig/2/stgc-structure.pdf}
-  \caption{sTGC の断面図。 パッド、ストリップを用いて $\eta$ を、ワイヤーを用いて $\phi$ を計算する。}
+  \caption{sTGC の断面図\cite{article:sTGC}。 パッド、ストリップを用いて $\eta$ を、ワイヤーを用いて $\phi$ を計算する。}
   \label{fig:sTGC}
 \end{figure}
 
@@ -264,7 +284,7 @@ Micromegas~(MM) は、ワイヤーを用いないガス検出器である。図~
 \begin{figure}[tb]
   \centering
   \includegraphics[clip, width=13cm]{fig/2/mm-structure.pdf}
-  \caption{MM の概略図。メッシュによってドリフト領域と増幅領域に分けられる。ドリフト領域で生成された電子はメッシュを通過し、増幅領域で形成された電場により増幅される。}
+  \caption{MM の概略図\cite{article:sTGC}。メッシュによってドリフト領域と増幅領域に分けられる。ドリフト領域で生成された電子はメッシュを通過し、増幅領域で形成された電場により増幅される。}
   \label{fig:MM}
 \end{figure}
 
@@ -279,7 +299,7 @@ ATLAS 検出器では大きく分けて 2 段階のトリガーを実装して�
 \begin{figure}[tb]
   \centering
   \includegraphics[clip, width=14cm]{fig/3/trigger-nagare2.pdf}
-  \caption{Run-3 における ATLAS トリガーシステム及びデータ読み出しの流れ。トリガーシステムは Level-1 Trigger と High-Level TRigger の 2 段階のトリガーで構成されている。L1 には L1Calo、L1Muon、L1Topo の 3種類が存在する}
+  \caption{Run-3 における ATLAS トリガーシステム及びデータ読み出しの流れ\cite{article:Run3trigger}。トリガーシステムは Level-1 Trigger と High-Level TRigger の 2 段階のトリガーで構成されている。L1 には L1Calo、L1Muon、L1Topo の 3種類が存在する}
   \label{fig:トリガーの全体像}
 \end{figure}
 
@@ -304,7 +324,7 @@ ATLAS 実験で用いられているトリガーシステムは、限られた�
 \begin{figure}[b]
   \centering
   \includegraphics[clip, width=14cm]{fig/2/muon_trigger_menu.pdf}
-  \caption{Run-3 におけるプライマリーミューオントリガーのメニュー}
+  \caption{Run-3 におけるプライマリーミューオントリガーのメニュー\cite{article:Run3trigmenu}。}
   \label{fig:muon_trigger_menu.pdf}
 \end{figure}
 
