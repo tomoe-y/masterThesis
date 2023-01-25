@@ -1,12 +1,14 @@
-\chapter{機械学習を用いた Coincidence Window の作成手法}\label{chapter4}
-本章では本研究の主題である機械学習を用いた CW の作成手法について述べる。
+\chapter{機械学習を用いたCoincidence Windowの作成手法}\label{chapter4}
+第\ref{chapter3}ではATLAS実験で実装されているトリガーシステムの概要について説明し、初段ミューオントリガーで使用されているCWの作成及びRun-2における最適化手法について述べ、効率的な最適化手法の開発が必要であることを示した。
+本章では近年発展が著しい種々の機械学習についての概説を述べ、本研究の主題である機械学習を用いることで効率よくCWを作成及び最適化する手法について述べる。
 
 \section{機械学習}\label{回帰分析}
-機械学習は近年大きな注目を集めている技術であり、本研究の目的である CW の作成作業の効率化に対する解決案として期待できる。
+機械学習は近年大きな注目を集めている技術であり、本研究の目的であるCWの作成作業の効率化に対する解決案として期待できる。
 ここで機械学習とは、データからコンピュータが自動で特徴量やルールを学習し、学習した結果に基づいて新たなデータに対し分類や予測を行う分析手法の一つである。
 代表的な分析手法として「クラス分類」と「回帰分析」がよく知られている。
-回帰の主な目的は、連続値などの値を学習データの傾向をもとに予測することである。過去の気温から明日の気温を予測することや企業における売り上げの予測などが回帰に当てはまる。回帰分析には、線形回帰、多項式回帰などが存在し、図\ref{fig:regre}に線形回帰の概要図を示す。線形回帰では，データから推定される線形予測関数を用いて傾向をモデル化する。
-一方で分類は、分析したいデータが属するカテゴリーやクラス、種類が何なのかを判定する手法である。特に、予測するクラス数が 2 クラスの場合には 2 値分類と、2クラスより多い分類予測については多クラス分類と呼ばれる。図\ref{fig:class}にクラス分類の概要図を示す。
+クラス分類とは、分析したいデータが属するカテゴリーやクラス、種類が何なのかを判定する手法である。特に、予測するクラス数が 2 クラスの場合には 2 値分類と、2クラスより多い分類予測については多クラス分類と呼ばれる。図\ref{fig:class}にクラス分類の概要図を示す。高エネルギー物理学実験では、粒子の同定や探索の対象としている信号事象 (シグナル) とその背景事象 (バックグラウンド) の分離などに応用されている。
+回帰の主な目的は、連続値などの値を学習データの傾向をもとに予測することである。過去の気温から明日の気温を予測することや企業における売り上げの予測などが回帰に当てはまる。回帰分析には、線形回帰、多項式回帰などが存在し、図\ref{fig:regre}に線形回帰の概要図を示す。線形回帰では，データから推定される線形予測関数を用いて傾向をモデル化する。高エネルギー物理学実験では、粒子の衝突で得られたデータを説明変数とし、粒子のエネルギー測定の補正を行う解析などに応用されている。
+
 \begin{figure}[tb]
   \centering
     \begin{minipage}[b]{0.4\linewidth}
@@ -28,16 +30,17 @@
   \label{fig:fit_def}
 \end{figure}
 
-機械学習の学習手法は、教師あり学習、教師なし学習、強化学習の 3 つに大きく分けられる。
-教師あり学習は正解の値を与えた状態で傾向を学習させる方法である。
-教師あり学習は、「学習」と「予測」といった 2 つのプロセスによって成り立っており、、正解のデータを用いてルールやパターンの学習を行った後、新しいデータに対して、これまでに学習したデータを用いて予測を行う。
-一方で教師なし学習は、正解の値を教えずに学習させる方法である。大量のデータを学習させることでデータの特徴やパターンなどを覚えるが、それが正解か否かを判断することを学ぶのが教師なし学習の特徴である。
-また強化学習では、出力される結果に点数をつけて、最も多くの点数を得るための行動を学習させる。教師なし学習と同じように正解の値を学習させないが、教師なし学習との違いは、機械が報酬を得るために最適な行動を自ら考え実行する点である。
+機械学習のトレーニング手法は、正解の値(教師データ)を与えた状態で傾向を学習させる「教師あり学習」と教師データを用いずに学習を行う「教師なし学習」の2つに大きく分けられる。
+本研究では教師あり学習によって機械学習モデルのトレーニングを行う。
+%教師あり学習は正解の値を与えた状態で傾向を学習させる方法である。
+%教師あり学習は、「学習」と「予測」といった 2 つのプロセスによって成り立っており、、正解のデータを用いてルールやパターンの学習を行った後、新しいデータに対して、これまでに学習したデータを用いて予測を行う。
+%一方で教師なし学習は、正解の値を教えずに学習させる方法である。大量のデータを学習させることでデータの特徴やパターンなどを覚えるが、それが正解か否かを判断することを学ぶのが教師なし学習の特徴である。
+%また強化学習では、出力される結果に点数をつけて、最も多くの点数を得るための行動を学習させる。教師なし学習と同じように正解の値を学習させないが、教師なし学習との違いは、機械が報酬を得るために最適な行動を自ら考え実行する点である。
 
 \subsection{ニューラルネットワーク}
 機械学習には多くの種類があるが、その内の一つがニューラルネットワークを使った手法である。ニューラルネットワークとは、人間の脳内にある神経細胞（ニューロン）とそのつながり、つまり神経回路網を人工ニューロン（パーセプトロン）という数式的なモデルで表現したものである。個々のパーセプトロンは単純な仕組みであるが、多数組み合わせる事で複雑な関数近似を行う事ができるのが、ニューラルネットワークの大きな特徴である。
 
-図\ref{fig:perce}に示すように、パーセプトロンは入力と出力の2層で構成され、 n 個の信号$x_i$に対し重み$w_i$を作用させバイアス b　とともに入力し、 1 個の信号$y$を出力する関数 $f(x_i; w_i)$ を持ったモデルである。式\eqref{equ:acctivation}で表すことができる。この $f(x_i; w_i)$ の事を「活性化関数」と呼び、活性化関数には、sigmoid 関数、tanh 関数、 ReLU 関数(Rectified linear Unit)」、 softmax 関数などが良く使われている。 
+図~\ref{fig:perce}に示すように、パーセプトロンは入力と出力の2層で構成され、 n 個の信号$x_i$に対し重み$w_i$を作用させバイアス b　とともに入力し、1個の信号$y$を出力する関数 $f(x_i; w_i)$ を持ったモデルである。式~\eqref{equ:acctivation}で表すことができる。この $f(x_i; w_i)$ の事を「活性化関数」と呼び、活性化関数には、sigmoid 関数、tanh 関数、ReLU 関数~(Rectified Linear Unit)」、 softmax 関数などが良く使われている。 
 \begin{equation}
     %y = f(\Vec{w}・\Vec{x} + b)
     y = f(x_i; w_i) = \sum^{n-1}_{i=1}(w_i・x_i) + b
@@ -47,7 +50,7 @@
 \begin{figure}[tb]
   \centering
   \includegraphics[clip, width=13cm]{fig/4/parceptron.png}
-  \caption{パーセプトロン}
+  \caption{単一パーセプトロンの概念図。}
   \label{fig:perce}
 \end{figure}
 sigmoid 関数及びReLU 関数の概形を図\ref{fig:sigmoid},図\ref{fig:ReLU}に示す。sigmoid 関数はニューラルネットワークでよく用いられてきた関数であり、式\eqref{equ:sigmoid}のような関数で表される。ReLU 関数は式\eqref{equ:ReLU}のような関数で示される。
@@ -63,22 +66,24 @@ sigmoid 関数及びReLU 関数の概形を図\ref{fig:sigmoid},図\ref{fig:ReLU
     \label{equ:ReLU}
 \end{equation}
 \begin{figure}
-    \centering
-    \begin{minipage}[b]{0.4\linewidth}
-        \centering
-        \includegraphics[clip, width=7cm]{fig/4/sigmoid.png}
-        \vspace{10pt}
+    %\centering
+    \begin{tabular}{cc}
+    \begin{minipage}[b]{0.45\hsize}
+        %\centering
+        \includegraphics[clip, width=7cm]{fig/4/sigmoid_2.pdf}
+        %\vspace{5pt}
         \subcaption{}
         \label{fig:sigmoid}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.4\linewidth}
-        \centering
-        \includegraphics[clip, width=7cm]{fig/4/ReLU.png}
-        \vspace{10pt}
+    \end{minipage}&
+    %\hfill
+    \begin{minipage}[b]{0.45\hsize}
+        %\centering
+        \includegraphics[clip, width=7cm]{fig/4/ReLU_2.pdf}
+        %\vspace{5pt}
         \subcaption{}
         \label{fig:ReLU}
     \end{minipage}
+    \end{tabular}
     \caption{機械学習で用いられる活性化関数の例。(a): sigmoid 関数、(b): ReLU 関数。}
     \label{fig:acctivation}
 \end{figure}
@@ -93,7 +98,9 @@ sigmoid 関数及びReLU 関数の概形を図\ref{fig:sigmoid},図\ref{fig:ReLU
 \end{figure}
 
 出力された予測値は損失関数を用いて評価が行われる。これは、入力値 $x_n$ に対してとある重み $w$ を設定して予測値 $y$ を導出し、その予測値 $y$ に対し目標値 $t$ との誤差 $L$ が最小になるようにそれぞれの重みやバイアスなどのパラメータの値を少しだけ増減させ調整を行う方法である。この調整を繰り返すことによって予測の精度を向上させていく。図\ref{fig:lossfunction}にパラメータの更新の流れを示す。
-この調整の際に使用される誤差を計算する関数は「損失関数」と呼ばれ、特に式\eqref{equ:MSE}に示すような関数で表される平均二乗誤差（MSE : Mean Squared Error）が多く用いられる。他には、平均絶対誤差（MAE : Mean Absolute Error））や平均二乗誤差の平方根（RMSE : Root Mean Squared Error）などが用いられる。
+この調整の際に使用される誤差を計算する関数は「損失関数」と呼ばれ、特に式~\eqref{equ:MSE}に示すような関数で表される平均二乗誤差~(MSE : Mean Squared Error)が多く用いられる。他には、平均絶対誤差~(MAE : Mean Absolute Error)や平均二乗誤差の平方根~(RMSE : Root Mean Squared Error）などが用いられる。
+また、学習の中で重みやバイアスの値の更新を行う回数をepochと呼び、一度の重み更新で変更する重みの大きさを調節する学習率~(Learning rate)などと合わせてハイパーパラメータとして設定する。
+
 \begin{equation}
     L = \frac{1}{n}\sum^{n}_{i=1}(y_i-t_i)^2
     %f \begin{pmatrix}  \\ 2 & 3 \end{pmatrix}
@@ -107,12 +114,12 @@ sigmoid 関数及びReLU 関数の概形を図\ref{fig:sigmoid},図\ref{fig:ReLU
   \label{fig:lossfunction}
 \end{figure}
 
+
 \section{機械学習を用いた CW 作成手法}
 本節では機械学習の学習方法及びCWを作成する手法について述べる。
-従来の作成手法では、シミュレーションデータを用いて$p_T$閾値を決定しCWを作成する。その後、実際のデータを使用して磁場の影響や検出器のズレに最適化させるといった方法を行っていた。一方、本研究で開発する作成手法では実際のデータを学習に利用した機械学習を用いてミューオンの$p_T$の予測を行い、予測した$p_T$を使用してCWを作成する。
-本研究で作成するCWは実際の測定で用いるトリガー用のCWの他にシミュレーションで用いるトリガー用のCWも同様の手法で作成する。それぞれ実際のデータとシミュレーションデータを使用し機械学習のトレーニングを行う。
+従来の作成手法では、シミュレーションデータを用いて$p_T$閾値を決定しCWを作成する。その後、実際のデータを使用して磁場の影響や検出器のズレに最適化させるといった方法を行っていた。一方、本研究で開発する作成手法では実際のデータを学習に利用した機械学習を用いてミューオンの$p_T$の予測を行い、予測した$p_T$を使用してCWを作成する。また、本研究で作成するCWは実際の測定で用いるトリガー用のCWの他にシミュレーションで用いるトリガー用のCWもシミュレーションデータを用いて同様の手法で作成する。
 
-初めに、トレーニングに使用するシミュレーションデータおよび実際のデータを学習に適した形式に変更する。次に図\ref{fig:MLP_over}に示すように、TGCにおけるミューオンのヒット位置の情報を表すトリガーセクターの番号とRoIの番号、ミューオンの飛跡の曲がり具合を表す($\Delta R$, $\Delta \phi$)の4変数から$p_T$の値を出力するMLPをトレーニングする。この時、機械学習の分析手法として回帰分析を行うので出力される値は連続値となる。出力された$p_T$の値を15段階の閾値に変換するために、任意の値で$p_T$を区切った際のトリガー効率を求め、Turn-on curve にフィッティングを行い 15 段階の $p_T$ 閾値に対応した CW を作成する。
+初めに、トレーニングに使用するシミュレーションデータおよび実際のデータを学習に適した形式に変更する。次に図~\ref{fig:MLP_over}に示すように、TGCにおけるミューオンのヒット位置の情報を表すトリガーセクターの番号とRoIの番号、ミューオンの飛跡の曲がり具合を表す($\Delta R$, $\Delta \phi$)の4変数から$p_T$の値を出力するMLPをトレーニングする。この時、機械学習の分析手法として回帰分析を行うため、出力される値は連続値となる。出力された$p_T$の値を15段階の閾値に変換するために、任意の値で$p_T$を区切っり、トリガー効率を求めTurn-on curve にフィッティングを行うことで15段階の$p_T$閾値に対応したCWを作成する。
 
 \begin{figure}[tb]
   \centering
@@ -121,57 +128,70 @@ sigmoid 関数及びReLU 関数の概形を図\ref{fig:sigmoid},図\ref{fig:ReLU
   \label{fig:MLP_over}
 \end{figure}
 
-\subsection{入力データに対する事前処理}
+\subsection{入力データに対する事前処理}\label{事前処理}
 本節では学習に用いるシミュレーションデータおよび実際のデータに対して処理を行い、本研究の機械学習に適した形式に変換する方法について述べる。
 
-シミュレーションに使用する CW 用の機械学習のトレーニングには、1 イベントにミューオンが 1 個存在するシミュレーションサンプル（シングルミューオンサンプル）を使用する。
-イベントのミューオンの内、TGC M3 に外挿されたヒット情報が存在し、 $0 GeV < p_T < 50 GeV$ の運動量を持ったミューオンを学習に使用する。
+本研究ではトレーニングのために、シミュレーションデータ及び実際の測定データを使用する。
+シミュレーション用のCWを作成するための機械学習のトレーニングには、1回のイベントに対してミューオンが1個存在するシングルミューオンのシミュレーションサンプルを使用する。オフライン再構成されたミューオンに対して、TGCのM3におけるヒット情報が存在することを要求する。そして、TGC M3におけるヒット情報からヒット位置の情報(トリガーセクターの番号、RoIの番号)と飛跡の情報(dR、d$\phi$)を取得する。
+また、実際の測定に使用するCWを作成するための機械学習のトレーニングには、2018年Run-2で収集されたデータを用いる。使用するイベントにはHLTのシングルミューオントリガーである「HLT$\_$mu26$\_$ivarmeduium」を要求する。シミュレーションデータと同様に、イベントの中でもTGC M3おけるヒット情報が存在するオフライン再構成されたミューオンをすべて使用し、TGC M3におけるヒット位置の情報(トリガーセクターの番号、RoIの番号)と飛跡の情報(dR、d$\phi$)を取得する。
 
-\begin{figure}[thb]
+%\begin{figure}[thb]
+%  \centering
+%  \rule{8cm}{6cm}
+%  %\includegraphics[clip, width=14cm]{}
+%  \caption{深層学習モデルのトレーニングに用いたシングルミューオンサンプルの $p_T$ 分布。}
+%  \label{fig:mu_pt_forMC}
+%\end{figure}
+
+%\begin{figure}[thb]
+%  \centering
+%  \rule{8cm}{6cm}
+%  %\includegraphics[clip, width=14cm]{}
+%  \caption{深層学習モデルのトレーニングに用いたミューオンの $p_T$ 分布。}
+%  \label{fig:mu_pt_forData}
+%\end{figure}
+
+\subsubsection{TGCの位置情報におけるナンバリングの変換}
+学習には、TGCのヒット位置の情報としてトリガーセクターの番号とRoIの番号を使用する。
+RoIはトリガーセクターごとに設定された番号が与えられており、あるトリガーセクターの一番端の列のRoIの番号は隣接するトリガーセクターのRoIの番号と関連性がない。
+しかし、隣り合った場所に位置するRoIは似通った磁場構造を持っているため、トレーニングするにあたって、隣り合ったRoIの情報に関連性を持たせたい。
+
+\begin{figure}[tb]
   \centering
-  \rule{8cm}{6cm}
-  %\includegraphics[clip, width=14cm]{}
-  \caption{深層学習モデルのトレーニングに用いたシングルミューオンサンプルの $p_T$ 分布。}
-  \label{fig:mu_pt_forMC}
+  \includegraphics[clip, width=12cm]{fig/4/TGC_numbering.pdf}
+  \caption{TGCにおけるトリガーセクターとRoIのナンバリングの概要。}
+  \label{fig:newnumbering}
 \end{figure}
 
-実際の測定に使用する CW 用の機械学習のトレーニングには、2018年 Run-2 のデータを用いる。使用するイベントには HLT のシングルミューオントリガーである 「HLT$\_$mu26$\_$ivarmeduium」を要求する。取得されたイベントのミューオンの内、TGC M3 に外挿されたヒット情報が存在し、 $0 GeV < p_{T} < 100 GeV$ の運動量を持ったミューオンを学習に使用する。
-
-\begin{figure}[thb]
+本研究では、TGCにおけるヒット位置を表すトリガーセクターの番号とRoIの番号を、新たに隣り合ったRoIの番号が連続するようなナンバリングに変換する。
+図~\ref{fig:newnumbering}に新たなナンバリングの概要を示す。Eta$\_$IndexはRoIを$\eta$方向に0から37の番号に、Phi$\_$IndexはRoIを$\phi$方向に0から191の番号に読み替えている。
+\begin{figure}[tb]
   \centering
-  \rule{8cm}{6cm}
-  %\includegraphics[clip, width=14cm]{}
-  \caption{深層学習モデルのトレーニングに用いたミューオンの $p_T$ 分布。}
-  \label{fig:mu_pt_forData}
+  \includegraphics[clip, width=14cm]{fig/4/new_numbering.pdf}
+  \caption{新たなナンバリングの概要。マスの中で数字はRoIの番号を表しており、奇数の番号のトリガーセクターでは読み出し回路の関係からRoIのナンバリング順が反転している。TGCにおけるヒット位置の情報(Sector番号、RoI番号)を新たに(Eta$\_$Index, Phi$\_$Index)で指定する。}
+  \label{fig:newnumbering}
 \end{figure}
-
-\subsubsection{TGC の位置情報のナンバリングの変換}
-学習には、TGC のヒット位置の情報として RoI の番号とトリガーセクターの番号を使用する。
-＜RoI トリガーセクターのナンバリングの図を貼る＞
-RoI はトリガーセクターごとに設定された番号が与えられており、あるトリガーセクターの一番端の RoI の番号は隣のトリガーセクターの RoI の番号と関連性がない。
-学習するにあたって、隣り合った場所に位置する RoI は似通った磁場構造を持っているので関係性を利用したい。そこで、隣り合った RoI の番号が連続するようなナンバリングに変換する。
-
-本研究では、TGC のヒット位置の情報の RoI の番号とトリガーセクターの番号を新たに (TGC-R-index, TGC-phi-index) という 2 変数に変換する。
-＜新しいRoI ナンバリングを貼る＞
-
 
 \subsubsection{磁場構造を考慮した学習領域の分割}
-\ref{magnetic_filed}節で述べたように、トロイド磁石が 8 回転対象に設置されていることにより TGC$\_$BW における磁場構造は図\ref{fig:Mag}に示すように一様ではない。そのため、本研究では TGC$\_$BW 全体を一括で学習させるのではなく、図\ref{fig:Mag}で示すように、入力データとして使用する領域を分割して学習を行う。
-本研究では、磁場構造に考慮するためにTGC のエンドキャプ部を $\phi$ 方向に 48 分割、$\eta$ 方向に 9 分割、フォワード部を $\phi$ 方向に 24 分割、$\eta$ 方向に 4 分割にした。
+\ref{magnetic_filed}節で述べたように、トロイド磁石が8回転対象に設置されていることにより TGC-BW における磁場構造は図\ref{fig:Mag}に示すように一様ではない。そのため、本研究ではTGC-BWの全領域を一つの機械学習でトレーニングさせるのではなく、図\ref{fig:Mag}で色付けされた領域が示すように、入力データとして使用する領域を分割して複数の機械学習をトレーニングする。
+本研究では、磁場構造に考慮するためにTGC のエンドキャプ部を $\phi$ 方向に 48 分割、$\eta$ 方向に 9 分割、フォワード部を $\phi$ 方向に 24 分割、$\eta$ 方向に 4 分割にし、それぞれの領域に対して機械学習のトレーニングを行う。
 \begin{figure}[tb]
   \centering
   \includegraphics[clip, width=9cm]{fig/4/c1_withMag.pdf}
-  \caption{磁場構造を考慮するための学習領域の分け方。「赤」の領域に対する学習を行う際には「赤」と「緑」の領域のデータのみを使用する。}
+  \caption{磁場構造を考慮するための学習領域の分け方。赤色の領域に対するトレーニングを行う際には緑色で囲まれたの領域のデータを使用する。}
   \label{fig:Mag}
 \end{figure}
 
 \subsubsection{ミューオン情報の選別}
-次に分割した入力データを用いて各 RoI に対するヒットマップを作成しミューオンの選別を行う。作成したヒットマップには孤立しているマス、穴の空いているマスが存在する。これは偶発的にミューオンヒットしたことや多重散乱の影響によるもので機械学習のトレーニングの際にノイズとなる。そのため、以下に説明するヒットマップクリーナーを用いてヒットマップの最適化を行う。
+次に各RoIにおけるヒットマップを作成し学習に使用するミューオンの選別を行う。作成したヒットマップには孤立しているマスが存在する。
+これは偶発的にミューオンがヒットしたことや多重散乱の影響によるもので、このままトレーニングに用いると本来$p_T$を判定する必要のないマスまで学習してしまい、トリガーレートの増加に繋がってしまう。
+そのため、以下に説明する手順に沿ってヒットマップを用いたミューオンの選別行う。
+図~\ref{fig:hitmapcleaner}にヒットマップクリーナを作用させた場合の例を示す。
 \begin{enumerate}
-   \item エントリー数が 3 以下のビンは削除する。これは、偶発的にミューオンがヒットしたマスを削除することを目的とする。
-   \item ミューオンがヒットしたマスが隣接する 8 個のマスのうち 2 つ以下であるとき、そのマスは削除する。孤立したミューオンのヒットを削除することを目的としている。
+   \item エントリー数が 3 以下のマスは削除する。これは、偶発的にミューオンがヒットしたマスを削除することを目的とする。
+   \item あるマスに隣接する周囲の8マスのうち、ミューオンがヒットしたマスが2マス以下であるとき、削除する。これは、孤立したミューオンのヒットを削除することを目的としている。
 \end{enumerate}
-入力データのヒットマップに対して、上記のヒットマップクリーナーの手順を 1 番から順番に要求し、ヒットマップを最適化を行う。図\ref{fig:hitmapcleaner}にヒットマップクリーナを作用させた場合の例を示す。
+
 
 \begin{figure}[tb]
   \centering
@@ -185,12 +205,11 @@ RoI はトリガーセクターごとに設定された番号が与えられて�
 本節では飛跡の曲がり具合と TGC$\_$BW のヒット情報からミューオンの横方向運動量 $p_T$ を出力させる機械学習モデルの設計について述べる。
 
 \subsubsection{機械学習モデルの設計}
+本研究において、機械学習モデルの構築にはGoogle社によって開発された機械学習に用いるためのオープンソースのフレームワークであるTensorFlow~\cite{article:TensorFlow}とニューラルネットワークライブラリであるKeras~\cite{article:keras}を用いた。
 
-本研究において、機械学習モデルの構築には Google 社によって開発された機械学習に用いるためのオープンソースのフレームワークである TensorFlow \cite{article:TensorFlow}とニューラルネットワークライブラリである Keras \cite{article:keras}を用いた。
-
-本研究で使用する機械学習モデルは、4 つの入力変数を持つ入力層、5 つの隠れ層、$p_T$ の値を出力する1 つの出力層となるような回帰分析を行う全結合型 MLP モデルを構築する。
-図\ref{fig:MLP_overview}に機械学習モデルの概要図を示す。
-MLP の各隠れ層は以下の表\ref{table:hibben}に示す要素から構成される。
+本研究で使用する機械学習モデルは、4つの入力変数を持つ入力層、5つの隠れ層、$p_T$ の値を出力する1つの出力層となるような、回帰分析を行う全結合型MLPモデルを構築する。
+図~\ref{fig:MLP_overview}に機械学習モデルの概要図を示す。
+MLPの各隠れ層は以下の表\ref{table:hibben}に示す要素から構成される。
 \begin{enumerate}\label{table:hibben}
    \item Dence layer：前の層からのすべての出力の線形結合を入力としたパーセプトロンの層。1 つの層に存在するパーセプトロンの数をノード数と呼ぶ。
    \item Batch normalization layer：入力に対し正規化を行う層。
@@ -199,7 +218,7 @@ MLP の各隠れ層は以下の表\ref{table:hibben}に示す要素から構成�
    %\caption{隠れ層を構成する要素。}
 \end{enumerate}
 出力層には ReLU 関数を活性化関数として使用する。これは、目的とする出力の $p_T$ の値が必ず正の値を取るためである。
-誤差逆伝搬法には RMSprop optimizer を用いて勾配降下法を行っている。
+誤差逆伝搬法にはRMSpropを用いて勾配降下法を行っている。
 
 \subsubsection{ハイパーパラメータ}
 隠れ層の数、ノード数、ドロップアウト率、損失関数、学習率の 5 個のハイパーパラメータを表\ref{table:hyper}のように変化させることで評価を行い最適なモデルを選択した。評価にはPreferred Networks社が開発したハイパーパラメータの最適化を自動で行うフレームワークである Optuna \cite{article:optuna}を使用した。
@@ -207,85 +226,80 @@ MLP の各隠れ層は以下の表\ref{table:hibben}に示す要素から構成�
    \item 隠れ層の数：3層 から 6層
    \item ノード数：128, 256, 512, 1024
    \item ドロップアウト率：0.01, 0.02, 0.03, 0.04, 0.05
-   \item 活性化関数：Sigmoid 関数、relu 関数
+   \item 活性化関数：Sigmoid 関数、ReLU 関数
    \item 学習率：0.01, 0.001, 0.0001
    %\caption{変化させるハイパーパラメータの一覧。}
 \end{enumerate}
-評価を行った結果、いくつかの組み合わせで同等の性能が得られることがわかった。これらのうち、学習可能なパラメータの数が最も少ないネットワークが選ばれた。パラメータとその値は、ドロップアウト率 0.05、活性化関数 relu、学習率 0.001, そして、5つの隠れ層と [256, 256, 256, 256, 256] のノード数を選択する。
+評価を行った結果、いくつかの組み合わせで同等の性能が得られることがわかった。これらのうち、学習可能なパラメータの数が最も少ないネットワークが選ばれた。パラメータとその値は、ドロップアウト率 0.05、活性化関数 ReLU、学習率 0.001, そして、5つの隠れ層と [256, 256, 256, 256, 256] のノード数を選択する。
 
 \begin{figure}[tb]
   \centering
   %\rule{8cm}{6cm}
-  \includegraphics[clip, width=12cm]{fig/4/MLP.pdf}
-  \caption{機械学習モデルの概要図。}
+  \includegraphics[clip, width=12cm]{fig/4/MLP_2.pdf}
+  \caption{機械学習モデルの概要図。4つの入力、各層に256個のノードを持つ5つの隠れ層、$p_{T}^{\rm{offline}}$を出力とする全結合型MLPを構築する。活性化関数はReLU、ドロップアウト率は0.05とする。}
   \label{fig:MLP_overview}
 \end{figure}
 
 
 \subsubsection{トレーニング}
-MLPのトレーニングには教師あり学習を用いる。
-トレーニングのために2018年Run-3データ
+機械学習モデルのトレーニングには、\ref{事前処理}節で述べた方法を用いて実際のデータ及びシミュレーションデータに対して事前処理を行ったデータを入力データとする。教師データとしてはそれぞれのデータでオフライン再構成されたミューオンの$p_T$を利用する。
+トレーニングデータの総数は、シミュレーションデータが500万イベント、2018年Run-2データが約****万イベントである。
 
+図~\ref{fig:epoch}に機械学習モデルをトレーニングした際のepochに対する出力と教師データの平均二乗誤差の推移を示す。全てのモデルにおいて validation データの平均二乗誤差は十分に収束している事が見て取れる。
+
+\begin{figure}[tb]
+  \centering
+  %\rule{8cm}{6cm}
+  \includegraphics[clip, width=10cm]{fig/4/epoch2.png}
+  \caption{機械学習モデルをトレーニングした際の epoch に対する平均二乗誤差の推移。}
+  \label{fig:epoch}
+\end{figure}
 
 
 \subsubsection{機械学習モデルの性能評価}
-本節では、トレーニングを行った機械学習モデルの性能評価を行う。
-2018 年 Run-2 のデータを用いて、MLP で予測した$p_{T}^{pred}$ と正解値 $p_{T}^true$ の残差分布の比較を行った。
+まず、シミュレーションデータをもとにトレーニングを行った機械学習モデルについての評価を行う。
+新たに500万イベントのシングルミューオンのシミュレーションデータ作成し評価に用いて、MLPで予測した$p_{T}^{pred}$とオフライン再構成された正解値 $p_{T}^true$ の比較を行った結果を図~\ref{fig:zannsa_25_MC}に示す。
+また、ある$p_T^{True}$に対して、$p_T^{Pred}$の分布をガウシアンフィットした場合の$\mu$の分布を図~\ref{fig:Gausmu_MC}に示す。$p_T^{True}$に対して機械学習の予測値はほぼ線形である事が見て取れる。
 
 \begin{figure}[tb]
   \centering
-  \rule{8cm}{6cm}
-  %\includegraphics[clip, width=14cm]{}
-  \caption{残差分布(MC)}
-  \label{fig:fit_def}
+  %\rule{8cm}{6cm}
+  \includegraphics[clip, width=12cm]{fig/4/zansa_25_MC.pdf}
+  \caption{シミュレーションデータを用いてトレーニングを行ったMLPの$p_{T}^{True}$に対する$p_{T}^{Pred}$の分布。評価にはシングルミューオンのシミュレーションデータを用いた。}
+  \label{fig:zannsa_25_MC}
 \end{figure}
 
 \begin{figure}[tb]
   \centering
-  \rule{8cm}{6cm}
-  %\includegraphics[clip, width=14cm]{}
-  \caption{trueに対するpredの分布(MC)}
-  \label{fig:fit_def}
+  %\rule{8cm}{6cm}
+  \includegraphics[clip, width=12cm]{fig/4/tp_Gausmean_MC.pdf}
+  \caption{ある$p_T^{True}$に対して、$p_T^{Pred}$の分布をガウシアンフィットした場合の$\mu$の分布。}
+  \label{fig:Gausmu_MC}
 \end{figure}
+
+次に、実際のデータをトレーニングに使用した機械学習モデルの評価を行う。
+2018年Run-2で収集したデータを用いて、MLP で予測した$p_{T}^{pred}$ と正解値 $p_{T}^true$ の残差分布の比較を行った結果を図~\ref{fig:zannsa_25_Data}に示す。また、ある$p_T^{True}$に対して、$p_T^{Pred}$の分布をガウシアンフィットした場合の$\mu$の分布を図~\ref{fig:Gausmu_Data}に示す。こちらも$p_T^{True}$に対して機械学習の予測値はほぼ線形である事が見て取れる。
 
 \begin{figure}[tb]
   \centering
-  \rule{8cm}{6cm}
-  %\includegraphics[clip, width=14cm]{}
-  \caption{true-prepのpt分布(MC)}
-  \label{fig:fit_def}
+  %\rule{8cm}{6cm}
+  \includegraphics[clip, width=12cm]{fig/4/zansa_25_DESDM.pdf}
+  \caption{2018年Run-2のデータを用いてトレーニングを行ったMLPの$p_{T}^{True}$に対する$p_{T}^{Pred}$の分布。評価には2018年Run-2のデータを用いた。}
+  \label{fig:zannsa_25_Data}
 \end{figure}
+
 
 \begin{figure}[tb]
   \centering
-  \rule{8cm}{6cm}
-  %\includegraphics[clip, width=14cm]{}
-  \caption{残差分布(Data)}
-  \label{fig:fit_def}
+  %\rule{8cm}{6cm}
+  \includegraphics[clip, width=12cm]{fig/4/tp_Gausmean_Data.pdf}
+  \caption{ある$p_T^{True}$に対して、$p_T^{Pred}$の分布をガウシアンフィットした場合の$\mu$の分布。}
+  \label{fig:Gausmu_Data}
 \end{figure}
-
-\begin{figure}[tb]
-  \centering
-  \rule{8cm}{6cm}
-  %\includegraphics[clip, width=14cm]{}
-  \caption{trueに対するpredの分布(Data)}
-  \label{fig:fit_def}
-\end{figure}
-
-\begin{figure}[tb]
-  \centering
-  \rule{8cm}{6cm}
-  %\includegraphics[clip, width=14cm]{}
-  \caption{true-prepのpt分布(Data)}
-  \label{fig:fit_def}
-\end{figure}
-
-
-
 
 \subsection{出力データをPt閾値に変換}
-\subsubsection{iフィッティング関数の定義}\label{section:fitting}
-式\eqref{equ:fitting}を用いて Turn-on curve にフィッティングを行うことでトリガー効率を定量的に評価する。
+\subsubsection{フィッティング関数の定義}\label{section:fitting}
+式~\eqref{equ:fitting}を用いて Turn-on curve にフィッティングを行うことでトリガー効率を定量的に評価する。
 \begin{equation}
     f(p_T) = \frac{p_0}{exp(\frac{p_T-p_1}{p_2})+1}
 　\label{equ:fitting}
@@ -293,7 +307,7 @@ MLPのトレーニングには教師あり学習を用いる。
 ここで、トリガーの性能を表す 3 つのパラメータ $p_0$, $p_1$, $p_2$ を以下のように定義する。図\ref{fig:fiting}に
 \begin{figure}[tb]
   \centering
-  \includegraphics[clip, width=14cm]{fig/4/fitting_def.png}
+  \includegraphics[clip, width=12cm]{fig/4/fitting_def.png}
   \caption{Turn-on curve に対するfittingの例。$p_0$ を Plateau efficiency、$p_1$ を Effective threshold、$p_2$ を Resolution と定義する。}
   \label{fig:fiting}
 \end{figure}
@@ -314,26 +328,54 @@ MLPのトレーニングには教師あり学習を用いる。
 図\ref{fig:Effictive_thr_v1}に出力データを 0.1 GeV 刻みで区切った時の Effective threshold を示す。
 \begin{figure}[tb]
   \centering
-  \includegraphics[clip, width=14cm]{fig/4/Effictive_thr_v1.pdf}
+  \includegraphics[clip, width=12cm]{fig/4/Effictive_thr_v1.pdf}
   \caption{出力された $p_T$ を 0.1 GeV 刻みで区切った時のTurn-on curve における Effective threshold。}
   \label{fig:Effictive_thr_v1}
 \end{figure}
 フィッティング結果から表\ref{Effective_number}のように 15 段階閾値に区切る値を決定した。
 \begin{table}[thb]
 \centering
-    \caption{Run-3 初段ミューオントリガーにおける 15 段階の $p_T$ の値。}
+    \caption{機械学習からの出力値におけるの15段階閾値。}
     \label{Effective_number}
-    
-    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+    \begin{tabular}{|c|c|}
         \hline
-        $p_t$ number & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15\\
+        $p_t$ number & 出力された $p_T$ [GeV]\\
         \hline
-        出力された $p_T$ [GeV] & 1.0 & 2.0 & 3.0 & 4.7 & 6.2 & 7.4 & 8.4 & 9.6 & 10.6 & 11.7 & 12.8 & 13.9 & 15.0 & 21.7 & 25.1\\
+        1 & 1.0\\
         \hline
+        2 & 2.0\\
+        \hline
+        3 & 3.0\\
+        \hline
+        4 & 4.7\\
+        \hline
+        5 & 6.2\\
+        \hline
+        6 & 7.4\\
+        \hline
+        7 & 8.4\\
+        \hline
+        8 & 9.6\\
+        \hline
+        9 & 10.6\\
+        \hline
+        10 & 11.7\\
+        \hline
+        11 & 12.8\\
+        \hline
+        12 & 13.9\\
+        \hline
+        13 & 15.0\\
+        \hline
+        14 & 21.7\\
+        \hline
+        15 & 25.1\\
+        \hline
+        
     \end{tabular}
 \end{table}
 
-図\ref{}に本研究で作成したCWの一例を示す。
+図~\ref{}に本研究で作成したCWの一例を示す。
 
 
 
