@@ -65,6 +65,7 @@ sigmoid 関数及びReLU 関数の概形を図\ref{fig:sigmoid},図\ref{fig:ReLU
     %f \begin{pmatrix}  \\ 2 & 3 \end{pmatrix}
     \label{equ:ReLU}
 \end{equation}
+
 \begin{figure}
     %\centering
     \begin{tabular}{cc}
@@ -132,8 +133,8 @@ sigmoid 関数及びReLU 関数の概形を図\ref{fig:sigmoid},図\ref{fig:ReLU
 本節では学習に用いるシミュレーションデータおよび実際のデータに対して処理を行い、本研究の機械学習に適した形式に変換する方法について述べる。
 
 本研究ではトレーニングのために、シミュレーションデータ及び実際の測定データを使用する。
-シミュレーション用のCWを作成するための機械学習のトレーニングには、1回のイベントに対してミューオンが1個存在するシングルミューオンのシミュレーションサンプルを使用する。オフライン再構成されたミューオンに対して、TGCのM3におけるヒット情報が存在することを要求する。そして、TGC M3におけるヒット情報からヒット位置の情報(トリガーセクターの番号、RoIの番号)と飛跡の情報(dR、d$\phi$)を取得する。
-また、実際の測定に使用するCWを作成するための機械学習のトレーニングには、2018年Run-2で収集されたデータを用いる。使用するイベントにはHLTのシングルミューオントリガーである「HLT$\_$mu26$\_$ivarmeduium」を要求する。シミュレーションデータと同様に、イベントの中でもTGC M3おけるヒット情報が存在するオフライン再構成されたミューオンをすべて使用し、TGC M3におけるヒット位置の情報(トリガーセクターの番号、RoIの番号)と飛跡の情報(dR、d$\phi$)を取得する。
+シミュレーション用のCWを作成するための機械学習のトレーニングには、1回のイベントに対してミューオンが1個存在するシングルミューオンのシミュレーションサンプルを使用する。オフライン再構成されたミューオンに対して、TGCのM3におけるヒット情報が存在することを要求する。そして、TGC M3におけるヒット情報からヒット位置の情報(トリガーセクターの番号、RoIの番号)と飛跡の情報($\Delta $、d$\phi$)を取得する。
+また、実際の測定に使用するCWを作成するための機械学習のトレーニングには、2018年Run-2で収集されたデータを用いる。使用するイベントにはHLTのシングルミューオントリガーである「HLT$\_$mu26$\_$ivarmeduium」を要求する。シミュレーションデータと同様に、イベントの中でもTGC M3おけるヒット情報が存在するオフライン再構成されたミューオンをすべて使用し、TGC M3におけるヒット位置の情報(トリガーセクターの番号、RoIの番号)と飛跡の情報($\Delta$ R、d$\phi$)を取得する。
 
 %\begin{figure}[thb]
 %  \centering
@@ -153,14 +154,14 @@ sigmoid 関数及びReLU 関数の概形を図\ref{fig:sigmoid},図\ref{fig:ReLU
 
 \subsubsection{TGCの位置情報におけるナンバリングの変換}
 学習には、TGCのヒット位置の情報としてトリガーセクターの番号とRoIの番号を使用する。
-RoIはトリガーセクターごとに設定された番号が与えられており、あるトリガーセクターの一番端の列のRoIの番号は隣接するトリガーセクターのRoIの番号と関連性がない。
+\ref{fig:TGCnumbering}に示すようにRoIはトリガーセクターごとに設定された番号が与えられており、あるトリガーセクターの一番端の列のRoIの番号は隣接するトリガーセクターのRoIの番号と関連性がない。
 しかし、隣り合った場所に位置するRoIは似通った磁場構造を持っているため、トレーニングするにあたって、隣り合ったRoIの情報に関連性を持たせたい。
 
 \begin{figure}[tb]
   \centering
   \includegraphics[clip, width=12cm]{fig/4/TGC_numbering.pdf}
   \caption{TGCにおけるトリガーセクターとRoIのナンバリングの概要。}
-  \label{fig:newnumbering}
+  \label{fig:TGCnumbering}
 \end{figure}
 
 本研究では、TGCにおけるヒット位置を表すトリガーセクターの番号とRoIの番号を、新たに隣り合ったRoIの番号が連続するようなナンバリングに変換する。
@@ -250,12 +251,13 @@ MLPの各隠れ層は以下の表\ref{table:hibben}に示す要素から構成�
 \begin{figure}[tb]
   \centering
   %\rule{8cm}{6cm}
-  \includegraphics[clip, width=10cm]{fig/4/epoch2.png}
+  \includegraphics[clip, width=7cm]{fig/4/epoch2.png}
   \caption{機械学習モデルをトレーニングした際の epoch に対する平均二乗誤差の推移。}
   \label{fig:epoch}
 \end{figure}
 
 
+\newpage
 \subsubsection{機械学習モデルの性能評価}
 まず、シミュレーションデータをもとにトレーニングを行った機械学習モデルについての評価を行う。
 新たに500万イベントのシングルミューオンのシミュレーションデータ作成し評価に用いて、MLPで予測した$p_{T}^{pred}$とオフライン再構成された正解値 $p_{T}^true$ の比較を行った結果を図~\ref{fig:zannsa_25_MC}に示す。
@@ -264,7 +266,7 @@ MLPの各隠れ層は以下の表\ref{table:hibben}に示す要素から構成�
 \begin{figure}[tb]
   \centering
   %\rule{8cm}{6cm}
-  \includegraphics[clip, width=12cm]{fig/4/zansa_25_MC.pdf}
+  \includegraphics[clip, width=11cm]{fig/4/zansa_25_MC.pdf}
   \caption{シミュレーションデータを用いてトレーニングを行ったMLPの$p_{T}^{True}$に対する$p_{T}^{Pred}$の分布。評価にはシングルミューオンのシミュレーションデータを用いた。}
   \label{fig:zannsa_25_MC}
 \end{figure}
@@ -272,7 +274,7 @@ MLPの各隠れ層は以下の表\ref{table:hibben}に示す要素から構成�
 \begin{figure}[tb]
   \centering
   %\rule{8cm}{6cm}
-  \includegraphics[clip, width=12cm]{fig/4/tp_Gausmean_MC.pdf}
+  \includegraphics[clip, width=11cm]{fig/4/tp_Gausmean_MC.pdf}
   \caption{ある$p_T^{True}$に対して、$p_T^{Pred}$の分布をガウシアンフィットした場合の$\mu$の分布。}
   \label{fig:Gausmu_MC}
 \end{figure}
@@ -280,31 +282,44 @@ MLPの各隠れ層は以下の表\ref{table:hibben}に示す要素から構成�
 次に、実際のデータをトレーニングに使用した機械学習モデルの評価を行う。
 2018年Run-2で収集したデータを用いて、MLP で予測した$p_{T}^{pred}$ と正解値 $p_{T}^true$ の残差分布の比較を行った結果を図~\ref{fig:zannsa_25_Data}に示す。また、ある$p_T^{True}$に対して、$p_T^{Pred}$の分布をガウシアンフィットした場合の$\mu$の分布を図~\ref{fig:Gausmu_Data}に示す。こちらも$p_T^{True}$に対して機械学習の予測値はほぼ線形である事が見て取れる。
 
-\begin{figure}[tb]
+\begin{figure}[htb]
   \centering
   %\rule{8cm}{6cm}
-  \includegraphics[clip, width=12cm]{fig/4/zansa_25_DESDM.pdf}
+  \includegraphics[clip, width=11cm]{fig/4/zansa_25_DESDM.pdf}
   \caption{2018年Run-2のデータを用いてトレーニングを行ったMLPの$p_{T}^{True}$に対する$p_{T}^{Pred}$の分布。評価には2018年Run-2のデータを用いた。}
   \label{fig:zannsa_25_Data}
 \end{figure}
 
-
-\begin{figure}[tb]
+\begin{figure}[htb]
   \centering
   %\rule{8cm}{6cm}
-  \includegraphics[clip, width=12cm]{fig/4/tp_Gausmean_Data.pdf}
+  \includegraphics[clip, width=11cm]{fig/4/tp_Gausmean_Data.pdf}
   \caption{ある$p_T^{True}$に対して、$p_T^{Pred}$の分布をガウシアンフィットした場合の$\mu$の分布。}
   \label{fig:Gausmu_Data}
 \end{figure}
 
+
+
+
+
+
 \subsection{出力データをPt閾値に変換}
+\subsubsection{トリガー効率の算出}
+全オフライン再構成されたミューオンの内、あるpT 閾値以上のトリガーが発行された割合$\epsilon$を式~\eqref{equ:Eff}と定義し、トリガー効率の算出を行った。
+このとき得られるトリガー効率を $p_T$ の関数で表したプロットをTurn-on curveと呼ぶ。
+\begin{equation}
+　   \epsilon = \frac{ある p_T 閾値以上のトリガーを発行したミューオンの数}{全オフライン再構成したミューオンの数}
+　\label{equ:Eff}
+\end{equation}
+
+
 \subsubsection{フィッティング関数の定義}\label{section:fitting}
 式~\eqref{equ:fitting}を用いて Turn-on curve にフィッティングを行うことでトリガー効率を定量的に評価する。
 \begin{equation}
     f(p_T) = \frac{p_0}{exp(\frac{p_T-p_1}{p_2})+1}
 　\label{equ:fitting}
 \end{equation}
-ここで、トリガーの性能を表す 3 つのパラメータ $p_0$, $p_1$, $p_2$ を以下のように定義する。図\ref{fig:fiting}に
+ここで、トリガーの性能を表す 3 つのパラメータ $p_0$, $p_1$, $p_2$ を以下のように定義する。Turn-on curveにフィッティングした様子を図~\ref{fig:fiting}に示す。
 \begin{figure}[tb]
   \centering
   \includegraphics[clip, width=12cm]{fig/4/fitting_def.png}
@@ -318,21 +333,21 @@ MLPの各隠れ層は以下の表\ref{table:hibben}に示す要素から構成�
    \item $p_1$:Effective threshold\\
    トリガーの実効的な $p_T$ の閾値を表す。トリガー効率が Plateau efficiency の値の 50\% となる時の $p_T$ の値である。
    \item $p_2$:Resolution\\
-   トリガーの運動量の分解能を表す。Turn-on curve の立ち上がりの鋭さに対応すしており、Resolution の値が大きくなると Turn-on curve の立ち上がりが緩くなるため、、トリガーの運動量分解能が悪くなる。
+   トリガーの運動量の分解能を表す。Turn-on curve の立ち上がりの鋭さに対応すしており、Resolution の値が大きくなると Turn-on curve の立ち上がりが緩くなるため、fトリガーの運動量分解能が悪くなる。
 \end{enumerate}
 
 \subsubsection{15段階閾値への変換}
-目的とする $p_T$ の値は MLP から連続値として出力される。そのため、任意の値で $p_T$ を区切り15段階の $p_T$ 閾値に変換を行う。
-方法としては、任意の値で $p_T$ を区切った時のトリガー効率を求め、Turn-on curve に対し\eqref{equ:fitting}を用いてフィッティングを行う。フィッティングから Effective threshold を求め、\ref{section:CW}で述べた Run-3 における 15 段階閾値となる任意の値を導出する。
-本研究では出力された $p_T$ を 1 GeV から 30 GeV まで 0.1 GeV 刻みで区切り、それぞれの Turn-on curve に対してのフィッティング結果から 15 段階の $p_T$ 閾値に変換を行った。
-図\ref{fig:Effictive_thr_v1}に出力データを 0.1 GeV 刻みで区切った時の Effective threshold を示す。
+目的とする$p_T$の値はMLPから連続値として出力される。そのため、任意の値で$p_T$を区切り15段階の$p_T$閾値に変換を行う。
+方法としては、任意の値で$p_T$を区切った時のトリガー効率を求め、Turn-on curveに対し式\eqref{equ:fitting}を用いてフィッティングを行う。フィッティング結果からEffective thresholdを求め、Effective thresholdが\ref{section:CW}節で述べたRun-3における15段階閾値となる任意の値を導出する。
+本研究では出力された$p_T$を1GeVから30GeVまで0.1GeV刻みで区切り、それぞれのTurn-on curveに対してのフィッティング結果から15段階の$p_T$閾値に変換を行った。
+図~\ref{fig:Effictive_thr_v1}に出力データを0.1GeV刻みで区切った時のEffective thresholdを示す。
 \begin{figure}[tb]
   \centering
   \includegraphics[clip, width=12cm]{fig/4/Effictive_thr_v1.pdf}
-  \caption{出力された $p_T$ を 0.1 GeV 刻みで区切った時のTurn-on curve における Effective threshold。}
+  \caption{出力された$p_T$を0.1GeV刻みで区切った時のTurn-on curveにおけるEffective threshold。}
   \label{fig:Effictive_thr_v1}
 \end{figure}
-フィッティング結果から表\ref{Effective_number}のように 15 段階閾値に区切る値を決定した。
+本研究では、フィッティング結果から表~\ref{Effective_number}のように15段階閾値に区切る値を決定した。
 \begin{table}[thb]
 \centering
     \caption{機械学習からの出力値におけるの15段階閾値。}
