@@ -5,20 +5,11 @@
 
 本章では、第~\ref{chapter4}章で述べた手法を用いて作成した2種類のCW(シミュレーション用のCWと実際の測定用のCW)を用いたトリガーの性能の評価を行う。
 
+\section{機械学習を用いて作成したCWの15段階閾値の評価}
+便宜上、本研究の手法で作成した2種類のCWについて、シミュレーション用のCWを$\mathrm{CW_{Simu}}$、実際の測定用のCWを$\mathrm{CW_{Data}}$と呼び、比較対象として2022年度Run-3で使用されたCWを$\mathrm{CW_{2022}}$と呼ぶこととする。
 
-\section{評価方法}
-全オフライン再構成されたミューオンの内、ある$p_{\rm{T}}$閾値以上のトリガーが発行された割合$\epsilon$を計算し、トリガー効率の算出を行った。また、$\epsilon$をオフライン再構成した$p_{\rm{T}}$の関数として表したTurn-on curveを描き、式~\eqref{equ:fitting}の関数によってフィッティングを行う事で、トリガー性能の評価を行った。
-
-また、トリガーの$p_{\rm{T}}$分解能を式~\eqref{equ:residual}を用いて行う。
-\begin{equation}
-    p_{\rm{T}} residual = \frac{p_{\rm{T}}^{L1}-p_{\rm{T}}^{offline}}{p_{\rm{T}}^{offline}}
-    \label{equ:residual}
-\end{equation}
-ここで、$p_{\rm{T}}^{L1}$はL1MuonでCWを用いて判定される$p_{\rm{T}}$閾値、$p_{\rm{T}}^{offline}$はオフライン再構成されたミューオンで$p_{\rm{T}}$ある。
-そのため、$p_{\rm{T}}^{offline}$に対して正しく$p_{\rm{T}}^{L1}$を判定できていれば0に近づき、0から離れるほど$p_{\rm{T}}^{L1}$が$p_{\rm{T}}^{offline}$とずれていることになる。
-
-以下で行う評価にはシングルミューオンのシミュレーションデータおよび2018年Run2のデータを使用する。
-
+まず、全オフライン再構成されたミューオンの内、ある$p_{\rm{T}}$閾値以上のトリガーが発行された割合$\epsilon$を計算し、トリガー効率の算出を行った。また、$\epsilon$をオフライン再構成した$p_{\rm{T}}$の関数として表したTurn-on curveを描き、式~\eqref{equ:fitting}の関数によってフィッティングを行う事で、トリガー性能の評価を行った。
+このとき、Tag$\&$Probe法を用いて評価に用いるデータの処理を行う。
 \subsubsection{Tag$\&$Probe法}
 実際の実験データはトリガーによって選別された粒子の情報のみが保存されているため、そのままのデータを用いてトリガーの性能評価を行うとバイアスがかかる可能性がある。そこで、このバイアスを除く手法としてTag$\&$Probe法を用いる。
 
@@ -52,15 +43,10 @@ TagミューオンがHLTを発行しているとみなされた時、もう一�
   \label{fig:Probe_TGC}
 \end{figure}
 
-%\newpage
-
-\section{機械学習を用いて作成したCWの15段階閾値の評価}
-便宜上、本研究の手法で作成した2種類のCWについて、シミュレーション用のCWを$\mathrm{CW_{Simu}}$、実際の測定用のCWを$\mathrm{CW_{Data}}$と呼び、比較対象として2022年度Run-3で使用されたCWを$\mathrm{CW_{2022}}$と呼ぶこととする。
-
-%\subsection{作成したCWの15段階の$p_{\rm{T}}$閾値}
-図~\ref{fig:15Eff_CW_Data}に$\mathrm{CW_{Data}}$を用いて3ステーションコインシデンスのみでhotroiフラグを要求した15段階の$p_{\rm{T}}$閾値におけるTurn-on curveを示す。評価には2018年Run-2 のデータに対して$Z\rightarrow \mu\mu$によるTag$\&$Probe法を用いた。
+\subsection{作成したCWの15段階の$p_{\rm{T}}$閾値}
+図~\ref{fig:15Eff_CW_Data}に$\mathrm{CW_{Data}}$を用いて15段階の$p_{\rm{T}}$閾値におけるTurn-on curveを示す。評価には2018年Run-2 のデータに対して$Z\rightarrow \mu\mu$によるTag$\&$Probe法を用いた。
 $\mathrm{CW_{2022}}$と同様に、本研究の手法で作成した$\mathrm{CW_{Data}}$は15段階に分かれたTurn-on curveを描けていることがわかる。
-また、図~\ref{fig:15Eff_CW_Simu}に$\mathrm{CW_{Simu}}$を用いて3ステーションコインシデンスのみでhotroiフラグを要求した15段階の$p_{\rm{T}}$閾値におけるTurn-on curveを示す。評価にはシングルミューオンのシミュレーションサンプルを用いた。
+また、図~\ref{fig:15Eff_CW_Simu}に$\mathrm{CW_{Simu}}$を用いてを要求した15段階の$p_{\rm{T}}$閾値におけるTurn-on curveを示す。評価にはシングルミューオンのシミュレーションサンプルを用いた。
 比較のため、図~\ref{fig:Run3_15_MC5} に $\mathrm{CW_{2022}}$を用いた15段階の$p_{\rm{T}}$閾値におけるのTurn-on curveを示す。
 こちらも同様に、本研究の手法で作成した$\mathrm{CW_{Simu}}$は15段階に分かれたTurn-on curveを描けていることがわかる。
 よって、本研究の手法によって作成された2種類のCWは、2022年度Run-3において使用された$\mathrm{CW_{2022}}$と同様に15段階の判定が可能であることが見て取れる。
@@ -98,7 +84,7 @@ $\mathrm{CW_{2022}}$と同様に、本研究の手法で作成した$\mathrm{CW_
 \subsection{現行のトリガーとのトリガー性能の比較}
 次に、それぞれの15段階の$p_{\rm{T}}$閾値のトリガーについて評価を行う。
 
-\subsubsection{シミュレーションデータをトレーニングに用いて作成した$\mathrm{CW_{Simu}}$の評価}
+\subsubsection{トリガー効率の評価}
 まず、$\mathrm{CW_{Simu}}$と$\mathrm{CW_{2022}}$のトリガー効率$\epsilon$を比較する。評価にはシングルミューオンのシミュレーションデータを用いる。
 
 図~\ref{fig:v05v07} には$p_{\rm{T}}$閾値が14~GeVの時の、$\mathrm{CW_{2022}}$と$\mathrm{CW_{Simu}}$のTurn-on curveの比較を示す。
@@ -152,11 +138,20 @@ $\mathrm{CW_{Data}}$は全体的にResolutionの値が小さくなっており�
   \label{Plateau_v07v05}
 \end{figure}
 
-次に、$p_{\rm{T}}$分解能を式~\eqref{equ:residual}で計算する$p_{\rm{T}}$ residualを用いて評価する。
+\subsubsection{$p_{\rm{T}}^{offline}$分解能の評価}
+$p_{\rm{T}}$分解能を式~\eqref{equ:residual}で計算する$p_{\rm{T}}$ residualを用いて評価する。
+\begin{equation}
+    p_{\rm{T}} residual = \frac{p_{\rm{T}}^{L1}-p_{\rm{T}}^{offline}}{p_{\rm{T}}^{offline}}
+    \label{equ:residual}
+\end{equation}
+ここで、$p_{\rm{T}}^{L1}$はL1MuonでCWを用いて判定される$p_{\rm{T}}$閾値、$p_{\rm{T}}^{offline}$はオフライン再構成されたミューオンで$p_{\rm{T}}$ある。
+そのため、$p_{\rm{T}}^{offline}$に対して正しく$p_{\rm{T}}^{L1}$を判定できていれば0に近づき、0から離れるほど$p_{\rm{T}}^{L1}$が$p_{\rm{T}}^{offline}$とずれていることになる。
+
 この$p_{\rm{T}}$ residualを1~GeVごとの$p_{\rm{T}}^{offline}$に対して計算し、細かい$p_{\rm{T}}$に対する分解能を見る。
-評価にはトリガー効率と同様にシングルミューオンのシミュレーションサンプルを用いる。
+まず、本研究の手法で作成した$\mathrm{CW_{Simu}}$と2022年度Run-2で使用された$\mathrm{CW_{2022}}$の比較を行う。
+評価にはシングルミューオンのシミュレーションサンプルを用いる。
 図~\ref{residual_MC_3_10}と図~\ref{residual_MC_11_18}に1~GeVごとの$p_{\rm{T}}^{offline}$に対する$p_{\rm{T}}$ residual分布を示す。
-本研究の手法で作成した$\mathrm{CW_{Simu}}$は、2022年度Run-2で使用された$\mathrm{CW_{2022}}$と同様の分布を示している。
+本研究の手法で作成した$\mathrm{CW_{Simu}}$は、2022年度Run-3で使用された$\mathrm{CW_{2022}}$と同様の分布を示している。
 \begin{figure}[htb]
   \centering
   %\rule{8cm}{6cm}
@@ -176,62 +171,8 @@ $\mathrm{CW_{Data}}$は全体的にResolutionの値が小さくなっており�
 
 
 
-%\newpage
-\subsubsection{実際のデータをトレーニングに用いて作成した$\mathrm{CW_{Data}}$の評価}
-次に、$\mathrm{CW_{Data}}$を$\mathrm{CW_{2022}}$と比較する。評価には2018年Run-2データを用いる。
-図~\ref{fig:v05v06}に$p_{\rm{T}}$閾値14~GeVにおける$\mathrm{CW_{2022}}$と$\mathrm{CW_{Data}}$のTurn-on curveの比較を示す。
-本研究の手法によるCWは、2022年度Run-3において使用されたCWよりもTurn-on curveの立ち上がりが鋭くなっており、トリガー性能が良くなっていることが見て取れる。
-また、他の$p_{\rm{T}}$閾値における比較を図~\ref{fig:v05v06_1_9_Data}及び図~\ref{fig:v05v06_10_15_Data}に示す。
-本研究の手法による$\mathrm{CW_{Data}}$は、2022年度Run-3において使用された$\mathrm{CW_{2022}}$と同等以上の性能で15段階の$p_{\rm{T}}$判定が可能であることが見て取れる。
-\begin{figure}[htb]
-  \centering
-  %\rule{8cm}{6cm}
-  \includegraphics[clip, width=10cm]{fig/5/v05vsv06_MU14.pdf}
-  \caption{$\mathrm{CW_{Data}}$と$\mathrm{CW_{2022}}$のTurn-on curveの比較。評価には2018年Run-3のデータを使用した。}
-  \label{fig:v05v06}
-\end{figure}
-
-\begin{figure}[htb]
-  \centering
-  %\rule{8cm}{6cm}
-  \includegraphics[clip, width=10cm]{fig/5/v05v06_1_9.pdf}
-  \caption{$p_{\rm{T}}$閾値3~GeV$\sim$ 9~GeVにおける$\mathrm{CW_{Data}}$と$\mathrm{CW_{2022}}$のTurn-on curveの比較。評価には2018年Run-3のデータを使用した。}
-  \label{fig:v05v06_1_9_Data}
-\end{figure}
-
-\begin{figure}[htb]
-  \centering
-  %\rule{8cm}{6cm}
-  \includegraphics[clip, width=10cm]{fig/5/v05v06_10_15.pdf}
-  \caption{$p_{\rm{T}}$閾値10~GeV$\sim$ 20~GeVにおける$\mathrm{CW_{Data}}$と$\mathrm{CW_{2022}}$のTurn-on curveの比較。評価には2018年Run-3のデータを使用した。}
-  \label{fig:v05v06_10_15_Data}
-\end{figure}
-
-さらに、それぞれのTurn-on curveに式~\eqref{equ:fitting}によるフィッティングを行うことでトリガー性能の比較を行う。図~\ref{fig:Resolution_v06v05}に $\mathrm{CW_{Data}}$と$\mathrm{CW_{2022}}$のEffective thresholdに対するResolitionの比較を示す。
-$\mathrm{CW_{Data}}$は全体的にResolutionの値が小さくなっており、Resolutionの改善がみられる。しかし、低いEffective thresholdにおいては悪化が見られた。
-これは、＊＊＊
-
-図~\ref{Plateau_v06v05}に$\mathrm{CW_{Data}}$と$\mathrm{CW_{2022}}$のEffective thresholdに対するPlateau Efficiencyの比較を示す。2018年Run-3で使用された$\mathrm{CW_{2022}}$と比べて、本研究の手法で作成した$\mathrm{CW_{Simu}}$は全体的にPlateau Efficiencyが向上している。
-\begin{figure}[htb]
-  \centering
-  %\rule{8cm}{6cm}
-  \includegraphics[clip, width=10cm]{fig/4/v05vsv06_Resolution.pdf}
-  \caption{各Effective thresholdにおけるResolutionの比較。}
-  \label{fig:Resolution_v06v05}
-\end{figure}
-
-\begin{figure}[htb]
-  \centering
-  %\rule{8cm}{6cm}
-  \includegraphics[clip, width=10cm]{fig/4/v05vsv06_Plateau.pdf}
-  \caption{各Effective thresholdにおけるPlateau Efficiencyの比較。}
-  \label{Plateau_v06v05}
-\end{figure}
-
-
-次に、$p_{\rm{T}}$分解能を式~\eqref{equ:residual}で計算する$p_{\rm{T}}$ residualを用いて評価する。
-この$p_{\rm{T}}$ residualを1~GeVごとの$p_{\rm{T}}^{offline}$に対して計算し、細かい$p_{\rm{T}}$に対する分解能を見る。
-評価にはトリガー効率と同様にシングルミューオンのシミュレーションサンプルを用いる。
+次に、本研究の手法で作成した$\mathrm{CW_{Data}}$と2022年度Run-2で使用された$\mathrm{CW_{2022}}$の比較を行う。
+評価には2022年Run-2のデータを用いる。
 図~\ref{residual_Data_3_10}と図~\ref{residual_Data_11_18}に1~GeVごとの$p_{\rm{T}}^{offline}$に対する$p_{\rm{T}}$ residual分布を示す。
 本研究の手法で作成した$\mathrm{CW_{Data}}$は、2022年度Run-2で使用された$\mathrm{CW_{2022}}$と同様の分布を示している。
 \begin{figure}[htb]
@@ -252,25 +193,21 @@ $\mathrm{CW_{Data}}$は全体的にResolutionの値が小さくなっており�
 \end{figure}
 
 
-
-
-
-
-%%\newpage
 \subsection{機械学習によるCWの最適化の評価}
 実際のデータを機械学習に用いることで期待されるCWの最適化の効果について評価を行う。
 
-本研究で開発した手法では、実際のデータをトレーニング用いることで自動で最適化を行っており、
+本研究で開発した手法では、実際のデータをトレーニング用いることで自動で最適化を行うことで$\mathrm{CW_{Data}}$と$\mathrm{CW_{Simu}}$を作成した。そのため、最適化を行っていない$\mathrm{CW_{2022}}$よりもトリガー性能が向上することが期待される。
 
-
-同じ磁場構造の位置にあるRoIのCWを図~\ref{fig:CWv05v07}に示す。$p_{\rm{T}}$閾値が14~GeVとなる領域について、$\mathrm{CW_{Data}}$と$\mathrm{CW_{2022}}$の比較を図~\ref{fig:CWv05v07}に示す。
-図~\ref{fig:CWv05v07}に示す8個のCWは、シミュレーション上では磁場構造が8回転対象となるため、黒枠で表される$\mathrm{CW_{2022}}$はすべて同じ形である。しかし、\ref{ズレ}節で述べたように、実際の検出器のズレによって磁場構造が異なるため、本手法で作成した$\mathrm{CW_{Data}}$ではCWに数マス分のズレが生じている。
+まず、検出器アライメントに対応してCWをズラすことができているかを確認する。
+8回転対象の磁場構造において、同じ磁場構造となる場所に位置するRoIのCWの、$p_{\rm{T}}$閾値が14~GeVとなる領域についての$\mathrm{CW_{Data}}$と$\mathrm{CW_{2022}}$の比較を図~\ref{fig:CWv05v07}に示す。
+図~\ref{fig:CWv05v07}に示す8個のCWは、シミュレーション上では磁場構造が同じになるため、黒枠で表される$\mathrm{CW_{2022}}$はすべて同じ形である。しかし、\ref{ズレ}節で述べたように、実際の検出器のズレによって場所によって磁場構造が異なるため、本手法で作成した$\mathrm{CW_{Data}}$ではCWに数マス分のズレが生じている。
 \begin{figure}[tb]
   \centering
   \includegraphics[clip, width=13cm]{fig/5/ALL_Aside_Endcap_phiSector_Octant1_roi58.pdf}
   \caption{$p_{\rm{T}}$閾値が14~GeVとなる領域の比較。黄色の領域が本手法で作成した$\mathrm{CW_{Data}}$、黒枠の領域が$\mathrm{CW_{2022}}$である。}
   \label{fig:CWv05v07}
 \end{figure}
+
 次に、2018年Run-2データを評価に用いた際の$\mathrm{CW_{Data}}$と$\mathrm{CW_{Simu}}$の比較を行う。図~\ref{fig:v06v07}に$p_{\rm{T}}$閾値14~GeVにおけるTurn-on curveを比較したプロットを示す。実際のデータに対して、$\mathrm{CW_{Data}}$を用いたトリガーの方がトリガー効率が良くなっているのが見て取れる。
 \begin{figure}[tb]
   \centering
@@ -364,35 +301,3 @@ Run-2データにはHLTでのプリスケールによるバイアスが存在す
 
 $p_{\rm{T}}$閾値7~GeV以上のトリガーにおいて、$\mathrm{CW_{Data}}$のトリガーレートの値は$\mathrm{CW_{2022}}$と同等であることが見て取れる。
 しかし、$p_{\rm{T}}$閾値4~GeV、5~GeV、6~GeVのトリガーに関してはトリガーレートの大幅な増加が見られる。
-
-
-
-
-
-%\section{Run-3 に対するトリガー性能の評価}
-%2022 年Run-3 のデータを用いてトリガー効率の評価を行う。
-%\begin{figure}[tb]
-%  \centering
-%  \rule{8cm}{6cm}
-%  \caption{Efficiency}
-%  \label{fig:fit_def}
-%\end{figure}
-
-%次に、本手法で作成した CW を使用したときのRun-3 におけるトリガーレートの評価を行う。
-%2022 年Run-3 のデータを用い、トリガーには「」を要求する。
-%図\ref{fig:Run-3_rate}に$p_{\rm{T}}$閾値が 8 GeV から 20　GeV までの 10 段階のトリガーレートを示す。
-%\begin{figure}[tb]
-%  \centering
-%  \includegraphics[clip, width=14cm]{fig/5/l1mue_rate_run3.png}
-%  \caption{Rate}
-%  \label{fig:Run-3_rate}
-%\end{figure}
-
-
-
-
-
-
-
-
-
