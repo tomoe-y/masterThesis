@@ -267,22 +267,22 @@ MLPの各隠れ層は以下の表\ref{table:hibben}に示す要素から構成�
     \begin{minipage}[b]{0.45\hsize}%
         \centering
         \hspace*{-1cm}
-        \includegraphics[clip, width=7cm]{fig/4/Data_input_pt.pdf}
-        %\vspace{5pt}
-        \subcaption{}
-        \label{Data_input}
-    \end{minipage}%
-    %\hfill
-    \begin{minipage}[b]{0.6\hsize}%
-        \centering
-        \hspace*{-1cm}
         \includegraphics[clip, width=7cm]{fig/4/MC_input_pt100.pdf}
         %\vspace{5pt}
         \subcaption{}
         \label{MC_input}
     \end{minipage}%
+    %\hfill
+    \begin{minipage}[b]{0.6\hsize}%
+        \centering
+        \hspace*{-1cm}
+        \includegraphics[clip, width=7cm]{fig/4/Data_input_pt.pdf}
+        %\vspace{5pt}
+        \subcaption{}
+        \label{Data_input}
+    \end{minipage}%
     \end{tabular}
-    \caption{トレーニングに用いたミューオンの$p_{\rm{T}}$分布。(a)：2018年Run-2のデータ。(b)：シングルミューオンのシミュレーションサンプル。}
+    \caption{トレーニングに用いたミューオンの$p_{\rm{T}}$分布。(a)：シングルミューオンのシミュレーションサンプル。(b)：2018年Run-2のデータ。}
     \label{Inputdata}
 \end{figure}
 
@@ -299,76 +299,189 @@ MLPの各隠れ層は以下の表\ref{table:hibben}に示す要素から構成�
 
 \newpage
 \subsubsection{機械学習モデルの性能評価}
-まず、シミュレーションデータをもとにトレーニングを行った機械学習モデルについての評価を行う。
+本節では、機械学習モデルについての評価を行う。
 新たに500万イベントのシングルミューオンのシミュレーションデータ作成し評価に用いて、MLPで予測した$p_{\rm{T}}^{Pred}$とオフライン再構成された正解値 $p_{\rm{T}}^{True}$の比較を行った結果を図~\ref{fig:zannsa_25_MC}に示す。
-また、ある$p_{\rm{T}}^{True}$に対して、$p_{\rm{T}}^{Pred}$の分布をガウシアンフィットした場合の$\mu$の分布を図~\ref{fig:Gausmu_MC}に示す。$p_{\rm{T}}^{True}$に対して機械学習の予測値はほぼ線形である事が見て取れ、ミューオンの$p_{\rm{T}}^{True}$の予測が行えていることが確認できる。
-
-\begin{figure}[tb]
-  \centering
-  %\rule{8cm}{6cm}
-  \includegraphics[clip, width=10cm]{fig/4/MC_pred_true_25.pdf}
-  \caption{シミュレーションデータを用いてトレーニングを行ったMLPの$p_{\rm{T}}^{True}$に対する$p_{\rm{T}}^{Pred}$の分布。評価にはシングルミューオンのシミュレーションデータを用いた。}
-  \label{fig:zannsa_25_MC}
+また、2018年Run-2で収集したデータを用いて、MLP で予測した$p_{\rm{T}}^{pred}$と正解値 $p_{\rm{T}}^true$の残差分布の比較を行った結果を図~\ref{fig:zannsa_25_Data}に示す。
+さらに、ある$p_{\rm{T}}^{True}$に対して、$p_{\rm{T}}^{Pred}$の分布をガウシアンフィットした場合のmean値の分布を図~\ref{fig:Gausmu}に示す。シミュレーション用と実際の測定用のそれぞれにおいて、$p_{\rm{T}}^{True}$に対して機械学習の予測値はほぼ線形である事が見て取れ、ミューオンの$p_{\rm{T}}^{True}$の予測が行えていることが確認できる。
+\begin{figure}
+    %\centering
+    \begin{tabular}{cc}
+    \centering
+    \begin{minipage}[b]{0.45\hsize}%
+        \centering
+        \hspace*{-1cm}
+        \includegraphics[clip, width=8cm]{fig/4/MC_pred_true_25.pdf}
+        %\vspace{5pt}
+        \subcaption{}
+        \label{fig:zannsa_25_MC}
+    \end{minipage}%
+    %\hfill
+    \begin{minipage}[b]{0.7\hsize}%
+        \centering
+        %\hspace*{-cm}
+        \includegraphics[clip, width=8cm]{fig/4/pred_true_25.pdf}
+        %\vspace{5pt}
+        \subcaption{}
+        \label{fig:zannsa_25_Data}
+    \end{minipage}%
+    \end{tabular}
+    \caption{MLPの$p_{\rm{T}}^{True}$に対する$p_{\rm{T}}^{Pred}$の分布。ト(a)：2018年Run-2のデータ。(b)：シミュレーションデータを用いてトレーニングを行ったMLP。(b):2018年Run-2のデータを用いてトレーニングを行ったMLP。}
+    \label{25}
 \end{figure}
 
-\begin{figure}[tb]
-  \centering
-  %\rule{8cm}{6cm}
-  \includegraphics[clip, width=10cm]{fig/4/tp_Gausmean_MC.pdf}
-  \caption{ある$p_{\rm{T}}^{True}$に対して、$p_{\rm{T}}^{Pred}$の分布をガウシアンフィットした場合のmean値の分布。}
-  \label{fig:Gausmu_MC}
-\end{figure}
-また、学習に用いた正解値($p_{\rm{T}}^{True}$)と予測値($p_{\rm{T}}^{Pred}$)の残差の分布を図~\ref{fig:MC_predtrue}に示す。
-\begin{figure}[htb]
-  \centering
-  %\rule{8cm}{6cm}
-  \includegraphics[clip, width=10cm]{fig/4/MC_predtrue.pdf}
-  \caption{学習に用いた正解値($p_{\rm{T}}^{True}$)と予測値($p_{\rm{T}}^{Pred}$)の残差の分布。}
-  \label{fig:MC_predtrue}
+%\begin{figure}[tb]
+%  \centering
+%  %\rule{8cm}{6cm}
+%  \includegraphics[clip, width=10cm]{fig/4/MC_pred_true_25.pdf}
+%  \caption{シミュレーションデータを用いてトレーニングを行ったMLPの$p_{\rm{T}}^{True}$に対する$p_{\rm{T}}^{Pred}$の分布。評価にはシングルミューオンのシミュレーションデータを用いた。}
+%  \label{fig:zannsa_25_MC}
+%\end{figure}
+
+
+
+\begin{figure}
+    %\centering
+    \begin{tabular}{cc}
+    \centering
+    \begin{minipage}[b]{0.45\hsize}%
+        \centering
+        \hspace*{-1cm}
+        \includegraphics[clip, width=8cm]{fig/4/tp_Gausmean_MC.pdf}
+        %\vspace{5pt}
+        \subcaption{}
+        \label{}
+    \end{minipage}%
+    %\hfill
+    \begin{minipage}[b]{0.7\hsize}%
+        \centering
+        %\hspace*{-cm}
+        \includegraphics[clip, width=8cm]{fig/4/tp_Gausmean_Data.pdf}
+        %\vspace{5pt}
+        \subcaption{}
+        \label{MC_input}
+    \end{minipage}%
+    \end{tabular}
+    \caption{ある$p_{\rm{T}}^{True}$に対して、$p_{\rm{T}}^{Pred}$の分布をガウシアンフィットした場合のmean値の分布。(b)：シミュレーションデータを用いてトレーニングを行ったMLP。(b):2018年Run-2のデータを用いてトレーニングを行ったMLP。}
+    \label{fig:Gausmu}
 \end{figure}
 
-\begin{figure}[htb]
-  \centering
-  %\rule{8cm}{6cm}
-  \includegraphics[clip, width=10cm]{fig/4/MC_predtrue_perpt.pdf}
-  \caption{オフライン再構成されたミューオンの$p_{\rm{T}}^{offline}$に対して、$p_{\rm{T}}^{True}$$-$$p_{\rm{T}}^{Pred}$のガウシアンフィットした時のmean値の分布。}
-  \label{fig:MC_predtrue_perpt}
+
+%\begin{figure}[tb]
+%  \centering
+%  %\rule{8cm}{6cm}
+%  \includegraphics[clip, width=10cm]{fig/4/tp_Gausmean_MC.pdf}
+%  \caption{ある$p_{\rm{T}}^{True}$に対して、$p_{\rm{T}}^{Pred}$の分布をガウシアンフィットした場合のmean値の分布。}
+%  \label{fig:Gausmu_MC}
+%\end{figure}
+次に、学習に用いた正解値($p_{\rm{T}}^{True}$)と予測値($p_{\rm{T}}^{Pred}$)の残差の分布を図~\ref{fig:predtrue}に示す。
+それぞれの残差の分布において、0を中心とした分布が見て取れ、概ね予測ができている。
+しかし、図~\ref{fig:predtrue_MC}に示したシミュレーションデータを用いてトレーニングを行ったMLPの残差の分布は図~\ref{fig:predtrue_Data}に比べて、正の側が膨らんでいる。
+原因を考察するために、残差の分布を各$p_{\rm{T}}^{offline}$ごとに作成し、Gaus関数を用いてフィッティングを行った際のmean値を図~\ref{Gauspredtrue}に示す。
+図~\ref{Gauspredtrue_MC}に示したシミュレーションデータを用いてトレーニングを行ったMLPの$p_{\rm{T}}^{offline}$ごとの残差の分布から、高い$p_{\rm{T}}^{offline}$において機械学習による予測が正解値からズレていることがわかる。これは、トレーニングに用いたシミュレーションデータにおいて高い$p_{\rm{T}}^{offline}$のイベント数が足りなかったものと考えられる。
+また、図~\ref{Gauspredtrue_Data}に示した2018年Run-2のデータを用いてトレーニングを行ったMLPの$p_{\rm{T}}^{offline}$ごとの残差の分布は、$p_{\rm{T}}^{offline}=$20~GeV付近で予測が正解値からズレていることが見て取れる。$p_{\rm{T}}^{offline}=$20~GeVのイベント数はシミュレーション用のMLPの時と比べて十分に多いはずであるのにもかかわらず、予測の精度が悪くなっていることから、トレーニングに用いた全イベント数に対してある$p_{\rm{T}}^{offline}$が占める割合が、本研究で作成した機械学習の、ある$p_{\rm{T}}^{offline}$の予測精度に大きく影響を与えていると考えられる。
+
+\begin{figure}
+    %\centering
+    \begin{tabular}{cc}
+    \centering
+    \begin{minipage}[b]{0.45\hsize}%
+        \centering
+        \hspace*{-1.5cm}
+        \includegraphics[clip, width=8cm]{fig/4/MC_predtrue.pdf}
+        %\vspace{5pt}
+        \subcaption{}
+        \label{fig:predtrue_MC}
+    \end{minipage}%
+    %\hfill
+    \begin{minipage}[b]{0.7\hsize}%
+        \centering
+        \hspace*{-0.75cm}
+        \includegraphics[clip, width=8cm]{fig/4/predtrue.pdf}
+        %\vspace{5pt}
+        \subcaption{}
+        \label{fig:predtrue_Data}
+    \end{minipage}%
+    \end{tabular}
+    \caption{学習に用いた正解値($p_{\rm{T}}^{True}$)と予測値($p_{\rm{T}}^{Pred}$)の残差分布。(b)：シミュレーションデータを用いてトレーニングを行ったMLP。(b):2018年Run-2のデータを用いてトレーニングを行ったMLP。}
+    \label{fig:predtrue}
 \end{figure}
 
-次に、実際のデータをトレーニングに使用した機械学習モデルの評価を行う。
-2018年Run-2で収集したデータを用いて、MLP で予測した$p_{\rm{T}}^{pred}$と正解値 $p_{\rm{T}}^true$の残差分布の比較を行った結果を図~\ref{fig:zannsa_25_Data}に示す。また、ある$p_{\rm{T}}^{True}$に対して、$p_{\rm{T}}^{Pred}$の分布をガウシアンフィットした場合の$\mu$の分布を図~\ref{fig:Gausmu_Data}に示す。こちらも$p_{\rm{T}}^{True}$に対して機械学習の予測値はほぼ線形である事が見て取れる。
-
-\begin{figure}[htb]
-  \centering
-  %\rule{8cm}{6cm}
-  \includegraphics[clip, width=10cm]{fig/4/pred_true_25.pdf}
-  \caption{2018年Run-2のデータを用いてトレーニングを行ったMLPの$p_{\rm{T}}^{True}$に対する$p_{\rm{T}}^{Pred}$の分布。評価には2018年Run-2のデータを用いた。}
-  \label{fig:zannsa_25_Data}
+%\begin{figure}[htb]
+%  \centering
+%  %\rule{8cm}{6cm}
+%  \includegraphics[clip, width=10cm]{fig/4/MC_predtrue.pdf}
+%  \caption{学習に用いた正解値($p_{\rm{T}}^{True}$)と予測値($p_{\rm{T}}^{Pred}$)の残差の分布。}
+%  \label{fig:MC_predtrue}
+%\end{figure}
+\begin{figure}
+    %\centering
+    \begin{tabular}{cc}
+    \centering
+    \begin{minipage}[b]{0.45\hsize}%
+        \centering
+        \hspace*{-1.5cm}
+        \includegraphics[clip, width=8cm]{fig/4/MC_predtrue_perpt.pdf}
+        %\vspace{5pt}
+        \subcaption{}
+        \label{Gauspredtrue_MC}
+    \end{minipage}%
+    %\hfill
+    \begin{minipage}[b]{0.7\hsize}%
+        \centering
+        \hspace*{-0.5cm}
+        \includegraphics[clip, width=8cm]{fig/4/predtrue_perpt.pdf}
+        %\vspace{5pt}
+        \subcaption{}
+        \label{Gauspredtrue_data}
+    \end{minipage}%
+    \end{tabular}
+    \caption{ある$p_{\rm{T}}^{True}$に対して、$p_{\rm{T}}^{Pred}$の分布をガウシアンフィットした場合のmean値の分布。(b)：シミュレーションデータを用いてトレーニングを行ったMLP。(b):2018年Run-2のデータを用いてトレーニングを行ったMLP。}
+    \label{Gauspredtrue}
 \end{figure}
 
-\begin{figure}[htb]
-  \centering
-  %\rule{8cm}{6cm}
-  \includegraphics[clip, width=10cm]{fig/4/tp_Gausmean_Data.pdf}
-  \caption{ある$p_{\rm{T}}^{True}$に対して、$p_{\rm{T}}^{Pred}$の分布をガウシアンフィットした時ののmean値の分布。}
-  \label{fig:Gausmu_Data}
-\end{figure}
 
-\begin{figure}[htb]
-  \centering
+%\begin{figure}[htb]
+%  \centering
   %\rule{8cm}{6cm}
-  \includegraphics[clip, width=10cm]{fig/4/predtrue.pdf}
-  \caption{学習に用いた正解値($p_{\rm{T}}^{True}$)と予測値($p_{\rm{T}}^{Pred}$)の残差の分布。}
-  \label{fig:Gausmu_Data}
-\end{figure}
+%  \includegraphics[clip, width=10cm]{fig/4/MC_predtrue_perpt.pdf}
+%  \caption{オフライン再構成されたミューオンの$p_{\rm{T}}^{offline}$に対して、$p_{\rm{T}}^{True}$$-$$p_{\rm{T}}^{Pred}$のガウシアンフィットした時のmean値の分布。}
+%  \label{fig:MC_predtrue_perpt}
+%\end{figure}
 
-\begin{figure}[htb]
-  \centering
+%次に、実際のデータをトレーニングに使用した機械学習モデルの評価を行う。
+%2018年Run-2で収集したデータを用いて、MLP で予測した$p_{\rm{T}}^{pred}$と正解値 $p_{\rm{T}}^true$の残差分布の比較を行った結果を図~\ref{fig:zannsa_25_Data}に示す。また、ある$p_{\rm{T}}^{True}$に対して、$p_{\rm{T}}^{Pred}$の分布をガウシアンフィットした場合の$\mu$の分布を図~\ref{fig:Gausmu_Data}に示す。こちらも$p_{\rm{T}}^{True}$に対して機械学習の予測値はほぼ線形である事が見て取れる。
+
+%\begin{figure}[htb]
+%  \centering
+%  %\rule{8cm}{6cm}
+%  \includegraphics[clip, width=10cm]{fig/4/pred_true_25.pdf}
+%  \caption{2018年Run-2のデータを用いてトレーニングを行ったMLPの$p_{\rm{T}}^{True}$に対する$p_{\rm{T}}^{Pred}$の分布。評価には2018年Run-2のデータを用いた。}
+%  \label{fig:zannsa_25_Data}
+%\end{figure}
+
+%\begin{figure}[htb]
+%  \centering
   %\rule{8cm}{6cm}
-  \includegraphics[clip, width=10cm]{fig/4/predtrue_perpt.pdf}
-  \caption{オフライン再構成されたミューオンの$p_{\rm{T}}^{offline}$に対して、$p_{\rm{T}}^{True}$$-$$p_{\rm{T}}^{Pred}$のガウシアンフィットした時のmean値の分布。}
-  \label{fig:Gausmu_Data}
-\end{figure}
+%  \includegraphics[clip, width=10cm]{fig/4/tp_Gausmean_Data.pdf}
+%  \caption{ある$p_{\rm{T}}^{True}$に対して、$p_{\rm{T}}^{Pred}$の分布をガウシアンフィットした時ののmean値の分布。}
+%  \label{fig:Gausmu_Data}
+%\end{figure}
+
+%\begin{figure}[htb]
+% \centering
+  %\rule{8cm}{6cm}
+%  \includegraphics[clip, width=10cm]{fig/4/predtrue.pdf}
+%  \caption{学習に用いた正解値($p_{\rm{T}}^{True}$)と予測値($p_{\rm{T}}^{Pred}$)の残差の分布。}
+%  \label{fig:Gausmu_Data}
+%\end{figure}
+
+%\begin{figure}[htb]
+%  \centering
+  %\rule{8cm}{6cm}
+%  \includegraphics[clip, width=10cm]{fig/4/predtrue_perpt.pdf}
+%  \caption{オフライン再構成されたミューオンの$p_{\rm{T}}^{offline}$に対して、$p_{\rm{T}}^{True}$$-$$p_{\rm{T}}^{Pred}$のガウシアンフィットした時のmean値の分布。}
+%  \label{fig:Gausmu_Data}
+%\end{figure}
 
 \newpage
 \subsection{出力データをPt閾値に変換}
@@ -457,6 +570,11 @@ MLPの各隠れ層は以下の表\ref{table:hibben}に示す要素から構成�
   \label{fig:ALL_Turn-on}
 \end{figure}
 図~\ref{fig:Effictive_thr_v1}にTurn-on curveにフィッティングを行って導出したEffective thresholdを示す。
+$p_{\rm{T}}$が5~GeVから20~GeVまでは線形的な変換を行うことができているが、一方で$p_{\rm{T}}$が5~GeV以下の変換はできていないことが見て取れる。
+これは、機械学習による低い$p_{\rm{T}}$に対するトレーニングが十分に行われていなかった可能性がある。
+今後、トレーニングデータに対して$\frac{1}{p_{\rm{T}}}$の重みを付けてトレーニングを行うなどの対策によって、このような低い$p_{\rm{T}}$に対する予測性能が向上する可能性がある。
+%本研究でトレーニングを行った機械学習では低い$p_{\rm{T}}$の予測が行えていない影響がしていると考えられる。
+
 \begin{figure}[tb]
   \centering
   \includegraphics[clip, width=12cm]{fig/4/Effictive_thr_v1.pdf}
@@ -507,7 +625,7 @@ MLPの各隠れ層は以下の表\ref{table:hibben}に示す要素から構成�
     \end{tabular}
 \end{table}
 
-図~\ref{}に本研究で作成したCWの一例を示す。
+%図~\ref{}に本研究で作成したCWの一例を示す。
 
 
 
