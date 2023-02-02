@@ -16,15 +16,15 @@ ATLAS実験における初段ミューオントリガーは、RPCを用いるバ
 
 \subsubsection{ミューオンの横方向運動量の判定}
 エンドキャップ部の初段ミューオントリガーで用いられるトリガー判定の概要を図~\ref{fig:trigger-scheme}に示す。
-衝突点で生成されたミューオンはトロイド磁石の磁場領域より内側にある検出器を通過した後、トロイド磁場領域を通りTGCに到達する。トロイド磁石による磁場は$\phi$方向にかかっているため、ミューオンの飛跡はトロイド磁場中で$\eta$方向に曲げられる。さらに、衝突点付近のソレノイド磁石で生じるz方向の磁場成分と、トロイド磁石付近で生じたR方向の磁場成分によって、ミューオンの飛跡は$\phi$方向にも曲げられる。ミューオンの飛跡の曲がり具合は横方向運動量$p_{\rm{T}}$の大きさによって変化するため、測定した飛跡情報からミューオンの$p_{\rm{T}}$を算出することができ、トリガー判定に使用することができる。
+衝突点で生成されたミューオンはトロイド磁石の磁場領域より内側にある検出器を通過した後、トロイド磁場領域を通りTGCに到達する。トロイド磁石による磁場は$\phi$方向にかかっているため、ミューオンの飛跡はトロイド磁場中で$\eta$方向に曲げられる。さらに、衝突点付近のソレノイド磁石で生じる$z$方向の磁場成分と、トロイド磁石付近で生じた$R$方向の磁場成分によって、ミューオンの飛跡は$\phi$方向にも曲げられる。ミューオンの飛跡の曲がり具合は横方向運動量$p_{\rm{T}}$の大きさによって変化するため、測定した飛跡情報からミューオンの$p_{\rm{T}}$を算出することができ、トリガー判定に使用することができる。
 
-トロイド磁場によって曲げられたミューオンは TGC-BW の M1, M2, M3 を通過し、それぞれのヒット情報から飛跡を再構成される。この時、衝突点とM3のヒット位置を結んだ直線をミューオンが無限運動量で通過したと仮定した場合の飛跡として扱う。この無限運動量を持つミューオンの飛跡と磁場によって曲げられた実際の飛跡を比較し、M1 におけるヒット位置のR方向と$\phi$方向のずれ(dR、d$\phi$)を計算する。この(dR、d$\phi$)は磁場による飛跡の曲がり具合を表している。このdRとd$\phi$の値が大きいミューオンは、磁場中で大きく曲げられたことを意味しているため小さい$p_{\rm{T}}$として判定される。逆にdRとd$\phi$の値がが小さいほど、磁場中ではあまり曲がらないミューオンの飛跡であるため大きな$p_{\rm{T}}$として判定される。
-初段ミューオントリガーでは(dR、d$\phi$)からトリガー判定に用いる$p_{\rm{T}}$を算出する際に、あらかじめ保持しておいた(dR、d$\phi$)と$p_{\rm{T}}$の対応関係を表したLook-Up Table~(LUT)を参照することで、短時間での$p_{\rm{T}}$の算出を実現している。
+トロイド磁場によって曲げられたミューオンはTGC-BWのM1, M2, M3を通過し、それぞれのヒット情報から飛跡を再構成される。この時、衝突点とM3のヒット位置を結んだ直線をミューオンが無限運動量で通過したと仮定した場合の飛跡として扱う。この無限運動量を持つミューオンの飛跡と磁場によって曲げられた実際の飛跡を比較し、M1におけるヒット位置のR方向と$\phi$方向のずれ(d$R$,d$\phi$)を計算する。この(d$R$,d$\phi$)は磁場による飛跡の曲がり具合を表している。このd$R$とd$\phi$の値が大きいミューオンは、磁場中で大きく曲げられたことを意味しているため小さい$p_{\rm{T}}$として判定される。逆にd$R$とd$\phi$の値がが小さいほど、磁場中ではあまり曲がらないミューオンの飛跡であるため大きな$p_{\rm{T}}$として判定される。
+初段ミューオントリガーでは(d$R$,d$\phi$)からトリガー判定に用いる$p_{\rm{T}}$を算出する際に、あらかじめ保持しておいた(d$R$,d$\phi$)と$p_{\rm{T}}$の対応関係を表したLook-Up Table~(LUT)を参照することで、短時間での$p_{\rm{T}}$の算出を実現している。
 
 \begin{figure}[tb]
   \centering
   \includegraphics[clip, width=15cm]{fig/3/akatuka_mt_trigger_sceme.pdf}
-  \caption{ATLAS検出器エンドキャップ領域におけるトリガースキームの概念図\cite{article:akatsuka-mron}。無限大の運動量を持つミューオンを仮定し、磁場によって曲げられたミューオンとの位置の差(dR, d$\phi$)を用いて$p_{\rm{T}}$を計算する。}
+  \caption{ATLAS検出器エンドキャップ領域におけるトリガースキームの概念図\cite{article:akatsuka-mron}。無限大の運動量を持つミューオンを仮定し、磁場によって曲げられたミューオンとの位置の差(d$R$,d$\phi$)を用いて$p_{\rm{T}}$を計算する。}
   \label{fig:trigger-scheme}
 \end{figure}
 
@@ -32,8 +32,8 @@ ATLAS実験における初段ミューオントリガーは、RPCを用いるバ
 
 %\subsubsection{Coincidence Window}
 $p_{\rm{T}}$を算出する際に参照するLUTはCoincidence Window~(CW)と呼ばれており、図~\ref{fig:CW}のようなCWがFPGA上に保存されている。
-図~\ref{fig:CW}のCWが色分けされているように、(dR、d$\phi$)によって判定される$p_{\rm{T}}$は異なり、Run-3においては15段階の$p_{\rm{T}}$を判定することができる。この15段階の$p_{\rm{T}}$の閾値は先行研究\cite{article:shiomi-mron}によって定められており、表~\ref{pt_number}に$p_{\rm{T}}$閾値を示す。
-このとき、図~\ref{fig:CW}に示すCWのマスの中の数字は表~\ref{pt_number}に示す$p_{\rm{T}}$ numberと対応しており、符号はミューオンの電荷に対応している。
+図~\ref{fig:CW}のCWが色分けされているように、(d$R$,d$\phi$)によって判定される$p_{\rm{T}}$は異なり、Run-3においては15段階の$p_{\rm{T}}$を判定することができる。この15段階の$p_{\rm{T}}$の閾値は先行研究\cite{article:shiomi-mron}によって定められており、表~\ref{pt_number}に$p_{\rm{T}}$閾値を示す。
+このとき、図~\ref{fig:CW}に示すCWのマスの中の数字は表~\ref{pt_number}に示す閾値と対応しており、符号はミューオンの電荷に対応している。
 図~\ref{fig:Run3_15_MC5}に2022年Run-3で用いられたCWのトリガー効率を示す。
 %Run-3のミューオントリガーで用いられるCWは15段階の$p_{\rm{T}}$を判定することができ、図~\ref{fig:CW}に示すCWの15色がそれぞれ15段階の
 %判定できる$p_{\rm{T}}$は、図~\ref{fig:CW}の15色が示すように15段階である。マスの中の数字は表~\ref{pt_number}に示す$p_{\rm{T}}$ numberと対応している。また、各$p_{\rm{T}}$閾値の符号はミューオンの電荷に対応している。図~\ref{fig:CW}の
@@ -42,7 +42,7 @@ $p_{\rm{T}}$を算出する際に参照するLUTはCoincidence Window~(CW)と呼
 \begin{figure}[tb]
   \centering
   \includegraphics[clip, width=7cm]{fig/3/Run3CW.pdf}
-  \caption{Run-3でのTGCにおける3ステーションのCoincidence Windowの例\cite{article:shiomi-mron}。ミューオンのヒットがあった時にそれぞれの検出位置ののCWを参照し、(dR, d$φ$)からミューオンの$p_{\rm{T}}$を15段階で見積もる。マスの中の数字は表~\ref{pt_number}に示す$p_{\rm{T}}$ numberと対応しており、符号はミューオンの電荷に対応している。}
+  \caption{Run-3でのTGCにおける3ステーションのCoincidence Windowの例\cite{article:shiomi-mron}。ミューオンのヒットがあった時にそれぞれの検出位置ののCWを参照し、(d$R$, d$φ$)からミューオンの$p_{\rm{T}}$を15段階で見積もる。マスの中の数字は表~\ref{pt_number}に示す閾値と対応しており、符号はミューオンの電荷に対応している。}
   \label{fig:CW}
 \end{figure}
 
@@ -53,7 +53,7 @@ $p_{\rm{T}}$を算出する際に参照するLUTはCoincidence Window~(CW)と呼
     %\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
     \begin{tabular}{|c|c|c|c|}
         \hline
-        $p_{\rm{T}}$ number & name & Status\\
+        閾値 & name & Status\\
         \hline
         1 & L1$\_$MU3 & $p_{\rm{T}} \geq$ 3 GeV \\
         \hline
@@ -95,8 +95,8 @@ $p_{\rm{T}}$を算出する際に参照するLUTはCoincidence Window~(CW)と呼
 
 \begin{figure}[tb]
   \centering
-  \includegraphics[clip, width=12cm]{fig/3/PLOT-TRIG-2020-01-fig1.pdf}
-  \caption{2022年Run-3で使用した15段階閾値のTurn-on curve。シングルミューオンのシミュレーションサンプルに対してのトリガー効率を示している。}
+  \includegraphics[clip, width=14cm]{fig/3/PLOT-TRIG-2020-01-fig1.pdf}
+  \caption{2022年Run-3で使用した15段階閾値のTurn-on curve~\cite{article:shiomi-mron}。シングルミューオンのシミュレーションサンプルに対してのトリガー効率を示している。}
   \label{fig:Run3_15_MC5}
 \end{figure}
 
@@ -113,7 +113,7 @@ Tileカロリメータとコインシデンスだけでなく、新たに導入�
 \begin{figure}[tb]
   \centering
     \includegraphics[clip, width=14cm]{fig/3/ATL-COM-DAQ-2018-033-fig2.pdf}
-  \caption{Run-3 で期待される $p_{\rm{T}}$閾値が20~GeVにおけるトリガー発行数の$\eta$分布。白色、水色、黄色の領域はそれぞれ Tile カロリメータ、RPC BIS78、NSWを用いたインナーコインシデンスを導入した場合に削減できるトリガー発行数を示す。青色の領域は Run-3で期待されるトリガー発行数、赤色の領域は発行されたトリガーのうちオフラインで再構成されるミューオンの数を示す。緑の分布はオフラインで再構成されたミューオンのうち、$p_{\rm{T}}$が20~GeV以上のミューオンの数を示す。}
+  \caption{Run-3 で期待される $p_{\rm{T}}$閾値が20~GeVにおけるトリガー発行数の$\eta$分布\cite{article:ATLASpublic}。白色、水色、黄色の領域はそれぞれ Tile カロリメータ、RPC BIS78、NSWを用いたインナーコインシデンスを導入した場合に削減できるトリガー発行数を示す。青色の領域は Run-3で期待されるトリガー発行数、赤色の領域は発行されたトリガーのうちオフラインで再構成されるミューオンの数を示す。緑の分布はオフラインで再構成されたミューオンのうち、$p_{\rm{T}}$が20~GeV以上のミューオンの数を示す。}
   \label{fig:Rate_innercoincidence}
 \end{figure}
 
@@ -122,11 +122,11 @@ TGC のトリガー判定に用いられる単位の模式図を図~\ref{fig:RoI
 TGCの検出領域は$\phi$方向にエンドキャプ領域では48個、フォワード領域では24個に分割しており、トリガー回路的に独立していて "トリガーセクター" と呼ばれる。このトリガーセクターはさらに小さな領域であるRegion of Interest~(RoI)に分割され、エンドキャップ領域のトリガーセクターは$\eta$方向に37分割、$\phi$方向に4分割されるため148個のRoIで構成されている。フォワード領域のトリガーセクターは$\eta$方向に16分割、$\phi$方向に4分割されるため64個のRoIで構成されている。
 %また RoI を $\eta$ 方向に 2 つ、$\phi$ 方向に 4 つまとめたものを Sub Sector Cluster (SSC) と呼ぶ。
 RoIがL1Muonが持つミューオンの検出位置の最小単位であり、トリガー発行したミューオンの位置情報はこのRoIの場所を示す。
-$p_{\rm{T}}$判定に用いるCWはこのRoIごとに作成しているため、TGCのA-side、C-side、エンドキャップ、フォワードを考慮すると合計$(148\times48+64\times24)\times2=17280$個のCWが作成されている。
+$p_{\rm{T}}$判定に用いるCWはこのRoIごとに作成しているため、TGCのA-side、C-side、エンドキャップ、フォワードを考慮すると合計$(148\times48+64\times24)\times2=17,280$個のCWが作成されている。
 
 \begin{figure}[tb]
   \centering
-  \includegraphics[clip, width=13cm]{fig/3/RoI.pdf}
+  \includegraphics[clip, width=12cm]{fig/3/RoI.pdf}
   \caption{TGCにおけるトリガーセクターとRoIの模式図~\cite{article:phase1}。緑の線で囲まれた領域が1つのトリガーセクターを表し、赤の線で囲まれたマスが1つのRoIを表す。}
   \label{fig:RoI}
 \end{figure}
@@ -150,7 +150,7 @@ $p_{\rm{T}}$判定に用いるCWはこのRoIごとに作成しているため、
 
 \subsubsection{Amplifier Shaper Discriminatorボード}
 Amplifier Shaper Discriminator~(ASD) ボードはTGCのワイヤーとストリップからアナログ信号を受け取り、デジタル信号への変換を行う。
-ASDボード上のASDにおいてTGCからのアナログ信号を増幅・整形し、閾値電圧を超えた信号のみLVDS信号として出力される。1枚のASDボードは4つのASdASICを搭載しており、ASdASICは 4 つの信号の受信・処理を行う。そのため、同時に16チャンネルの信号を処理することが可能である。
+ASDボード上のASDにおいてTGCからのアナログ信号を増幅・整形し、閾値電圧を超えた信号のみLVDS信号として出力される。1枚のASDボードは4つのASDASICを搭載しており、ASdASICは 4 つの信号の受信・処理を行う。そのため、同時に16チャンネルの信号を処理することが可能である。
 
 \subsubsection{Patch-Panel ASIC}
 Patch-Panel ASIC~(PP ASIC)はASDからワイヤーとストリップそれぞれのLVDS信号を受け取り、タイミングの調整を行うことで、同じ陽子衝突由来の信号を同時に次のSLB ASICに送る。
@@ -163,12 +163,12 @@ TGC Triplet~(M1 ステーション)ではワイヤーの3層中2層にヒット�
 2 つのTGC Doublet~(M2、M3 ステーション)では、各ステーションから信号を受け取りワイヤーとストリップで独立に4層中3層以上にヒットがあることを要求する。これらのコインシデンス結果はLVDS信号で後段のHigh PTボードに送る。
 
 \subsubsection{High PT ボード}
-High PT~(HPT)ボードは、M1のSLBとM2,M3のSLB からのコインシデンス結果を受け取り、M1,M2,M3の3つのステーション間のコインシデンスを行う。M1とM3の位置情報から(dR, d$\phi$)を計算し、次のSector Logicに送る。Sector Logicにはボードごとに、位置情報 R と$\phi$、位置の差の情報dR とd$\phi$をG-Link通信を用いて送信する。データ通信速度の制限により、1つのHPTASICから最大2候補を選んで送信している。
+High-PT~(HPT)ボードは、M1のSLBとM2, M3のSLB からのコインシデンス結果を受け取り、M1, M2, M3の3つのステーション間のコインシデンスを行う。M1とM3の位置情報から(d$R$, d$\phi$)を計算し、次のSector Logicに送る。Sector Logicにはボードごとに、位置情報 R と$\phi$、位置の差の情報dR とd$\phi$をG-Link通信を用いて送信する。データ通信速度の制限により、1つのHPT-ASICから最大2候補を選んで送信している。
 
 \subsubsection{New Sector Logic}
 Sector Logic~(SL)はHPTボードから受け取ったTGC-BWのワイヤー・ストリップの情報と、磁場領域より内側にある検出器から受け取った信号を組み合わせてトリガー判定を行う。
 Run-3 では、NSWの導入に伴いトリガー判定に用いるデータ量が増え、従来のSLでは処理できないため刷新された。
-まず、TGC-BWのHPTから、ミューオン候補の情報がG-Link通信で送られてくる。この情報からM3のヒット位置のRoIを表す$\eta$、$\phi$及びコインシデンスが取れたM1とのヒット位置のずれ(dR, d$\phi$)を取得し、FPGA上に保存されているCoincidence Windowを参照しすることで$p_{\rm{T}}$を判定を行う。
+まず、TGC-BWのHPTから、ミューオン候補の情報がG-Link通信で送られてくる。この情報からM3のヒット位置のRoIを表す$\eta$、$\phi$及びコインシデンスが取れたM1とのヒット位置のずれ(d$R$, d$\phi$)を取得し、FPGA上に保存されているCoincidence Windowを参照しすることで$p_{\rm{T}}$を判定を行う。
 次に、RPC BIS78、Tile カロリメータ、EI/FIからは検出器におけるヒット情報、NSWからは通過したミューオンの飛跡情報が送られてくる。NSWの情報には、ヒット位置を表す$\eta$、$\phi$及びミューオンが飛来した角度$\theta$が含まれる。これらの検出器から送られてくる情報を用いてインナーコインシデンスとりトリガー判定を行う。そして、トリガー判定の結果を後段のMUCTPIに送信する。
 
 \begin{figure}[tb]
@@ -181,9 +181,9 @@ Run-3 では、NSWの導入に伴いトリガー判定に用いるデータ量�
 
 \section{従来のCWの作成及び最適化手法}\label{section:最適化}
 \subsection{従来のCWの作成方法}
-実際の検出器では磁場構造や構造物による影響などの様々な要素を考慮する必要があるため、CWを数式によって計算し作成するのは困難である。そこで、ミューオンのシミュレーションデータを用いて、ミューオンの$p_{\rm{T}}$と各RoIにおけるdR、d$\phi$の対応を調べることでCWを作成している。従来のCWを作成する流れについて以下に述べる~\cite{article:shiomi-mron}。
+実際の検出器では磁場構造や構造物による影響などの様々な要素を考慮する必要があるため、CWを数式によって計算し作成するのは困難である。そこで、ミューオンのシミュレーションデータを用いて、ミューオンの$p_{\rm{T}}$と各RoIにおけるd$R$, d$\phi$の対応を調べることでCWを作成している。従来のCWを作成する流れについて以下に述べる~\cite{article:shiomi-mron}。
 \begin{enumerate}\label{table:makeCW}
-   \item シングルミューオンサンプル(1イベントに対してミューオンが1個存在するサンプル)を用意し、1~GeVから40~GeVまで1~GeV刻みに各RoI、各$p_{\rm{T}}$毎のdR、d$\phi$の情報を抜き出し、dR、d$\phi$の2次元分布図~(ヒットマップ)を作成する。
+   \item シングルミューオンサンプル(1イベントに対してミューオンが1個存在するサンプル)を用意し、1~GeVから40~GeVまで1~GeV刻みに各RoI、各$p_{\rm{T}}$毎のd$R$, d$\phi$の情報を抜き出し、d$R$, d$\phi$の2次元分布図~(ヒットマップ)を作成する。
    \item 作成したヒットマップにはミューオンの多重散乱などが原因で、孤立している部分、穴の空いている部分、偶然ヒットした部分が存在する。そこで、ヒットマップのエントリー数などの条件をかけることでヒットマップに対する処理を行う。
    \item 各RoI、各$p_{\rm{T}}$毎に処理を行った40段階の$p_{\rm{T}}$のヒットマップを重ね合わせてCWを作成する。
    \item その後、CWの各マスにおける$p_{\rm{T}}$分布をもとに15段階の$p_{\rm{T}}$閾値を選択し、15段階の$p_{\rm{T}}$閾値を持ったCWとしてSLのFPGAに実装する。
@@ -194,21 +194,21 @@ Run-3 では、NSWの導入に伴いトリガー判定に用いるデータ量�
 
 \subsection{CWの最適化手法}
 \subsubsection{TGCの設置位置の測定}\label{ズレ}
-TGCは検出器の入れ替えなどのために検出器の移動を行うことがあり、結果として検出器の設置位置(アライメント)にズレが生じてしまう。TGCのアライメントのズレの測定方法はこれまでの研究\cite{article:sano-mron}で既に確立されており、TGCのズレを示すパラメータを図~\ref{fig:dr_para}のように定義し、図~\ref{fig:ズレ}にRun-2での実際のデータを用いて測定したTGCのアライメントのズレの値を示す。TGCの理想位置からのx軸方向のズレをdR、z軸方向のズレを$-dz\tan\theta$と表し、全体としてのズレをd$\rho = dr-dz\tan\theta$と定義する。
-d$\rho\textgreater$0はTGCが動径方向(R方向)の正の方向にズレていることを表し、d$\rho\textless0$は負の方向にズレていることを表している。
+TGCは検出器の入れ替えなどのために検出器の移動を行うことがあり、結果として検出器の設置位置(アライメント)にズレが生じてしまう。TGCのアライメントのズレの測定方法はこれまでの研究\cite{article:sano-mron}で既に確立されており、TGCのズレを示すパラメータを図~\ref{fig:dr_para}のように定義し、図~\ref{fig:ズレ}にRun-2での実際のデータを用いて測定したTGCのアライメントのズレの値を示す。TGCの理想位置からの$x$軸方向のズレをd$R$、$z$軸方向のズレを-d$z\tan\theta$と表し、全体としてのズレをd$\rho = dr-dz\tan\theta$と定義する。
+d$\rho \textgreater 0$はTGCが動径方向($R$方向)の正の方向にズレていることを表し、d$\rho \textless 0$は負の方向にズレていることを表している。
 \begin{figure}[tb]
   \centering
   \includegraphics[clip, width=10cm]{fig/3/drho_param_position_measurement.png}
-  \caption{TGC 検出器のズレd$\rho$を表すパラメータの定義。x軸方向のズレをdR、z軸方向のズレを$-dz\tan\theta$と表し、全体としてのズレをd$\rho = dr-dz\tan\theta$と定義する。}
+  \caption{TGC 検出器のズレd$\rho$を表すパラメータの定義\cite{article:yamauti-mron}。$x$軸方向のズレをd$R$、$z$軸方向のズレをd$z\tan\theta$と表し、全体としてのズレをd$\rho = $d$r-$d$z\tan\theta$と定義する。}
   \label{fig:dr_para}
 \end{figure}
 
 \begin{figure}
     %\begin{tabular}{cc}
     \begin{minipage}[tb]{0.4\linewidth}
-        \hspace*{-1cm}
+        \hspace*{-0.5cm}
         \centering
-        \includegraphics[clip, width=7cm]{fig/3/TGCAlign_CW.muon.bias.20160606.v1.A-side.pdf}
+        \includegraphics[clip, width=7cm]{fig/3/TGCAlign_CW.muon.bias.20160606.v1.C-side.pdf}
         %\vspace{10pt}
         \subcaption{}
         %\label{}
@@ -217,39 +217,39 @@ d$\rho\textgreater$0はTGCが動径方向(R方向)の正の方向にズレてい
     \begin{minipage}[tb]{0.4\linewidth}
         \centering
         \hspace*{-1cm}
-        \includegraphics[clip, width=7cm]{fig/3/TGCAlign_CW.muon.bias.20160606.v1.C-side.pdf}
+        \includegraphics[clip, width=7cm]{fig/3/TGCAlign_CW.muon.bias.20160606.v1.A-side.pdf}
         %\vspace{10pt}
         \subcaption{}
         %\label{}
     \end{minipage}
-    \caption{Run-2での検出器のズレの測定図。マスの中の数字がチェンバーごとのズレの値を表す。(a):A-side。(b):C-side。}
+    \caption{Run-2での検出器のズレの測定図。マスの中の数字がチェンバーごとのズレの値を表す。(a):C-side。(b):A-side。}
     \label{fig:ズレ}
     %\end{tabular}
 \end{figure}
 
 
 \subsubsection{Run-2における最適化手法}
-\ref{magnetic_filed}節で述べたように、トロイド磁石によって8回転対象の磁場構造が形成されている。そのため、従来の手法ではシミュレーションデータを用いて1回転分のCWを作成し、1つのCWを8か所のRoIに適応させていた。
+\ref{magnetic_filed}節で述べたように、トロイド磁石によって8回転対象の磁場構造が形成されている。そのため、従来の手法ではシミュレーションデータを用いて1回転分のCWを作成し、1つのCWをTGC-BWの8か所に対応させていた。
 しかし、シミュレーションにおいてTGCは設計通りの位置に設置されているが、実際の検出器ではアライメントにズレが生じている。
 このため、検出器アライメントのズレのせいで、TGCにおける磁場構造は厳密には8回転対象ではなくなっている。しかし、シミュレーションをもとに、8回転対象を前提としたCWには実際の検出器アライメントのズレの影響が考慮されていない。そのため、このCWをトリガーに適応するとミューオントリガーの運動量分解能の低下やトリガーレートの増加を招く原因となる。
 そこで、トリガー性能の向上のためにはCWに補正を行い検出器アライメントに対して最適化する必要がある。
 
-Run-2におけるCWの最適化方法は先行研究で開発されており、$p_{\rm{T}}$が11~GeV、15~GeV、20~GeVの閾値に対して最適化を行ったことでトリガー性能が改善された\cite{article:kido-mron}。
+Run-2におけるCWの最適化方法は先行研究で開発されており、$p_{\rm{T}}$が11~GeV, 15~GeV, 20~GeVの閾値に対して最適化を行ったことでトリガー性能が改善された\cite{article:kido-mron}。
 ここで行われていた手法では、実際のデータから検出器のズレの大きさを各TGCチェンバー毎に見積もり、その値に従ってCWに補正を加えることでトリガー効率を改善させていた。
 %そこで、Run-2では実際のデータからTGCのズレの大きさを各チェンバー毎に見積もり、その値に従ってCWに補正を加えることでトリガー効率を改善させていた。
 %シミュレーションにおいてTGCは設計通りの位置に設置されているが、実際の検出器では設置位置(アライメント)にズレが生じている。
 %従来のCWの作成手法では、シミュレーションデータを使用し作成するため、CWには実際のTGCの設置位置によるズレの影響が考慮されていない。そのため、このCWをトリガーに適応するとミューオントリガーの運動量分解能の低下やトリガーレートの増加を招く原因となる。
 %CWの補正方法は先行研究で確立されており、Run-2ではL1 MU15及L1 MU20の2つの閾値にのみ補正を行った結果、トリガー性能が改善された\cite{article:kido-mron}。
-以下にシミュレーションデータから作成されたCWにおける$p_{\rm{T}}$閾値が20GeVのトリガーに対するRun-2で行われた最適化の流れを示す。
+以下にシミュレーションデータから作成されたCWにおける$p_{\rm{T}}$閾値が20~GeVのトリガーに対するRun-2で行われた最適化の流れを示す。
 \begin{enumerate}\label{table:CW_optimazation}
-   \item Run-2 の実データから$p_{\rm{T}}<20GeV$のdR、d$\phi$の情報を抜き出し、dR、d$\phi$のヒットマップを各RoI毎に作成する。
+   \item Run-2 の実データから$p_{\rm{T}}<20$GeVのd$R$, d$\phi$の情報を抜き出し、d$R$, d$\phi$のヒットマップを各RoI毎に作成する。
    \item 作成したヒットマップに対して、ヒットマップの各マスごとに式~\eqref{equ:Aliment}で定義するパラメータxを計算する。
    \begin{equation}
-        x = \frac{N_{p_{\rm{T}}>20GeV}}{\sqrt{N^2_{p_{\rm{T}}>20GeV}+N^2_{p_{\rm{T}}<20GeV}}}
+        x = \frac{N_{p_{\rm{T}} > 20~\rm{GeV}}}{\sqrt{N^2_{p_{\rm{T}} > 20~\rm{GeV}}+N^2_{p_{\rm{T}} < 20~\rm{GeV}}}}
 　      \label{equ:Aliment}
    \end{equation}
-   ここで、$N_{p_{\rm{T}}>20GeV}$はヒットマップのマスにおける$p_{\rm{T}}>20GeV$のミューオン数、$N_{p_{\rm{T}}<20GeV}$はヒットマップのマスにおけるのミューオン数である。
-   \item すべてのヒットマップの各マスでで計算したxの値を指針として、CWのマスが示す$p_{\rm{T}}$閾値が正しいかどうかを判断し、必要に応じてCWの閾値を一段階変更する。
+   ここで、$N_{p_{\rm{T}} > 20~\rm{GeV}}$はヒットマップのマスにおける$p_{\rm{T}} > 20$~GeVのミューオン数、$N_{p_{\rm{T}} < 20~\rm{GeV}}$はヒットマップのマスにおけるのミューオン数である。
+   \item すべてのヒットマップの各マスでで計算した$x$の値を指針として、CWのマスが示す$p_{\rm{T}}$閾値が正しいかどうかを判断し、必要に応じてCWの閾値を一段階変更する。
    %\caption{隠れ層を構成する要素。}
 \end{enumerate}
 この手順を各$p_{\rm{T}}$閾値に対して上の閾値から順番に行うことでCWの最適化を行う。
