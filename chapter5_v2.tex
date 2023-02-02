@@ -28,7 +28,7 @@ TagミューオンがHLTを発行しているとみなされた時、もう一�
 \begin{figure}[htb]
   \centering
   %\rule{8cm}{6cm}
-  \includegraphics[clip, width=11cm]{fig/3/dR_tag_HLT.pdf}
+  \includegraphics[clip, width=11cm]{fig/5/dR_tag_HLT.pdf}
   \caption{TagミューオンとHLTの$\Delta R$分布。$\Delta R<0.001$ならばTagミューオンがHLTを発行したものとする。}
   \label{fig:tag_HLT}
 \end{figure}
@@ -39,7 +39,7 @@ TagミューオンがHLTを発行しているとみなされた時、もう一�
 \begin{figure}[htb]
   \centering
   %\rule{8cm}{6cm}
-  \includegraphics[clip, width=11cm]{fig/3/dR_probe_RoI.pdf}
+  \includegraphics[clip, width=11cm]{fig/5/dR_probe_RoI.pdf}
   \caption{ProbeミューオンとTGCのヒット情報との$\Delta R$分布。$\Delta R< 0.04$ならばProbeミューオンがTGCのヒット情報と一致したものとする。}
   \label{fig:Probe_TGC}
 \end{figure}
@@ -76,12 +76,6 @@ $\mathrm{CW_{2022}}$と同様に、本研究の手法で作成した$\mathrm{CW_
     \label{}
 \end{figure}
 
-\begin{figure}[tb]
-  \centering
-  \includegraphics[clip, width=10cm]{fig/3/PLOT-TRIG-2020-01-fig1.pdf}
-  \caption{2022年Run-3で使用した15段階閾値のTurn-on curve。シングルミューオンのシミュレーションサンプルに対してのトリガー効率を示している。}
-  \label{fig:Run3_15_MC5}
-\end{figure}
 
 \subsection{現行のトリガーとのトリガー性能の比較}
 次に、それぞれの15段階の$p_{\rm{T}}$閾値のトリガー性能について評価を行う。
@@ -92,7 +86,7 @@ $\mathrm{CW_{2022}}$と同様に、本研究の手法で作成した$\mathrm{CW_
 図~\ref{fig:v05v07}には$p_{\rm{T}}$閾値が14~GeVの時の、$\mathrm{CW_{2022}}$と$\mathrm{CW_{Simu}}$のTurn-on curveの比較を示し、図~\ref{fig:v05v06}には$p_{\rm{T}}$閾値が14~GeVの時の、$\mathrm{CW_{Data}}$を$\mathrm{CW_{2022}}$のTurn-on curveの比較を示す。
 
 2022年度Run-3で使用されている$\mathrm{CW_{2022}}$に比べて、本研究の手法ので作成したCWの方がTurn-on curveの立ち上がりが鋭くなっており、トリガー性能が良くなっていることが見て取れる。
-また、図~\ref{fig:v05v07_1_9_Simu}と図~\ref{fig:v05v07_12_20_Simu}、図~\ref{fig:v05v07_1_9_Simu}と図~\ref{fig:v05v07_12_20_Simu}に他の$p_{\rm{T}}$閾値における比較を示す。
+また、図~\ref{fig:v05v07_1_9_Simu}と図~\ref{fig:v05v07_1_9_Simu}に他の$p_{\rm{T}}$閾値における比較を示す。
 15段階の閾値において、本研究の手法によって作成された2種類のCWは、2022年度Run-3において使用された$\mathrm{CW_{2022}}$と同様に鋭く立ち上がっていることが見て取れる。
 \begin{figure}
     %\centering
@@ -101,7 +95,7 @@ $\mathrm{CW_{2022}}$と同様に、本研究の手法で作成した$\mathrm{CW_
     \begin{minipage}[b]{0.45\hsize}%
         \centering
         \hspace*{-1.5cm}
-        \includegraphics[clip, width=8cm]{fig/5/v05vsv07_MU14.pdf}
+        \includegraphics[clip, width=8cm]{fig/5/v05vsv07_MU14_re.pdf}
         %\vspace{5pt}
         \subcaption{}
         \label{fig:v05v07}
@@ -110,7 +104,7 @@ $\mathrm{CW_{2022}}$と同様に、本研究の手法で作成した$\mathrm{CW_
     \begin{minipage}[b]{0.7\hsize}%
         \centering
         \hspace*{-0.75cm}
-        \includegraphics[clip, width=8cm]{fig/5/v05vsv06_MU14.pdf}
+        \includegraphics[clip, width=8cm]{fig/5/v05vsv06_MU14_re.pdf}
         %\vspace{5pt}
         \subcaption{}
         \label{fig:v05v06}
@@ -120,41 +114,61 @@ $\mathrm{CW_{2022}}$と同様に、本研究の手法で作成した$\mathrm{CW_
     \label{fig:v05v07v06}
 \end{figure}
 
-\begin{figure}[htb]
+\begin{figure}[p]
   \centering
   %\rule{8cm}{6cm}
-  \includegraphics[clip, width=10cm]{fig/5/v05v07_1_9.pdf}
-  \caption{$p_{\rm{T}}$閾値3~GeV$\sim$9~GeVにおける$\mathrm{CW_{Simu}}$と$\mathrm{CW_{2022}}$のTurn-on curveの比較。評価にはシングルミューオンのシミュレーションデータを使用した。}
+  \includegraphics[clip, width=14cm]{fig/5/v05vsv07_MU3_20_re.pdf}
+  \caption{$p_{\rm{T}}$閾値3~GeV$\sim$20~GeVにおける$\mathrm{CW_{Simu}}$と$\mathrm{CW_{2022}}$のTurn-on curveの比較。評価にはシングルミューオンのシミュレーションデータを使用した。}
   \label{fig:v05v07_1_9_Simu}
 \end{figure}
 
-\begin{figure}[htb]
-  \centering
-  %\rule{8cm}{6cm}
-  \includegraphics[clip, width=10cm]{fig/5/v05v07_10_15.pdf}
-  \caption{$p_{\rm{T}}$閾値10~GeV$\sim$20~GeVにおける$\mathrm{CW_{Simu}}$と$\mathrm{CW_{2022}}$のTurn-on curveの比較。評価にはシングルミューオンのシミュレーションデータを使用した。}
-  \label{fig:v05v07_12_20_Simu}
-\end{figure}
 
-\begin{figure}[htb]
+%\begin{figure}[htb]
+%  \centering
+%  %\rule{8cm}{6cm}
+%  \includegraphics[clip, width=10cm]{fig/5/v05v07_1_9.pdf}
+%  \caption{$p_{\rm{T}}$閾値3~GeV$\sim$9~GeVにおける$\mathrm{CW_{Simu}}$と$\mathrm{CW_{2022}}$のTurn-on curveの比較。評価にはシングルミューオンのシミュレーションデータを使用した。}
+%  \label{fig:v05v07_1_9_Simu}
+%\end{figure}
+
+%\begin{figure}[htb]
+%  \centering
+%  %\rule{8cm}{6cm}
+%  \includegraphics[clip, width=10cm]{fig/5/v05v07_10_15.pdf}
+%  \caption{$p_{\rm{T}}$閾値10~GeV$\sim$20~GeVにおける$\mathrm{CW_{Simu}}$と$\mathrm{CW_{2022}}$のTurn-on curveの比較。評価にはシングルミューオンのシミュレーションデータを使用した。}
+%  \label{fig:v05v07_12_20_Simu}
+%\end{figure}
+
+\begin{figure}[p]
   \centering
   %\rule{8cm}{6cm}
-  \includegraphics[clip, width=10cm]{fig/5/v05v06_1_9.pdf}
-  \caption{$p_{\rm{T}}$閾値3~GeV$\sim$ 9~GeVにおける$\mathrm{CW_{Data}}$と$\mathrm{CW_{2022}}$のTurn-on curveの比較。評価には2018年Run-3のデータを使用した。}
+  \includegraphics[clip, width=14cm]{fig/5/v05vsv06_MU3_20_re.pdf}
+  \caption{$p_{\rm{T}}$閾値3~GeV$\sim$20~GeVにおける$\mathrm{CW_{Data}}$と$\mathrm{CW_{2022}}$のTurn-on curveの比較。評価には2018年Run-2のデータを使用した。}
   \label{fig:v05v06_1_9_Data}
 \end{figure}
 
-\begin{figure}[htb]
-  \centering
+%\begin{figure}[htb]
+%  \centering
+%  %\rule{8cm}{6cm}
+%  \includegraphics[clip, width=10cm]{fig/5/v05v06_1_9.pdf}
+%  \caption{$p_{\rm{T}}$閾値3~GeV$\sim$ 9~GeVにおける$\mathrm{CW_{Data}}$と$\mathrm{CW_{2022}}$のTurn-on curveの比較。評価には2018年Run-3のデータを使用した。}
+%  \label{fig:v05v06_1_9_Data}
+%\end{figure}
+
+%\begin{figure}[htb]
+%  \centering
   %\rule{8cm}{6cm}
-  \includegraphics[clip, width=10cm]{fig/5/v05v06_10_15.pdf}
-  \caption{$p_{\rm{T}}$閾値10~GeV$\sim$ 20~GeVにおける$\mathrm{CW_{Data}}$と$\mathrm{CW_{2022}}$のTurn-on curveの比較。評価には2018年Run-3のデータを使用した。}
-  \label{fig:v05v06_10_15_Data}
-\end{figure}
+%  \includegraphics[clip, width=10cm]{fig/5/v05v06_10_15.pdf}
+%  \caption{$p_{\rm{T}}$閾値10~GeV$\sim$ 20~GeVにおける$\mathrm{CW_{Data}}$と$\mathrm{CW_{2022}}$のTurn-on curveの比較。評価には2018年Run-3のデータを使用した。}
+%  \label{fig:v05v06_10_15_Data}
+%\end{figure}
 
 さらに、これらのTurn-on curveに式~\eqref{equ:fitting}によるフィッティングを行い、パラメータの比較を行う。
-図~\ref{fig:Resolution_v07v05}に$\mathrm{CW_{Simu}}$と$\mathrm{CW_{2022}}$のEffective thresholdに対するResolitionの比較、図~\ref{fig:Resolution_v06v05}に$\mathrm{CW_{Data}}$と$\mathrm{CW_{2022}}$のEffective thresholdに対するResolitionの比較を示す。
-また、図~\ref{fig:Plateau_v07v05}に$\mathrm{CW_{Simu}}$と$\mathrm{CW_{2022}}$のEffective thresholdに対するPlateau Efficiencyの比較、図~\ref{fig:Plateau_v06v05}に$\mathrm{CW_{Data}}$と$\mathrm{CW_{2022}}$のEffective thresholdに対するPlateau Efficiencyの比較を示す。
+図~\ref{fig:Resolution_v07v05}に$\mathrm{CW_{Simu}}$と$\mathrm{CW_{2022}}$の各$p_{\rm{T}}$閾値のResolitionの比較、図~\ref{fig:Resolution_v06v05}に$\mathrm{CW_{Data}}$と$\mathrm{CW_{2022}}$の各$p_{\rm{T}}$閾値のResolitionの比較を示す。
+
+
+
+また、図~\ref{fig:Plateau_v07v05}に$\mathrm{CW_{Simu}}$と$\mathrm{CW_{2022}}$の各$p_{\rm{T}}$閾値のPlateau Efficiencyの比較、図~\ref{fig:Plateau_v06v05}に$\mathrm{CW_{Data}}$と$\mathrm{CW_{2022}}$の各$p_{\rm{T}}$閾値のPlateau Efficiencyの比較を示す。
 2018年Run-3で使用された$\mathrm{CW_{2022}}$と比べて、本研究の手法で作成したCWは全体的にPlateau Efficiencyが向上している。
 また、本研究で作成したCWは全体的にResolutionの値が小さくなっており、Resolutionの改善がみられる。しかし、低いEffective thresholdのトリガーにおいては、Resolutionの悪化が見られた一方でPlateau Efficiencyは向上していることから、低い$p_{\rm{T}}$閾値の領域が増えたことにより、その領域に入るミューオンの数は増えたが、その分間違った判定をすることが多くなったことを表している。
 \begin{figure}
@@ -164,7 +178,7 @@ $\mathrm{CW_{2022}}$と同様に、本研究の手法で作成した$\mathrm{CW_
     \begin{minipage}[b]{0.45\hsize}%
         \centering
         \hspace*{-1.5cm}
-        \includegraphics[clip, width=8cm]{fig/4/v05vsv07_Resolution.pdf}
+        \includegraphics[clip, width=8cm]{fig/5/v05vsv07_Resolution_re.pdf}
         %\vspace{5pt}
         \subcaption{}
         \label{fig:Resolution_v07v05}
@@ -173,13 +187,13 @@ $\mathrm{CW_{2022}}$と同様に、本研究の手法で作成した$\mathrm{CW_
     \begin{minipage}[b]{0.7\hsize}%
         \centering
         \hspace*{-0.75cm}
-        \includegraphics[clip, width=8cm]{fig/4/v05vsv06_Resolution.pdf}
+        \includegraphics[clip, width=8cm]{fig/5/v05vsv06_Resolution_re.pdf}
         %\vspace{5pt}
         \subcaption{}
-        \label{fig:Resolution_v05v06}
+        \label{fig:Resolution_v06v05}
     \end{minipage}%
     \end{tabular}
-    \caption{各$p_{\rm{T}}$閾値におけるTurn-on curveのEffective thresholdにおけるResolutionの比較。(a):$\mathrm{CW_{Simu}}$と$\mathrm{CW_{2022}}$の比較。(b):$\mathrm{CW_{Data}}$と$\mathrm{CW_{2022}}$の比較。}
+    \caption{各$p_{\rm{T}}$閾値におけるResolutionの比較。(a):$\mathrm{CW_{Simu}}$と$\mathrm{CW_{2022}}$の比較。(b):$\mathrm{CW_{Data}}$と$\mathrm{CW_{2022}}$の比較。}
     \label{fig:Resolution_v07v06v05}
 \end{figure}
 
@@ -190,7 +204,7 @@ $\mathrm{CW_{2022}}$と同様に、本研究の手法で作成した$\mathrm{CW_
     \begin{minipage}[b]{0.45\hsize}%
         \centering
         \hspace*{-1.5cm}
-        \includegraphics[clip, width=8cm]{fig/4/v05vsv07_Plateau.pdf}
+        \includegraphics[clip, width=8cm]{fig/5/v05vsv07_Plateau_re.pdf}
         %\vspace{5pt}
         \subcaption{}
         \label{fig:Plateau_v07v05}
@@ -199,13 +213,13 @@ $\mathrm{CW_{2022}}$と同様に、本研究の手法で作成した$\mathrm{CW_
     \begin{minipage}[b]{0.7\hsize}%
         \centering
         \hspace*{-0.75cm}
-        \includegraphics[clip, width=8cm]{fig/4/v05vsv06_Plateau.pdf}
+        \includegraphics[clip, width=8cm]{fig/5/v05vsv06_Plateau_re.pdf}
         %\vspace{5pt}
         \subcaption{}
         \label{fig:Plateau_v06v05}
     \end{minipage}%
     \end{tabular}
-    \caption{各$p_{\rm{T}}$閾値におけるTurn-on curveのPlateau EfficiencyにおけるResolutionの比較。(a):$\mathrm{CW_{Simu}}$と$\mathrm{CW_{2022}}$の比較。(b):$\mathrm{CW_{Data}}$と$\mathrm{CW_{2022}}$の比較。}
+    \caption{各$p_{\rm{T}}$閾値におけるPlateau Efficiencyの比較。(a):$\mathrm{CW_{Simu}}$と$\mathrm{CW_{2022}}$の比較。(b):$\mathrm{CW_{Data}}$と$\mathrm{CW_{2022}}$の比較。}
     \label{fig:Resolution_v07v06v05}
 \end{figure}
 
@@ -337,7 +351,7 @@ $\mathrm{CW_{2022}}$と比べ$\mathrm{CW_{Simu}}$は同程度のパフォーマ�
 次に、2018年Run-2データを評価に用いた際の$\mathrm{CW_{Data}}$と$\mathrm{CW_{Simu}}$の比較を行う。図~\ref{fig:v06v07}に$p_{\rm{T}}$閾値14~GeVにおけるTurn-on curveを比較したプロットを示す。実際のデータに対して、$\mathrm{CW_{Data}}$を用いたトリガーの方がトリガー効率が良くなっているのが見て取れる。
 \begin{figure}[tb]
   \centering
-  \includegraphics[clip, width=11cm]{fig/4/v06vsv07_MU14.pdf}
+  \includegraphics[clip, width=11cm]{fig/5/v06vsv07_MU14_re.pdf}
   \caption{$\mathrm{CW_{Data}}$と$\mathrm{CW_{Simu}}$のTurn-on curve。$p_{\rm{T}}$閾値14~GeVのトリガー効率の比較を行い、評価には2018年Run-2データを使用した。}
   \label{fig:v06v07}
 \end{figure}
@@ -347,12 +361,12 @@ $\mathrm{CW_{2022}}$と比べ$\mathrm{CW_{Simu}}$は同程度のパフォーマ�
 あるTGCチェンバーにおける$\mathrm{CW_{Data}}$と$\mathrm{CW_{2022}}$の、ミューオンの電荷別に計算した$p_{\rm{T}}$閾値が14~GeVのトリガー効率を図~\ref{Eff_Chage}に示す。
 磁場中のミューオンは電荷によって曲がる方向が違うため、検出器アライメントのズレによる影響を受けてCWもズレているとき、判定できる電荷に偏りが生じる。図~\ref{fig:v05_charge}に示すように、$\mathrm{CW_{2022}}$は検出器のズレに対する補正を行っていないために、ミューオンの電荷別に計算したトリガー効率に大きな差が出る。
 一方、図~\ref{fig:v06_charge}に示すように、本研究の手法で作成した$\mathrm{CW_{Data}}$はCWが最適化されたことにより、電荷別に計算したトリガー効率がほとんど一致していることが見て取れる。
-\begin{figure}
+\begin{figure}[htbp]
     %\centering
     \begin{tabular}{cc}
     \begin{minipage}[b]{0.45\hsize}
         %\centering
-        \includegraphics[clip, width=7cm]{fig/5/Eff_PNcharge_v05_phi0eta10.pdf}
+        \includegraphics[clip, width=7cm]{fig/5/Eff_PNcharge_v05_phi0eta10_re.pdf}
         %\vspace{5pt}
         \subcaption{}
         \label{fig:v05_charge}
@@ -360,7 +374,7 @@ $\mathrm{CW_{2022}}$と比べ$\mathrm{CW_{Simu}}$は同程度のパフォーマ�
     %\hfill
     \begin{minipage}[b]{0.45\hsize}
         %\centering
-        \includegraphics[clip, width=7cm]{fig/5/Eff_PNcharge_MLP_phi0eta10.pdf}
+        \includegraphics[clip, width=7cm]{fig/5/Eff_PNcharge_MLP_phi0eta10_re.pdf}
         %\vspace{5pt}
         \subcaption{}
         \label{fig:v06_charge}
@@ -404,31 +418,31 @@ Run-2データにはHLTでのプリスケールによるバイアスが存在す
 本章では作成したCWの評価を行った。
 15段階のトリガー効率の評価を、Turn-on CurveのPlateau EfficiencyとResolutionといった観点から評価を行った。
 本研究の手法で作成した2種類のCWは$\mathrm{CW_{2022}}$のTurn-on Curveと比べ、Plateau Efficiencyが高く、立ち上がりが鋭くなったことから、トリガー効率の向上が確認できた。
-また、L1Muonのプライマリートリガーである$p_{\rm{T}}$閾値14~GeVのトリガー効率について、図~\ref{EffMU14}にTGCのRoIにおける$p_{\rm{T}}$閾値14~GeVのトリガー効率を示す。$\mathrm{CW_{2022}}$はトリガー効率が85.4$\%$であったのに対し、$\mathrm{CW_{Data}}$ではトリガー効率が86.7$\%$となったことから約1$\%$の向上が見込まれる。
+また、L1Muonのプライマリートリガーである$p_{\rm{T}}$閾値14~GeVのトリガー効率について、$\mathrm{CW_{2022}}$はトリガー効率が85.4$\%$であったのに対し、$\mathrm{CW_{Data}}$ではトリガー効率が86.7$\%$となったことから約1$\%$の向上が見込まれる。
 
-\begin{figure}
-    %\centering
-    \begin{tabular}{cc}
-    \begin{minipage}[b]{0.45\hsize}%
-        %\centering
-        \hspace*{-1cm}
-        \includegraphics[clip, width=7cm]{fig/5/h2_Data14_Eff.pdf}
-        %\vspace{5pt}
-        \subcaption{}
-        \label{fig:dataEffMU14}
-    \end{minipage}%
-    %\hfill
-    \begin{minipage}[b]{0.55\hsize}%
-        %\centering
-        \includegraphics[clip, width=7cm]{fig/5/h2_v0514_Eff.pdf}
-        %\vspace{5pt}
-        \subcaption{}
-        \label{fig:v05EffMU14}
-    \end{minipage}%
-    \end{tabular}
-    \caption{TGCのRoIにおけるトリガー効率。分母を$p_{\rm{T}}$が20~GeV以上のオフライン再構成されたミューオンとし、その中で$p_{\rm{T}}$閾値14~GeVのトリガーを鳴らしたミューオンの割合を表している。(a):$\mathrm{CW_{Data}}$(b):$\mathrm{CW_{2022}}$}
-    \label{EffMU14}
-\end{figure}
+%\begin{figure}[htbp]
+%    %\centering
+%    \begin{tabular}{cc}
+%    \begin{minipage}[b]{0.45\hsize}%
+%        %\centering
+%        \hspace*{-1cm}
+%        \includegraphics[clip, width=7cm]{fig/5/h2_Data14_Eff.pdf}
+%        %\vspace{5pt}
+%        \subcaption{}
+%        \label{fig:dataEffMU14}
+%    \end{minipage}%
+%    %\hfill
+%    \begin{minipage}[b]{0.55\hsize}%
+%        %\centering
+%        \includegraphics[clip, width=7cm]{fig/5/h2_v0514_Eff.pdf}
+%        %\vspace{5pt}
+%        \subcaption{}
+%        \label{fig:v05EffMU14}
+%    \end{minipage}%
+%    \end{tabular}
+%    \caption{TGCのRoIにおけるトリガー効率。分母を$p_{\rm{T}}$が20~GeV以上のオフライン再構成されたミューオンとし、その中で$p_{\rm{T}}$閾値14~GeVのトリガーを鳴らしたミューオンの割合を表している。(a):$\mathrm{CW_{Data}}$(b):$\mathrm{CW_{2022}}$}
+ %   \label{EffMU14}
+%\end{figure}
 
 さらに、$p_{\rm{T}}$分解能の評価を$p_{\rm{T}}$ residualを計算することで評価を行った。
 本研究の手法で作成したCWは、2022年度Run-2で使用された$\mathrm{CW_{2022}}$と比べて$p_{\rm{T}}^{offline}$分解能のmean値が悪くなっているが、Resolutionを比べると改善されていることから、機械学習の出力からの$p_{\rm{T}}$閾値の選択方法を変更することによってmean値においても改善が見込まれる。

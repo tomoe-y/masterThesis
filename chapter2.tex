@@ -93,8 +93,9 @@ ATLAS 検出器は円筒形をしており、$|\eta| < 1.0$ の側面部分を�
 ATLAS 実験では、荷電粒子の運動量測定のために超伝導磁石を用いて磁場をかけている。超伝導磁石は2種類あり、衝突点付近で発生した荷電粒子の運動量測定のために用いられるソレノイド磁石とミューオンの運動量測定のために用いられるトロイド磁石が設置されている。
 図~\ref{fig:磁石}にATLAS検出器に設置されている超電導磁石の配置を示す。
 ソレノイド磁石は内部飛跡検出器とカロリメータの間に設置されており、この電磁石が作り出す磁場によって荷電粒子を曲げ、内部飛跡検出器でその曲率を測定することによって横方向運動量を測定する。
-トロイド磁石はバレル部とエンドキャップ部に分けられ、それぞれ$\phi$方向に8つずつ等間隔で配置されてるため、8回転対象の磁場構造を生み出している。
 トロイド磁石によって生じる磁場の$\eta$分布を図~\ref{fig:磁場eta}に、$x-y$平面での磁場の分布を図~\ref{fig:磁場平面}に示す。
+トロイド磁石はバレル部とエンドキャップ部に分けられ、それぞれ$\phi$方向に8つずつ等間隔で配置されてる。そのため、8回転対象の磁場構造を生み出しており、この磁場構造を考慮した上で様々な検出器が設置されている。
+
 %ATLAS実験では、トロイド磁石が作り出す磁場によってミューオンを曲げることで、ミューオンの横方向運動量を測定する。
 
 
@@ -107,21 +108,23 @@ ATLAS 実験では、荷電粒子の運動量測定のために超伝導磁石�
 
 \begin{figure}
     \centering
-    \begin{minipage}[b]{0.4\linewidth}
+    \begin{minipage}[b]{0.5\linewidth}%
         \centering
-        \includegraphics[clip, width=7cm]{fig/2/IBdl.pdf}
+        \hspace*{-1cm}
+        \includegraphics[clip, width=8cm]{fig/2/IBdl.pdf}
         \vspace{10pt}
         \subcaption{}
         \label{fig:磁場eta}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.5\linewidth}
+    \end{minipage}%
+    %\hfill
+    \begin{minipage}[b]{0.6\linewidth}%
         \centering
+%\hspace*{1cm}
         \includegraphics[clip, width=6cm]{fig/2/FMBmap.pdf}
         \vspace{10pt}
         \subcaption{}
         \label{fig:磁場平面}
-    \end{minipage}
+    \end{minipage}%
     \caption{(a):トロイド磁石による磁場の$\eta$分布\cite{Aad:1129811}。(b)：ビーム軸から見たx−y平面での磁場の分布\cite{article:ATLASMagneticField}。磁石の設置位置の影響により磁場構造が一様ではない。}
     \label{fig:磁場}
 \end{figure}
@@ -149,7 +152,8 @@ TRTは内部飛跡検出器の最外層に位置する検出器であり、飛�
     \centering
     \begin{minipage}[b]{0.4\linewidth}
         \centering
-        \includegraphics[clip, width=7cm]{fig/2/inner_detectoer1.jpg}
+        \hspace*{-1cm}
+        \includegraphics[clip, width=8cm]{fig/2/inner_detectoer1.jpg}
         \vspace{10pt}
         \subcaption{}
         \label{fig:内部飛跡検出器の概略図1}
@@ -157,7 +161,7 @@ TRTは内部飛跡検出器の最外層に位置する検出器であり、飛�
     \hfill
     \begin{minipage}[b]{0.5\linewidth}
         \centering
-        \includegraphics[clip, width=6cm]{fig/2/inner_detector2.jpg}
+        \includegraphics[clip, width=7cm]{fig/2/inner_detector2.jpg}
         \vspace{10pt}
         \subcaption{}
         \label{fig:内部飛跡検出器の概略図2}
@@ -232,8 +236,10 @@ ATLAS検出器には、$|\eta|<1.5$にバレル部をカバーするバレルカ
 \begin{figure}
     %\centering
     \begin{tabular}{c}
+    
     \begin{minipage}[b]{\hsize}
         %\centering
+        \hspace*{1cm}
         \includegraphics[clip, width=11cm]{fig/2/muon_Rz_Large.pdf}
         %\vspace{5pt}
         \subcaption{Large Sector でのミューオン検出器の配置図。}
@@ -242,6 +248,7 @@ ATLAS検出器には、$|\eta|<1.5$にバレル部をカバーするバレルカ
     %\hfill
     \begin{minipage}[b]{\hsize}
         %\centering
+        \hspace*{1cm}
         \includegraphics[clip, width=11cm]{fig/2/muon_Rz_small.pdf}
         %\vspace{5pt}
         \subcaption{Small Sector でのミューオン検出器の配置図。}
@@ -285,7 +292,7 @@ M1、M2、M3は図~\ref{fig:TGC_oc}のように複数のチェンバーを組み
 
 \begin{figure}[tb]
   \centering
-    \includegraphics[clip, width=11cm]{fig/2/TGC_anode_wire.pdf}
+    \includegraphics[clip, width=8cm]{fig/2/TGC_anode_wire.pdf}
   \caption{TGC 検出器の構造\cite{Aad:1129811}。ガスギャップ2.8~mm、ワイヤー間隔2.8~mmのMWPC~(Multi
 Wired Proportional Chamber)の構造をしている。}
   \label{fig:MWPC}
@@ -293,7 +300,7 @@ Wired Proportional Chamber)の構造をしている。}
 
 \begin{figure}[tb]
   \centering
-  \includegraphics[clip, width=11cm]{fig/2/TGC_construction.pdf}
+  \includegraphics[clip, width=13cm]{fig/2/TGC_construction.pdf}
   \caption{TGC Triplet と Doublet の断面図\cite{Aad:1129811}。}
   \label{fig:TGC}
 \end{figure}
@@ -332,7 +339,7 @@ small-strip TGC~(sTGC)はTGCと同様のMWPCである。図~\ref{fig:sTGC}に示
 \begin{figure}[tb]
   \centering
   \includegraphics[clip, width=10cm]{fig/2/stgc-structure.pdf}
-  \caption{sTGC の断面図~\cite{article:NSW_tech}。 パッド、ストリップを用いて $\eta$ を、ワイヤーを用いて $\phi$ を計算する。}
+  \caption{sTGCの断面図~\cite{article:NSW_tech}。 パッド、ストリップを用いて $\eta$ を、ワイヤーを用いて $\phi$ を計算する。}
   \label{fig:sTGC}
 \end{figure}
 
@@ -341,8 +348,8 @@ Micromegas~(MM) は、平面の電極と金属のメッシュで構成されて�
 
 \begin{figure}[tb]
   \centering
-  \includegraphics[clip, width=13cm]{fig/2/mm-structure.pdf}
-  \caption{MM の概略図~\cite{article:NSW_tech}。メッシュによってドリフト領域と増幅領域に分けられる。ドリフト領域で生成された電子はメッシュを通過し、増幅領域で電場により増幅される。}
+  \includegraphics[clip, width=15cm]{fig/2/mm-structure.pdf}
+  \caption{MMの概略図~\cite{article:NSW_tech}。メッシュによってドリフト領域と増幅領域に分けられる。ドリフト領域で生成された電子はメッシュを通過し、増幅領域で電場により増幅される。}
   \label{fig:MM}
 \end{figure}
 
@@ -377,17 +384,18 @@ High-Level Triggerでは、L1 Triggerでの粒子のトリガー判定の領域�
 Level-1 Triggerで用いられなかった内部飛跡検出器の情報、MDT や CSC などの精密測定用のミューオン検出器の情報、カロリメータの情報などを用いて、飛跡再構成やより高精度な $E_T$、$p_T$ の計算を行う。トリガーレートはHLTを用いて最終的に数~kHzまで削減される。
 
 \subsection{トリガーメニュー}
-ATLAS実験で用いられているトリガーシステムでは、限られたレートの中に必要な情報を収めなければならない。L1 TriggerとHLTにはそれぞれにトリガーが設定されている。これをトリガーアイテムと呼ぶ。L1 TriggerとHLTのトリガーアイテムを組み合わせたものをトリガーチェインを呼び、トリガーチェインとトリガーレートの配分をまとめたものがトリガーメニューである。
+ATLAS実験で用いられているトリガーシステムでは、限られたレートの中に必要な情報を収めなければならない。L1 TriggerとHLTにはそれぞれにトリガーが設定されている。これをトリガーアイテムと呼ぶ。
+例として、L1Muonではミューオンの横方向運動量$p_{\rm{T}}$に閾値を設定したトリガーアイテムがある。基本的に低い$p_{\rm{T}}$のミューオンを取得することが物理としては望ましいが、取得できるレートとの兼ね合いから、この$p_{\rm{T}}$閾値が決定されている。
+より低い$p_{\rm{T}}$のミューオンを取得するためには、レートを抑える工夫が必要であり、L1Muonでは同時に複数のミューオンのが存在するといった条件をかけることでレートを減らし、低い$p_{\rm{T}}$のミューオンが取得可能なトリガーアイテムが存在する。
+そして、L1 TriggerとHLTのトリガーアイテムを組み合わせたものをトリガーチェインを呼び、トリガーチェインとトリガーレートの配分をまとめたものがトリガーメニューである。表~\ref{triigermenu}にRun-3におけるのL1Muonのトリガーメニューの一例を示す。
 
 L1 Triggerではハードウェア上に512個のトリガーアイテムが用意されており、そのいずれかが鳴ったときにトリガーが発行される。一方で、HLTではソフトウェアベースのトリガー判定を行うため、トリガーアイテムの個数の制限はない。
-L1 TriggerとHLTのトリガーアイテムを組み合わせたトリガーチェインは主要なプライマリートリガーとサポートトリガーの2種類に分けられ、新粒子探索やTeVスケールの新しい物理探索に用いる高い$p_T$の電子やミューオンなどを取得するためのトリガーチェインや、$B$粒子の崩壊などからの低い運動量の粒子を取得するための低い閾値のトリガーチェインなど、多くのトリガーが用意されている。
-トリガーアイテムにはそれぞれにプリスケールファクターが設定されており、高いレートのトリガーに関してもレートを下げることが可能になる。
-
-図~\ref{triigermenu}に Run-3 におけるのL1Muonのプライマリートリガーメニューを示す。
-%ATLAS実験では複数のトリガーチェインがいくつも平行に動作している。新粒子探索やTeVスケールの新しい物理探索に用いる高い$p_T$の電子やミューオンなどを取得するために、閾値を設けたトリガー選別が行われる。また、$B$粒子の崩壊などからの低い運動量の粒子を取得するため、低い閾値のトリガーも用意されている。これらの目的に応じて、異なるトリガーチェインが用意されている。
+L1 TriggerとHLTのトリガーアイテムを組み合わせたトリガーチェインは大きく分けて2種類であり、物理解析に使用されるデータの収集のための主要なトリガーであるプライマリートリガーと、効率や性能の評価やモニタリングに使用されるサポートトリガーが存在する。
+その中には、新粒子探索やTeVスケールの新しい物理探索に用いる高い$p_T$の電子やミューオンなどを取得するためのトリガーチェインや、$B$粒子の崩壊などからの低い運動量の粒子を取得するための低い閾値のトリガーチェインなど、多くのトリガーが用意されている。
+しかし、トリガーレートに制限があるため、すべてのトリガーを使ってデータを取得することはできない。そのため、ATLAS実験のトリガーシステムにはプリスケールファクターと呼ばれる値がトリガーアイテムごとに設定されており、そのトリガーアイテムがトリガー発行する割合を下げることができるため、高いレートになってしまうトリガーに関してもレートを下げてトリガー発行することが可能になっている。
 
 \begin{table}[]
-    \caption{Run-3におけるプライマリーミューオントリガーのメニュー\cite{article:Run3trigmenu}。}
+    \caption{Run-3におけるプライマリーミューオントリガーのメニューの一例~\cite{article:Run3trigmenu}。L1及びHLTのプライマリートリガーのトリガーアイテムとRun-3で予想されるレートを示す。}
     \label{triigermenu}
     \centering
     %\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
@@ -397,10 +405,10 @@ L1 TriggerとHLTのトリガーアイテムを組み合わせたトリガーチ�
         \hline
         MU  & L1 & L1$\_$MU14FCH & 17~kHz\\
         \hline
-            &HLT 1mu isolation & HLT$\_$mu26$\_$ivarmedium & 195~Hz\\
-            &        & HLT$\_$mu24$\_$ivarmedium & 229~Hz\\
+            &HLT 1mu isolation & HLT$\_$mu26$\_$ivarmedium$\_$L1MU14FCH & 195~Hz\\
+            &        & HLT$\_$mu24$\_$ivarmedium$\_$L1MU14FCH & 229~Hz\\
         \hline
-            &HLT 1mu& HLT$\_$mu26$\_$ivarmedium & 38~Hz\\
+            &HLT 1mu& HLT$\_$mu26$\_$ivarmedium$\_$L1MU14FCH & 38~Hz\\
             &       & HLT$\_$mu60$\_$0eta105$\_$msonly & 10~Hz\\
             &       & HLT$\_$mu80$\_$msonly$\_$3layersEC & 8~Hz\\
         \hline
