@@ -1,4 +1,2 @@
 # master
-2022/09/20 修士論文制作開始
-2022/02/03 提出
-2022/03/17 訂正版提出
+2023/10/24 from Nakamura master_Thesis(gitLab)
