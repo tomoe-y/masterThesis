@@ -3,6 +3,13 @@
 
 \vspace*{1.5cm}
 
+\newcommand{\kintou}[2]{%
+  \leavevmode
+  \hbox to #1{%
+    \kanjiskip=0pt plus 1fill minus 1fill
+    \xkanjiskip=\kanjiskip
+    #2}}
+
 \begin{center}
   \begin{huge}
     修　　士　　学　　位　　論　　文
@@ -12,8 +19,8 @@
 
   \begin{huge}
     \begin{spacing}{1.1}
-      \fontsize{19pt}{20pt}\selectfont
-      \papertitle
+      \fontsize{18.4pt}{20pt}\selectfont
+        LHC-ATLAS実験Run-3における\\新ミューオントリガーアルゴリズムの動作検証と改良
     \end{spacing}
   \end{huge}
   
@@ -23,11 +30,13 @@
     \begin{spacing}{1.1}
         \flushright \submitdate\\
         \vspace{1cm}
-        \begin{center}
-            専\hspace{2.2mm}攻\hspace{2.2mm}名\hspace{4.5mm}物理学専攻\\
-            \hspace{-2.2mm}学籍番号\hspace{4.5mm}\studentid\\
-            氏　　名\hspace{4.5mm}\myname\hspace*{2.2mm}
-        \end{center}
+            \begin{center}
+                \begin{tabular}{p{6.5em}p{6.5em}}
+                    \kintou{4em}{専攻名}   & 物理学専攻 \\
+                    \kintou{4em}{学籍番号} & 220s126s   \\
+                    \kintou{4em}{氏名}     & 山下　智愛 \\
+                \end{tabular}                
+            \end{center}
     \end{spacing}
   \end{LARGE}
 
