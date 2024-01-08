@@ -1,24 +1,60 @@
 \chapter{LHCとATLAS実験}\label{chapter2}
+本章では、Run-3における大型ハドロン衝突型加速器であるLHC加速器とATLAS検出器の概要について述べる。
+
 
 \section{LHC加速器}\label{section2-1}
-\section{ATLAS検出器}\label{section2-2}
-%本節では、LHC-ATLAS 実験で使用されるATLAS 検出器とATLAS 実験で使用されているトリガーシステムについて説明する。
+LHCは周長27kmの陽子陽子衝突型大型円形加速器であり、スイスのジュネーブ郊外にあるCERN地下100mに設置されている。LHCの全体図を図~\ref{fig:2-1}に示す。LHCは重心系エネルギー14TeV、瞬間ルミノシティ1.0$\times10^{34}$cm$^{-2}$s$^{-1}$での陽子陽子衝突が可能なように設計されている。ルミノシティとはどれほど多くの衝突データを得られるかの指標として用いられる値で、毎秒・単位断面積当たり(cm$^{-2}$s$^{-1}$)のパートン衝突頻度であり、これを一定期間において積分したものを積分ルミノシティと呼ぶ。
 
-%\subsection{ATLAS検出器}
-ATLAS検出器は、LHCの衝突点の1つに設置された、直径25ｍ、長さ44ｍの円筒形の大型汎用検出器である\cite{Aad:1129811}。ATLAS 検出器の全体像を図~\ref{fig:ATLAS検出器}に示す。
+\begin{figure}[h]
+  \centering
+  \includegraphics[clip, width=11cm]{fig/2/lhc_map.jpg}
+  \caption{LHC加速器の全体図\cite{article:Overall_view_LHC}。地下100mに設置されたLHCの4つ衝突点にそれぞれ検出器が配置されている。}
+  \label{fig:2-1}
+\end{figure}
+
+LHCでは陽子はバンチと呼ばれる塊で2本のリングで互いに逆向きに加速されており、バンチが連なることでビームを形成している。加速リング内には、超伝統電磁石によって最大8.33Tの磁場がかけられ、磁場によって陽子が曲げられ加速リング内を周回する。ビームを交差させることによって、25nsおきに陽子陽子衝突を起こしている。
+LHCの陽子陽子衝突点は全部で4か所あり、それぞれで実験が行われている。ATLAS~(A~Troidal~LHC~ApparatuS)、CMS~(Compact~Muon~Solenoid)\cite{article:CMSExperiment}では大型汎用検出器を用いて、標準模型の精密測定や新物理の探索など幅広い物理を対象とした研究が行われている。また、LHCb~(Large~Hadron~COllider-b)\cite{article:LHCbExperiment}ではビームライン付近に感度を持つ検出器を設置することでbクォークの物理を対象とした研究が行われており、ALICE~(A~Large~Ion~Collider~Experiment)\cite{article:ALICEExperiment}は重イオンを用いた衝突実験で、鉛原子核を加速させ、高エネルギー領域での衝突によって生じるクォーク・グルーオンプラズマを対象とした研究を行っている。
+CERNに設置されている加速器・検出器群を図~\ref{fig:2-2}に示す。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[clip, width=11cm]{fig/2/accel_complex-v2022_complex.png}
+  \caption{CERNに設置されている加速器・検出器群\cite{article:accelerator-complex}}
+  \label{fig:2-2}
+\end{figure}
+
+
+図~\ref{fig:2-3}にLHCの運転計画を示す。
+LHCは第1期運転~(Run-1)として2010年から本格的に運転を開始し、7TeVから8TeVの重心系エネルギー($\sqrt{s}$)で2012年まで稼働した。最高瞬間ルミノシティは0.77$\times10^{34}$cm$^{-2}$s$^{-1}$であった。その後、2013年から2015年までのシャットダウン期間~(LS1)で加速器のアップグレードを行い、2015年から2018年までRun-2として最高瞬間ルミノシティ2.0$\times10^{34}$cm$^{-2}$s$^{-1}$、積分ルミノシティ約$150fb^{-1}$で運転が行われた。2019年から再びシャットダウン期間~(LS2)となり、2022初旬まで加速器のアップグレードが行われた。2022年7月よりRun-3としてデータ取得が開始され、2025年まで重心系エネルギーを13.6TeV、瞬間ルミノシティを2.0$\times10^{34}$cm$^{-2}$s$^{-1}$で運転を行い積分ルミノシティ350fb$^{-1}$のデータ取得を目指している。
+また、アップグレードを経て2029年からより高いルミノシティでの高輝度LHC実験(HL-LHC)の運転が予想されている。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[clip, width=11cm]{fig/2/HL-LHC_Janvier2022.pdf}
+  \caption{LHCの運転とアップグレード計画\cite{article:LHCDesignReport}}
+  \label{fig:2-3}
+\end{figure}
+
+
+
+\section{ATLAS検出器}\label{section2-2}
+
+ATLAS検出器は、LHCの衝突点の1つに設置された、直径25ｍ、長さ44ｍの円筒形の大型汎用検出器である\cite{Aad:1129811}。ATLAS 検出器の全体像を図~\ref{fig:2-4}に示す。
+ATLAS実験では様々な物理を研究対象としているので、陽子陽子衝突によって出てくる様々な粒子の種類やエネルギー・運動量を精密に測定できるように設計されている。
 ATLAS検出器は複数の検出器を組み合わせて構成されており、内側から内部飛跡検出器、カロリメータ、ミューオン検出器といった検出器が設置されている。また、内部飛跡検出器とカロリメータの間には超伝導ソレノイド磁石、カロリメータの外側にはトロイド磁石がそれぞれ設置されている。
 これらの検出器から得られる情報を組み合わせることで、粒子識別や粒子のエネルギーなどの測定を行っている。
 
 \begin{figure}[tb]
   \centering
   \includegraphics[clip,width=12cm]{fig/2/0803012_01.jpg}
-  \caption{ATLAS検出器の全体図\cite{Aad:1129811}。直径 25 m、長さ 44 m の円筒型をしており、内部飛跡検出器、カロリーメータ、ミューオン検出器などの検出器を組み合わせて粒子の測定を行っている。}
-  \label{fig:ATLAS検出器}
+  \caption{ATLAS検出器の全体図\cite{Aad:1129811}。直径 25 m、長さ 44 m の円筒型で、内部飛跡検出器、カロリーメータ、ミューオン検出器などの検出器を組み合わせて様々な粒子の測定を行っている。}
+  \label{fig:2-4}
 \end{figure}
 
 \subsection{ATLAS検出器における座標系}
-ATLAS実験では図~\ref{fig:a}に示すような直行座標系と円筒座標系が使用されている。直行座標系では、検出器の中心を原点として、ビーム軸に沿って$z$軸を取る。ビーム軸に垂直な平面を$x-y$平面としたときに、加速器の中心方向を正とする$x$軸及び、地面に対して垂直方向上向きを正とする$y$軸を設定する。円筒座標系では、ビーム軸に沿った$z$軸に対し、動径方向を$R$、ビーム軸周りの角度を方位角$\phi$、ビーム軸からの角度を極角$\theta$としている。
-%ATLAS検出器ではz軸が正の側をA-side、負の側をC-sideと定義している。
+検出器の座標系を~\ref{fig:2-5}に示す。
+ATLAS実験では直行座標系と円筒座標系が使用されており、直行座標系では、検出器の中心を原点として、ビーム軸に沿って$z$軸を取る。ビーム軸に垂直な平面を$x-y$平面としたときに、加速器の中心方向を正とする$x$軸及び、地面に対して垂直方向上向きを正とする$y$軸を設定する。円筒座標系では、ビーム軸に沿った$z$軸に対し、動径方向を$R$、ビーム軸周りの角度を方位角$\phi$、ビーム軸からの角度を極角$\theta$としている。
+ATLAS検出器ではz軸が正の側をA-side、負の側をC-sideと定義している。
 
 また、ATLAS実験で使用される座標系として、
 \begin{equation}
@@ -26,25 +62,136 @@ ATLAS実験では図~\ref{fig:a}に示すような直行座標系と円筒座標
 　\label{ラピディティ}
 \end{equation}
 と定義される擬ラピディティ$\eta$が用いられる。
-ATLAS 検出器は円筒形をしており、$|\eta| < 1.0$ の側面部分をバレル領域、$|\eta| > 1.0$ の底面部分をエンドキャップ領域と呼ぶ。
+ATLAS 検出器は円筒形をしており、$|\eta| < 1.05$ の側面部分をバレル領域、$|\eta| > 1.05$ の底面部分をエンドキャップ領域と呼ぶ。
 
 \begin{figure}[tb]
   \centering
   \includegraphics[clip, width=11cm]{fig/2/atlas_coordinate_fix.pdf}
   \caption{ATLAS検出器における座標系。}
-  \label{fig:a}
+  \label{fig:2-5}
 \end{figure}
 
 \newpage
 \subsection{マグネットシステム}\label{magnetic_filed}
+ATLAS実験では、超電導磁石を用いて磁場をかけることにより荷電粒子の飛跡を曲げ、その曲率を図ることで横方向運動量を測定している。超電導磁石は2種類設置されており、衝突点付近で発生した荷電粒子の運動量測定のために用いられるソレノイド磁石と、ミューオンの運動量測定のために用いられるトロイド磁石である。ATLAS検出器の磁石の配置を図~\ref{fig:2-6}に示す。
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[clip, width=11cm]{fig/2/ATLcoilGeom.pdf}
+  \caption{ATLAS検出器における超電導磁石の配置。}
+  \label{fig:2-6}
+\end{figure}
+
+その全体は半径22m、全長26mである。
+ソレノイド磁石は内部検出器とカロリーメータの間に設置されており、内径2.46m、外径2.56m、z軸方向の長さ5.8mの円筒形である。内部に2Tの磁場をかけており、内部検出器中で荷電粒子の飛跡を$\phi$方向に曲げて横運動量の測定を行う。
+また、トロイド磁石はカロリメータの外側に設置されており、1つのバレルトロイドとA-side、C-side両側にそれぞれ1つずつ設置されているエンドキャップトロイドで構成され、それらがビーム軸に対して8回対称になるように配置されている。バレルトロイドは内径9.4m、外径20.1m、z軸方向の長さ25.3mで、エンドキャップトロイドは内径1.65m、外径10.7m、z軸方向の長さ5.0mである。
+また磁場の強さはそれぞれ、バレルトロイドでは約0.5T、エンドキャップトロイドでは約1Tである。
+トロイド磁石によって生じる磁場の$\eta$分布と$x-y$平面での磁場の分布をそれぞれ図~\ref{fig:2-7-1}、図~\ref{fig:2-7-2}で示す。
+
+\begin{figure}[htp]
+  \begin{minipage}[b]{0.5\linewidth}
+      \centering
+      \includegraphics[clip, width=5cm]{fig/2/FMBmap.pdf}
+      \subcaption{トロイド磁石による磁場の$\phi$分布。}
+      \label{fig:2-7-1}
+  \end{minipage}
+    \begin{minipage}[b]{0.5\linewidth}
+      \centering
+      \includegraphics[clip, width=8cm]{fig/2/bdl.pdf}
+      \subcaption{ビーム軸に垂直な$x-y$平面での磁場の分布。}
+      \label{fig:2-7-2}
+  \end{minipage}
+  \caption{超電導磁石による磁場分布\cite{article:ATLASMagneticField}。}
+\end{figure}
 
 \subsection{内部飛跡検出器}
+内部飛跡検出器は内側からInsertable~B~Layer~(IBL)、Pixel検出器、SemiConductor~Tracker~(SCT)、Transition~Radiation~Tracker~(TRT)で構成される。バレル領域とエンドキャップ領域における内部飛跡検出器の配置をそれぞれ図~\ref{fig:2-8-1}、図~\ref{fig:2-8-2}に示す。
+内部飛跡検出器は半径約1.1m、z軸方向に長さ約5.3mで、$|\eta|<2.5$の領域を覆っている。
+検出器内には、前述のとおりソレノイド磁石によって約2Tの磁場がかかっており磁場領域を通過した荷電粒子の飛跡の$\theta$方向の曲率から運動量を計算する。
+
+\begin{figure}[h]
+  \begin{minipage}[b]{0.5\linewidth}
+      \centering
+      \includegraphics[clip, width=6cm]{fig/2/inner_detector2.jpg}
+      \subcaption{バレル領域}
+      \label{fig:2-8-1}
+  \end{minipage}
+    \begin{minipage}[b]{0.5\linewidth}
+      \centering
+      \includegraphics[clip, width=8cm]{fig/2/inner_detector3.png}
+      \subcaption{エンドキャップ領域}
+      \label{fig:2-8-2}
+  \end{minipage}
+  \caption{バレル領域とエンドキャップ領域での内部飛跡検出器の構造\cite{Aad:1129811}。}
+\end{figure}
+
+\subsubsection{Pixel検出器とIBL}
+Pixel検出器はバレル領域で同心円状に3層、エンドキャップ両飯豊A-side、C-side両側にそれぞれディスク状に3層設置されている。1つのpixelサイズは50$\mu$m$\times$ 400$\mu$mであり、R$\phi$方向及び$z$方向に並べて配置している。
+pixel検出器の位置分解能は、R$\phi$方向に10$\mu$m、$z$方向に115$\mu$mである。
+
+また、Run-2からルミノシティ増加への対応とPixel検出器の性能向上のためにPixel検出器よりも内側に配置された。1つのpixelのサイズは50$\mu$m$\times$ 250$\mu$mであり、位置分解能はR$\phi$方向に10$\mu$m、$z$方向に75$\mu$mである。IBLにより、衝突点と飛跡の距離であるImpact Parameterの測定精度が改善された。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[clip, width=9.5cm]{fig/2/IBL_layout.png}
+  \caption{IBLのレイアウト~\cite{article:ATLASBlayerTDR}。}
+  \label{fig:2-9}
+\end{figure}
+
+\subsubsection{SCT}
+SCTはバレル領域で4層からなる同心円状のシリンダ形状で設置されており、エンドキャップ領域でA-side、C-sideそれぞれ9枚ずつのディスク形状になっている。
+SCTの位置分解能はバレル領域でR方向に17$/mu$m、$\phi$方向に580$\mu$m、エンドキャップ領域ではR方向に17$\mu$m、$z$方向に580$\mu$mである。
+
+
+\subsubsection{TRT}
+TRTはドリフトチューブを積み重ねるように構成されており、$|\eta|<2.0$の領域を覆っている。バレル領域では長さ144cmのチューブをビーム軸と平行に、エンドキャップ領域では長さ37cmのチューブを放射状に配置している。TRTの位置分解能はR-$\phi$方向に130$\mu$mである。
+
+また、TRTでは荷電粒子が誘電率の異なる物質へ入社する際に光子を放出する「遷移放射」を利用した電子の同定も行っている。遷移放射で放出される光子のエネルギーは粒子のローレンツ因子$\gamma$に比例するため、これを利用することで入射した荷電粒子が電子かどうか判定している。
 
 \subsection{カロリメータ}
+カロリメータは内部飛跡検出器の外側に設置されており、内側から電磁カロリメータ、ハドロンカロリメータの順に配置されている。電磁カロリメータは電磁相互作用による電磁シャワーを用いて電子と光子のエネルギーを測定し、ハドロンカロリメータは強い相互作用によるハドロンシャワーを用いてハドロンのエネルギー測定やそれを組み合わせたジェット再構成に用いられる。ATLAS検出器におけるカロリメータの概要図を図~\ref{fig:2-10}に示す
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[clip, width=9cm]{fig/2/Calorimeter_d3.pdf}
+  \caption{カロリメータの全体図~\cite{Aad:1129811}。}
+  \label{fig:2-10}
+\end{figure}
 
 \subsubsection{電磁カロリメータ}
+電磁カロリメータはバレル領域をカバーするように$|\eta|<1.5$にバレル電磁カロリメータ、エンドキャップ領域をカバーするように$1.4<|\eta|<3.2$にエンドキャップ電磁カロリメータが配置されている。
+それぞれの厚さは、バレル領域で放射長の22倍以上、エンドキャップ領域で放射長の24倍以上である。
+電磁カロリメータは$\phi$方向の不感領域を失くすために鉛の吸収体と強い放射線耐性を持つ液体アルゴンをアコーディオン状に組み合わせた構造になっている(~\ref{fig:2-11})。
+
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[clip, width=9cm]{fig/2/electoricCal.jpg}
+  \caption{電磁カロリメータの構造~\cite{Aad:1129811}。}
+  \label{fig:2-11}
+\end{figure}
 
 \subsubsection{ハドロンカロリメータ}
+ハドロンカロリメータは、電磁カロリメータと同様にバレル領域をカバーするために$|\eta|<1.7$とエンドキャップ領域をカバーするために$1.5<|\eta|<3.2$に配置されている。
+バレル領域では、鉄の吸収体とシンチレータを交互に重ねたTileカロリメータ(図~\ref{fig:2-12-1})が設置されている。シンチレーション光を波長変換ファイバーで集め、光電子増倍管で読み出しを行っている。
+エンドキャップ領域では、銅の吸収体と液体アルゴンから構成されたハドロンエンドキャップカロリメータ(図~\ref{fig:2-12-2})が使用されている。
+バレル領域とエンドキャップ領域に加えて、$3.1<|\eta|<4.9$のフォワード領域をカバーするために銅とタングステンの吸収体と液体アルゴンから構成されたフォワードカロリメータが設置されている。
+
+\begin{figure}[h]
+  \begin{minipage}[b]{0.5\linewidth}
+      \centering
+      \includegraphics[clip, width=6cm]{fig/2/TileCalo.png}
+      \subcaption{Tileカロリメータ}
+      \label{fig:2-12-1}
+  \end{minipage}
+    \begin{minipage}[b]{0.5\linewidth}
+      \centering
+      \includegraphics[clip, width=8cm]{fig/2/HadronEndcapCal.png}
+      \subcaption{エンドキャップ領域におけるカロリメータ}
+      \label{fig:2-12-2}
+  \end{minipage}
+  \caption{バレル領域とエンドキャップ領域でのハドロンカロリメータの構造\cite{Aad:1129811}。}
+\end{figure}
 
 \subsection{ミューオン検出器}\label{section2-2-4}
 
