@@ -88,14 +88,14 @@ ATLAS実験では、超電導磁石を用いて磁場をかけることにより
 また磁場の強さはそれぞれ、バレルトロイドでは約0.5T、エンドキャップトロイドでは約1Tである。
 トロイド磁石によって生じる磁場の$\eta$分布と$x-y$平面での磁場の分布をそれぞれ図~\ref{fig:2-7-1}、図~\ref{fig:2-7-2}で示す。
 
-\begin{figure}[htp]
-  \begin{minipage}[b]{0.5\linewidth}
+\begin{figure}[h]
+  \begin{minipage}[b]{0.45\linewidth}
       \centering
       \includegraphics[clip, width=5cm]{fig/2/FMBmap.pdf}
       \subcaption{トロイド磁石による磁場の$\phi$分布。}
       \label{fig:2-7-1}
   \end{minipage}
-    \begin{minipage}[b]{0.5\linewidth}
+    \begin{minipage}[b]{0.48\linewidth}
       \centering
       \includegraphics[clip, width=8cm]{fig/2/bdl.pdf}
       \subcaption{ビーム軸に垂直な$x-y$平面での磁場の分布。}
@@ -193,12 +193,170 @@ TRTはドリフトチューブを積み重ねるように構成されており�
   \caption{バレル領域とエンドキャップ領域でのハドロンカロリメータの構造\cite{Aad:1129811}。}
 \end{figure}
 
+
 \subsection{ミューオン検出器}\label{section2-2-5}
+ミューオン検出器はATLAS検出器の一番外側に配置されており、カロリメータから出てきた荷電粒子の位置や横方向運動量を測定する。トリガー用の検出器として~Resistive~Plate~Chamber~(RPC)とThin~Gap~Chamber~(TGC)、精密測定用の検出器として~Monitored~Drift~Tube~(MDT)の3つの検出器で構成される。またRun-3からエンドキャップ領域の磁場領域より内側に設置されていた~Small~Wheelに代わって~New~Small~Whell~(NSW)という検出器が導入された。
+図~\ref{fig:2-13}にミューオン検出器の全体図を示す。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[clip, width=9cm]{fig/2/muondetector.pdf}
+  \caption{ミューオン検出器の全体図~\cite{Aad:1129811}。バレル領域にRPC、MDT、エンドキャップ領域にTGC、MDTが配置されている。}
+  \label{fig:2-13}
+\end{figure}
+
+ミューオン検出器では、各検出器をステーションと呼ばれる層状にまとめられている。これらのステーションはバレル領域とエンドキャップ領域でそれぞれ3層あり、衝突点に近い方からインナーステーション~(I)、ミドルステーション~(M)、アウターステーション~(O)と呼ばれる。バレル領域ではビーム軸周りに半径約5m、7m、10mのところに同心円状にステーションが並べられ円筒状の検出器を形成している。
+エンドキャップ領域では、$|z|$が約7.4m、14m、21.5mの位置に$z$軸に垂直にステーションが配置されており大きなホイールを形成している。また、インナーステーションとミドルステーションの間に~Endcap~Extra~(EE)と呼ばれる検出器が設置されている。
+
+また、図~\ref{fig:2-14}で示されているように、ミューオン検出器は不感領域を失くすために$\phi$方向に大きさの違う2つのセクターを互い違いに8つずつ$\phi$方向に重ねられている。衝突点に近い方から、~Small~sectorと~Large~sectorと呼ばれる。
+ミューオン検出器の~Large~sector、~Small~sectorの$R-z$平面の断面図を図~\ref{fig:2-15-1}、図~\ref{fig:2-15-2}に示す。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[clip, width=8cm]{fig/2/muon_detector_xy.pdf}
+  \caption{ミューオン検出器の$x-y$平面での断面図~\cite{Aad:1129811}。黄と橙が~Small~sector、緑と青が~Large~sector。}
+  \label{fig:2-14}
+\end{figure}
+
+%-------------チェンバーの略称と検出器の対応表を書く------------------------------
+
+\begin{figure}[h]
+  \begin{minipage}[b]{0.5\linewidth}
+      \centering
+      \includegraphics[clip, width=8cm]{fig/2/muon_Rz_Large.pdf}
+      \subcaption{Large~sector}
+      \label{fig:2-15-1}
+  \end{minipage}
+    \begin{minipage}[b]{0.5\linewidth}
+      \centering
+      \includegraphics[clip, width=8cm]{fig/2/muon_Rz_small.pdf}
+      \subcaption{Small~sector}
+      \label{fig:2-15-2}
+  \end{minipage}
+  \caption{ミューオン検出器の~Large~sector、~Small~sectorの$R-z$平面の断面図\cite{article:phase2}。}
+\end{figure}
 
 \subsubsection{Resisitive Plate Chamber (RPC)}
+RPCはバレル領域に設置されている、主にミューオントリガー用のガス検出器である。
+構造を図~\ref{fig:2-16}に示す。2枚の高抵抗プレートの間に幅~2mmの絶縁体が挟み込まれており、プレート間には約 ~4.9kV/mmの電場が形成されている。
+プレート間には、$\rm{C_{2}H_{2}F_{4}/Iso - C_{4}H_{10}/SF_{6}(94.7 : 5 : 0.3)}$の混合ガスが充填されている。
+ミューオンが通過した際に、ガスから電離した電子が電場に沿って雪崩増幅を起こし、プレートの外側に取り付けられたストリップで信号を読み出す。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[clip, width=8cm]{fig/2/RPC_structure.pdf}
+  \caption{RPC検出器の構造~\cite{Aad:1129811}。}
+  \label{fig:2-16}
+\end{figure}
+
+図~\ref{fig:2-17}で表されるように、Large~sectorと~Small~sectorそれぞれに、MDTミドルステーションを挟み込むように2枚、MDTアウターステーションの外側に1枚の、計3枚のRPCが配置されている。
+1枚のRPCは直交した$\eta$~-stripと$\phi$-~stripから構成されており、2次元での読み出しを行う。
+MDTでは$\phi$方向の測定ができないので、RPCで測定した$\phi$の情報を用いる。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[clip, width=8cm]{fig/2/RPC_xy.pdf}
+  \caption{RPC検出器の$x-y$平面での断面図~\cite{Aad:1129811}。}
+  \label{fig:2-17}
+\end{figure}
 
 \subsubsection{Thin Gap Chambers (TGC)}
+TGCはエンドキャップ領域に設置されている、主にミューオントリガー用のガス検出器である。
+構造を図~\ref{fig:2-18}に示す。
+TGCの各層は、ワイヤーとアノード層、ストリップ層から構成されているマルチワイヤーガス検出器で、$\eta$方向をワイヤー、$\phi$方向をストリップで測定している。内部には、$\rm{CO_{2}}$と$\rm{n - C_{5}H_{12}}$ガスが充填されている。
+ワイヤー間の距離を1.8mm、ワイヤーとストリップの距離を1.4mmと短くすることによって高い時間分解能を実現している。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[clip, width=8cm]{fig/2/l1mue-schema.pdf}
+  \caption{TGC検出器の配置~\cite{Aad:1129811}。}
+  \label{fig:2-18}
+\end{figure}
+
+図~\ref{fig:2-18}で表されるように、インナーステーションに1枚、ミドルステーションに3枚配置されている。
+インナーステーションではdoublet構造1枚が2層、ミドルステーションではdoublet構造が2枚、triplet構造が1枚の合計7層から構成されている。doublet構造とtriplet構造を図~\ref{fig:2-20}に示す。
+バレル領域と同様にMDTでは$\phi$方向の測定ができないので、TGCで測定した$phi$の情報を用いる。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[clip, width=8cm]{fig/2/TGC_anode_wire.pdf}
+  \caption{TGC検出器の構造~\cite{Aad:1129811}。}
+  \label{fig:2-19}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[clip, width=10cm]{fig/2/TGC_construction.pdf}
+  \caption{boublet構造(左)とtriplet構造(右)~\cite{Aad:1129811}。}
+  \label{fig:2-20}
+\end{figure}
 
 \subsubsection{Monitored Drift Tube (MDT)}
+MDTはバレル領域、エンドキャップ領域両方に設置されており、35$\mu$mと位置分解能が高いので精密測定に用いられる検出器である。
+MDTのドリフトチューブの構造を図~\ref{fig:2-21}に示す。
+MDTはArと$CO_{2}$ガスが93 : 7の割合で充填された半径27.979mmのドリフトチューブで構成され、チューブの中心のワイヤーには3080Vの電圧がかけられているので、荷電粒子が通過することによって電離した電子がワイヤーに集められる。
+荷電粒子の通過位置は、電子のドリフト距離から求めたドリフトサークルの接線である。
+また電子の最大ドリフト時間は約700nsである。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[clip, width=8cm]{fig/2/mdt_driftTube.png}
+  \caption{MDTのドリフトチューブの構造~\cite{Aad:1129811}。}
+  \label{fig:2-21}
+\end{figure}
+
+MDTは図~\ref{fig:2-22}で表されるように、ドリフトチューブ4レイヤーまたは3レイヤーを2層重ねた構造になっている。
+MDTはバレル領域では長方形、エンドキャップ領域では台形であり、ドリフトチューブは$\phi$方向に沿って並べられているので、バレル領域で$z$方向、エンドキャップ領域で$R$方向のみ測定可能である。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[clip, width=8cm]{fig/2/MDT_chamber_schematics_2.pdf}
+  \caption{MDTの構造~\cite{Aad:1129811}。}
+  \label{fig:2-22}
+\end{figure}
 
 \subsubsection{New Small Wheel (NSW)}
+NSWはRun-3よりLHCのルミノシティ増加に伴う高ヒットレート状況下での飛跡測定効率の向上とミューオントリガーの改良を目的として、エンドキャップ領域の磁場領域よりも内側に新たに導入された検出器である。
+図~\ref{fig:2-23}にNSWの全体図を示す。
+NSWはトリガー用のsmall-strip TGC(sTGC)と精密測定用のMicroMegas(MM)の2種類の検出器をそれぞれ8層ずつ組み合わせた構造をしている。
+衝突点側から、sTGC~4層、MM~4層、MM~4層、sTGC~4層の順に16層配置されている。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[clip, width=10cm]{fig/2/NSW_structure.png}
+  \caption{NSWの全体図\cite{article:ATLASNSWTDR}。左がLarge~Station、右がSmall~Station。}
+  \label{fig:2-23}
+\end{figure}
+
+sTGCの構造を図~\ref{fig:2-24}に示す。
+sTGCでは$\eta$方向と$\phi$方向の測定を、それぞれストリップとワイヤーを用いて行う。
+ワイヤーのピッチ幅は1.8mm、ワイヤー平面から1.4mmの距離にある2つのカソード面に挟まれた構造になっている。
+カソード面の裏には片側にはパッド、もう一方にワイヤーと垂直にストリップが配置されている。
+ストリップのピッチ幅は3.2mmである。ATLASで用いられているTGCと比べてはるかに小さいため、位置分解能が高くsmall-strip~TGCと呼ばれている。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[clip, width=9cm]{fig/2/stgc-structure.pdf}
+  \caption{sTGCの構造\cite{article:ATLASNSWTDR}。}
+  \label{fig:2-24}
+\end{figure}
+
+MMの構造を図~\ref{fig:2-25}に示す。
+MMはドリフト電極とガスギャップ、薄い金属メッシュ、増幅領域、読み出し電極で構成されている。ガスギャップは厚さ5mmで、Arと$CO_{2}$が93 : 7で混合されたガスで充填されている。
+荷電粒子がMMを通過することで生じた電子がメッシュにドリフトし、メッシュを通過した後で雪崩増幅を起こし、読み出し電極に到達することで入射粒子の位置を特定する。
+雪崩増幅で生じたイオンは電子と反対方向に移動し、メッシュに戻る。増幅領域が100$\mu$と他の検出器に比べて狭く、イオンの回収を非常に高速でできるため、高ヒットレート下での読み出しに適した検出器である。
+MMは1つの~sectorに8層設置されるが、2次元読み出しを可能にするために4層でストリップを底面に平行に、残りの4層では$\pm15^\circ$ずつ傾けて配置している(図~\ref{fig:2-26})。並行な層をX層、傾けて配置された層をU(V)層と呼ぶ。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[clip, width=13cm]{fig/2/mm-structure.pdf}
+  \caption{MMの構造\cite{article:ATLASNSWTDR}。}
+  \label{fig:2-25}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[clip, width=11cm]{fig/2/mm_stereolayer.png}
+  \caption{MM$y−z$平面におけるX,U,V 層の並びと$x−y$平面で見た各層のストリップの配置\cite{article:kumaoka}。}
+  \label{fig:2-26}
+\end{figure}
