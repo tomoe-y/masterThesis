@@ -1,6 +1,7 @@
 \chapter{L2MuonSAにおけるNSWを用いた横運動量再構成アルゴリズムの動作検証と改良}\label{chapter5}
 %本章ではNSWを用いたL2MuonSA部分飛跡再構成アルゴリズムについて、Run-3実データを用いた性能評価の結果について述べ、さらに検討したヒット選択アルゴリズムの説明および性能評価について述べる。
 
+%################################################画像を高画質でPDFから切り取る#################################################
 
 本章では、まず先行研究([\cite{article:kumaoka}, \cite{article:noguchi}])において開発、改良されたNSW部分飛跡再構成アルゴリズムについて紹介し、実データでの性能を評価した結果について述べる。
 その後に、今回新しく検討したNSWヒット選択アルゴリズムについて紹介し、Run-3実データにおいて現行のアルゴリズムとの性能を比較した結果について述べる。
@@ -35,7 +36,7 @@ sTGCヒット選択アルゴリズムの流れを以下に示す。
     \item 2で作成したペア2を組み合わせて、最大8つのヒットで構成されるペア3を作成する。この時に$z$軸に垂直でNSWの中心を通る平面においてペア2の直線同士の距離が100mm以上離れているペア3は除外する。またペア2の切片の平均値の絶対値が100mm以上のペア3も除外する。
     \item ペア3の中で、以下の式で表される位置のばらつき$s$が最小の組み合わせを選択する。
     \begin{equation}
-        s=\frac{1}{n-2} \sum_{i=1}^n\left(\hat{y}_i-y_i\right)^2\label{equ-5-1}
+        s=\frac{1}{n-2} \sum_{i=1}^n\left(\hat{y}_i-y_i\right)^2\label{equ5-1}
     \end{equation}
     ここで$n$は組み合わせの中にあるヒット数、$y_i$は各ヒットの$R$座標、$\hat{y}_i$は組み合わせを最小二乗法によりフィットした直線の各層の$z$座標における$R$座標である。
 \end{enumerate}
@@ -52,16 +53,72 @@ MMヒット選択アルゴリズムの流れを以下に示す。
 \begin{enumerate}
     \item $X$層(1層目, 7層目)、$X$層(2層目, 8層目)、$U$層(3層目, 5層目)、$V$層(4層目, 6層目)のヒットでペア1を作成し、ペア1を結ぶ直線の傾きの絶対値が0.1rad以下あるいは0.7rad以上あるペア1を除外する。また切片が原点から500mm以上離れているペア1も除外する。またペア1に1つしかヒットがない場合、原点と片方のヒットでペア1を作成する。また2つのペア1の切片の平均値の絶対値が200mm以上のペア2も除外する。
     \item 1で残ったペア1に対して、$X$層同士~((1層目, 7層目), (2層目, 8層目))、でペア2を作成する。この際、$z$軸に垂直でNSWの中心を通る平面においてペア1の直線同士の距離が50mm以上離れているペア2は除外する。
-    \item $U$層と$V$層~((3層目, 5層目), (4層目, 6層目))でペア2を作る。ヒットの情報を用いて荷電粒子の各層における通過位置の$\phi$座標を求め、4層の$\phi$平均を取る。3層目、4層目と5層目、6層目でそれぞれ$\phi$の差を取り、どちらかで0.05rad以上の差があった場合は除外する。$\phi$の計算については後述する。
-    \item 2と3で作成したペア2を組み合わせて、最大8つのヒットで構成されるペア3を作成する。また3で求めた$\phi$の情報を用いて各層の$R$座標を補正する。この補正についても後述する。補正された$R$座標~($R'$)と$z$座標を用いてペア3の部分飛跡を再構成し、\eqref{equ-5-1}式で表される位置のばらつき$s$が最小の組み合わせを選択する。
+    \item $U$層と$V$層~((3層目, 5層目), (4層目, 6層目))でペア2を作る。ヒットの情報を用いて荷電粒子の各層における通過位置の$\phi$座標を求め、4層の$\phi$平均を取る。3層目、4層目と5層目、6層目でそれぞれ$\phi$の差を取り、どちらかで0.05rad以上の差があった場合は除外する。$U$、$V$層における$\phi$の計算については後述する。
+    \item 2と3で作成したペア2を組み合わせて、最大8つのヒットで構成されるペア3を作成する。また3で求めた$\phi$の情報を用いて各層の$R$座標を補正する。この補正についても後述する。補正された$R$座標~($R'$)と$z$座標を用いてペア3の部分飛跡を再構成し、\eqref{equ5-1}式で表される位置のばらつき$s$が最小の組み合わせを選択する。
 \end{enumerate}
+
+このアルゴリズムで選ばれた最大8つの~MMのヒットを~sTGCのヒットと組み合わせて~SPの再構成に用いる。
 
 
 \subsection{sTGCとMMのヒット組み合わせによるNSW部分飛跡再構成}\label{5-1-2}
+ヒット選択アルゴリズムで選択された~sTGC、MMヒットを組み合わせて~NSWでの~SPを再構成する。
+sTGC~strip層と~MM~$X$層はチェンバー中心におけるストリップの位置座標$R$しかわからないので、sTGC~wireや~MM~stereo~layerの情報を用いて$\phi$情報を計算し、実際の通過位置である$R'$に補正を行う。$R$から$R'$への補正の方法を以下に示す。
+\begin{enumerate}
+    \item sTGCと~MM~$X$層のヒットの~($z$, $R$)座標を最小二乗法を用いて直線でフィットを行う。
+    \item sTGC~wireの情報を用いて、各層の$\phi$を求める。1で定義した直線の~sTGC~wireの各層の$z$座標での$R$座標を求め$R_{\rm{Int}}$とする。$R_{\rm{Int}}$を用いて、式\eqref{equ5-2}で$\phi_{\rm{sTGC}}$を求める。
+    \begin{equation}
+        \phi_{\rm{sTGC}}=\arctan(\frac{R_{\rm{wire}}}{R_{\rm{int}}} \times \tan(\phi_{\rm{wire}}))\label{equ5-2}
+    \end{equation}
+    ここで$R_{\rm{Int}}$と$\phi_{\rm{wire}}$はそれぞれ~wierの中心の$R$、$\phi$座標である。変数の定義を図~\ref{fig:5-2}に示す。
+    
+    \begin{figure}[h]
+        \centering
+        \includegraphics[clip, width=12cm]{fig/5/sTGC_phi.png}
+        \caption{sTGCにおける$\phi$の計算\cite{article:noguchi}。}
+        \label{fig:5-2}
+    \end{figure}
+        
+    \item MM~stereo~layerの情報を用いて、$\phi$を求める。sTGC~wireの時と同様に1で定義した直線の~MM~stereo~layerの各層の$z$座標での$R$座標を求め$R_{\rm{Int}}$とする。
+    $U$、$V$層はそれぞれ$\pm1.5^{\circ}$ずつ傾けて配置されているので、$x-y$平面での$U$層と$X$層の交点の$x$座標$x_{\rm{UV}}$を以下の式で定義する。
+    \begin{equation}
+        x_{\rm{UV}}=\frac{R_{\rm{U}}-R_{\rm{Int}}}{\tan(\frac{\pm1.5}{360}) \times 2\pi}\label{equ5-3}
+    \end{equation}
+    $x_{UV}$を用いて、以下の式で$\phi_{\rm{MM}}$を求める。
+    \begin{equation}
+        \phi_{\rm{MM}}=\arctan(\frac{x_{\rm{UV}}}{R_{\rm{Int}}})\label{equ5-4}
+    \end{equation}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[clip, width=12cm]{fig/5/mm_phi.png}
+        \caption{MMにおける$\phi$の計算と$U$層における$\phi$の射影\cite{article:noguchi}。}
+        \label{fig:5-3}
+    \end{figure}
+    \item 2と3で求めた各層の$\phi$の平均値$\phi_{\rm{Avg}}$を計算し、sTGC~stripや~MM~$X$層の各層での$R$を$\cos(\phi_{Avg})$で割ることによって実際のヒットの$R$座標である$R'$を求める。
+    \begin{equation}
+        R'=\frac{R}{\cos(\phi_{\rm{Avg}})}\label{equ5-5}
+    \end{equation}
+    MMの~stereo~layerでは$\phi_{\rm{MM}}$を用いて式~\eqref{equ5-7}で射影して$R'$を求める。
+    \begin{equation}
+        R' \times \cos(\phi_{\rm{U}}-\theta_{\rm{U}})=R_{\rm{U}} \times \cos(\theta_{\rm{U}})\label{equ5-6}
+    \end{equation}
+    \begin{equation}
+    \begin{split}
+        R' &= \frac{R_{\rm{U}} \times \cos(\theta_{U})}{\cos(\phi_{\rm{U}}-\theta_{\rm{U}})}\\
+        &= \frac{R_{\rm{U}} \times \cos(\theta_{U})}{\cos(\phi_{\rm{U}})\cos(\theta_{\rm{U}}) + \sin(\phi_{\rm{U}})\sin(\theta_{\rm{U}})}\label{equ5-7}
+    \end{split}
+    \end{equation}
+\end{enumerate}
 
 \section{NSWを用いた横運動量の計算方法}\label{5-2}
-NSWでの~SPから角度$\beta$を求めて、第3章で述べたように~LUTを用いて$p_T$を再構成する。
-以下の図は~NSWにおける角度$\beta$の定義を表す。
+NSWはインナーステーションにある検出器なので、NSWの~SPをL2MuonSAでの$p_T$再構成に用いる場合は角度$\beta$を用いる。
+角度$\beta$から$p_T$を求める方法は、第3章で述べたように~LUTを用いる。
+以下の図は~NSWの~SPを用いた角度$\beta$の定義を表す。
+\begin{figure}[h]
+    \centering
+    \includegraphics[clip, width=7cm]{fig/5/NSW_beta.png}
+    \caption{NSWを用いた$\beta$の定義}
+    \label{fig:enter-label}
+\end{figure}
 
 \section{Run-3実データにおけるNSWを用いたL2MuonSAの性能評価}\label{5-3}
 
