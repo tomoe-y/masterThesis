@@ -96,7 +96,7 @@ TGCはインナーステーションに1枚~(I)、ミドルステーションに
 
 %\subsection{後段トリガーシステム~(High Level Trigger)}\label{chapter3-2-2}
 
-\subsection{Level2~Muon~Stand~Alone~(L2MuonSA)}\label{chapter3-2-2}
+\subsection{Level-2~Muon~Stand~Alone~(L2MuonSA)}\label{chapter3-2-2}
 L2MuonSAはHLTの初段を担っている。
 ここでは~L1から受け取った~RoI周辺のミューオン検出器の情報を用いて、素早くかつ~L1よりも精密に飛跡を再構成することで高精度の$\pt$を計算し、閾値を設けてトリガー判定を行っている。また~L2MuonSAで再構成したミューオンの飛跡候補は、後段の~L2MuonCombに送られ、内部飛跡検出器の情報と組み合わせて$\pt$を再構成するために用いられる。
 以下に~L2MuonSAの$\pt$再構成の手順を示す。
@@ -114,10 +114,30 @@ L2MuonSAでは~L1から送られてきた~RoIの情報をもとに、バレル�
 \paragraph{バレル領域におけるロードの定義}
 バレル領域では、RoI周辺の~RPCのヒットの情報を用いる。
 RPCはミドルステーションとアウターステーションに設置されているため、各ステーションでRPCのヒットから大まかな飛跡の位置を求めて、ロードの中心と定義する。インナーステーションにはRPCがないので、ミドルステーションのロード中心を外挿して用いる。
+RPCのフィットに失敗しミドルステーションにおいて大まかな飛跡が作成されないときは、衝突点と~RoIを直線で結びロードを定義する。
 
 \paragraph{エンドキャップ領域におけるロードの定義}
 エンドキャップ領域では、RoI周辺の~TGCのヒットの情報を用いる。ミドルステーションでは~TGC~M1、M2、M3、インナーステーションでは~Inner~TGCを用いてロードを定義する。
 Inner~TGCがない領域では、ミドルステーションの~TGCの情報を用いて計算した$\pt$と位置情報を用いて飛跡を外挿し、インナーステーションのロードとして定義する。
+バレル領域と同様に、TGCのフィットに失敗しミドルステーションにおいて大まかな飛跡が作成されないときは、RoIからロードを定義する。
+
+以下の表に各領域の各ステーションでのロード幅について示す。
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c||c|c|c|} \hline
+     領域 & フィットの可否~(RPC、TGC) & Inner & Middle & Outer  \\ \hline \hline
+     \multirow{2}{*}{バレル領域} & 成功 & \SI{400}{\mm} & \SI{200}{\mm} &\SI{400}{\mm} \\
+                                & 失敗 & \SI{500}{\mm} & \SI{650}{\mm} & \SI{800}{\mm} \\ \hline
+     \multirow{2}{*}{エンドキャップ領域} & 成功 & \SI{100}{\mm} & \SI{100}{\mm} & \SI{100}{\mm} \\
+                                        & 失敗 & \SI{200}{\mm} & \SI{200}{\mm} & \SI{200}{\mm} \\ \hline
+    \end{tabular}
+    \caption{バレル、エンドキャップ領域の各ステーションにおけるロード幅の設定値}
+    \label{table1}
+\end{table}
+
+
+
 
 \subsubsection{部分飛跡の再構成}
 L2MuonSAでは，あるミューオン検出器ステーションを通過した飛跡を部分飛跡としてまず再構成する。この部分飛跡は直線であると仮定する。
@@ -253,7 +273,8 @@ $\ptBeta$単独で値が正しいかどうかの判定をすることは困難�
 \end{figure}
 
 
-\subsection{Level2~Combined~Muon~(L2MuComb)}\label{chapter3-2-3}
+
+\subsection{Level-2~Combined~Muon~(L2MuComb)}\label{chapter3-2-3}
 Level-2~Combined~Muon~(L2MuComb)では、L2MuonSAで計算した飛跡と内部飛跡検出器の情報を組み合わせてミューオンの$\pt$の再構成を行い、トリガー判定を行う。
 まず、L2MuonSAで再構成した飛跡を内部飛跡検出器の位置まで外挿する。
 外挿された飛跡の周辺で、内部飛跡検出器で測定されたミューオン候補の飛跡を探索する。
@@ -296,15 +317,15 @@ Run-2まで、2ミューオントリガーは2つのミューオンが近接し�
 
 \begin{figure}[H]
     \centering
-    \includegraphics[clip, width=12cm]{fig/3/L1_2MU10_eff.pdf}
+    \includegraphics[clip, width=13cm]{fig/3/L1_2MU10_eff.pdf}
     \caption{バレル領域における~L1の2ミューオントリガーを通過することが期待される事象に対する、L1の2ミューオントリガー効率}
     \label{fig:3-12}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[clip, width=12cm]{fig/3/l2saEff_taniguchi.png}
-    \caption{バレル領域におけるL1の2ミューオントリガーを通過した事象に対する、MuonSAの2ミューオントリガーの効率}
+    \includegraphics[clip, width=13cm]{fig/3/2mu14_Eff_data.pdf}
+    \caption{バレル領域における~MuonSAで2ミューオントリガーを通過することが期待される事象に対する、MuonSAの2ミューオントリガーの効率}
     \label{fig:3-13}
 \end{figure}
 

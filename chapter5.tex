@@ -18,7 +18,7 @@ NSWを用いたL2MuonSAアルゴリズムでは、まず~sTGC、MMでそれぞ�
 \subsubsection{sTGCヒット選択アルゴリズム}
 sTGCでは、ストリップが幅が小さいため1つの荷電粒子が通過すると複数のストリップで反応を起こす。この複数反応したストリップから読み出された電荷などの情報を用いて、1つの荷電粒子が通過した位置を求めるクラスタリングを行う。
 以下のヒット選択アルゴリズムではクラスタリング後のヒット情報を用いる。
-第3章で述べたように~L1の情報を用いてミドルステーションから定義されたロードの情報を用いて、ロード内にある~sTGCのヒットを選び、さらに~sTGCヒット選択アルゴリズムを用いて~NSWでの~SPの再構成に用いる~sTGCヒットを選択する。
+第3章で述べたように~L1の情報を用いてミドルステーションからロード幅~$\SI{100}{\mm}$~(RoIからロードを引く場合$\SI{200}{\mm}$)で定義されたロード(表~\ref{table1})の情報を用いて、ロード内にある~sTGCのヒットを選び、さらに~sTGCヒット選択アルゴリズムを用いて~NSWでの~SPの再構成に用いる~sTGCヒットを選択する。
 
 図~\ref{fig:5-1}は~sTGCヒット選択アルゴリズムの概要図である。
 
@@ -177,42 +177,41 @@ Run-3実データとモンテカルロシミュレーションにおいて~NSW�
 SP再構成に用いた~sTGC~stripと~MMのヒットの個数を以下に示す。
 
 \begin{figure}[H]
-  \begin{minipage}[b]{0.48\linewidth}
-      \centering
-      \includegraphics[clip, width=6.8cm]{fig/5/data_onlinemm.pdf}
-      \subcaption{MMのヒットの個数}
-      \label{fig:5-8-1}
-  \end{minipage}
-    \begin{minipage}[b]{0.48\linewidth}
-      \centering
-      \includegraphics[clip, width=6.8cm]{fig/5/data_onlinestgceta.pdf}
-      \subcaption{sTGCのヒットの個数}
-      \label{fig:5-8-2}
-  \end{minipage}
-  \caption{Run-3実データにおけるNSWでの~SP再構成に用いたsTGC~stripと~MMのヒットの個数}
+    \begin{tabular}{cc}
+      \begin{minipage}[b]{0.48\linewidth}
+          \centering
+          \includegraphics[clip, width=6.8cm]{fig/5/data_onlinemm.pdf}
+          \subcaption{Run-3実データでのMMのヒットの個数}
+          \label{fig:5-8-1}
+      \end{minipage} &
+      \begin{minipage}[b]{0.48\linewidth}
+          \centering
+          \includegraphics[clip, width=6.8cm]{fig/5/data_onlinestgceta.pdf}
+          \subcaption{Run-3実データでのsTGCのヒットの個数}
+          \label{fig:5-8-2}
+      \end{minipage} \\
+      
+      \begin{minipage}[b]{0.48\linewidth}
+          \centering
+          \includegraphics[clip, width=6.8cm]{fig/5/MC_onlinemm.pdf}
+          \subcaption{シミュレーションでのMMのヒットの個数}
+          \label{fig:5-9-1}
+      \end{minipage} &
+        \begin{minipage}[b]{0.48\linewidth}
+          \centering
+          \includegraphics[clip, width=6.8cm]{fig/5/MC_onlinestgceta.pdf}
+          \subcaption{シミュレーションでのsTGCのヒットの個数}
+          \label{fig:5-9-2}
+      \end{minipage}
+    \end{tabular}
+    \caption{Run-3実データ((a), (b))とシミュレーション((c), (d))におけるNSWでの~SP再構成に用いたsTGC~stripと~MMのヒットの個数。}\label{fig:5-9}
 \end{figure}
+
 
 第2章~\ref{section2-2-5}で述べたように、sTGCと~MMはそれぞれ8層ずつ設置されているので、ヒット選択アルゴリズムによって選ばれ~SPの再構成に用いるヒットの数は8個あたりにピークがあることが理想である。
 
 しかし上図において~NSWの~SP再構成に用いた~sTGCのヒット数は7個あたりにピークがあるのに対して、MMのヒット数はほとんどのイベントで0個であり、NSWで~SPを再構成する際にほとんど~MMのヒットを使えていないことがわかった。
 一方でシミュレーションでの~SP再構成に用いたヒット数の分布は図~\ref{fig:5-9}で示すように、~MMのヒット数は8個のところにピークがありSP再構成に~MMのヒットを十分使えているということがわかった。
-
-\begin{figure}[H]
-  \begin{minipage}[b]{0.48\linewidth}
-      \centering
-      \includegraphics[clip, width=6.8cm]{fig/5/MC_onlinemm.pdf}
-      \subcaption{MMのヒットの個数}
-      \label{fig:5-9-1}
-  \end{minipage}
-    \begin{minipage}[b]{0.48\linewidth}
-      \centering
-      \includegraphics[clip, width=6.8cm]{fig/5/MC_onlinestgceta.pdf}
-      \subcaption{sTGCのヒットの個数}
-      \label{fig:5-9-2}
-  \end{minipage}
-  \caption{シミュレーションにおけるNSWでの~SP再構成に用いたsTGC~stripと~MMのヒットの個数}\label{fig:5-9}
-\end{figure}
-
 
 実データにおいて~MMのヒットがほとんど使えていない原因としては、現在のアルゴリズムでは~MMのヒットを選ぶ際に真っ直ぐ並んでいることを強く要求しているが、Run-3では~MMのヒットが真っ直ぐ並んでいるイベントが少ないのでヒット選択アルゴリズムで選ばれておらず~SPの再構成に用いられていないことが考えられる。
 
