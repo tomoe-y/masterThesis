@@ -3,15 +3,15 @@
 
 
 本章では、まず先行研究(\cite{article:kumaoka}, \cite{article:noguchi})において開発されたNSW部分飛跡再構成アルゴリズムについて紹介し、実データでの性能を評価した結果について述べる。
-評価の結果~NSWの検出器ヒットの一部が部分飛跡の再構成に用いられないことが多いことが分かった。
-これを回復するアルゴリズムを考案しRun-3実データにおいて現行のアルゴリズムとの性能を比較した結果について述べる。
+評価の結果~NSW検出器のヒットの一部が部分飛跡の再構成に用いられないことが多いことが分かった。
+これを回復するアルゴリズムを考案し、Run-3実データにおいて現行のアルゴリズムとの性能を比較した結果について述べる。
 
 %\newpage
 
 \section{NSWを用いたL2MuonSA部分飛跡再構成アルゴリズム}\label{chapter5-1}
 第2章で述べたように、NSWは~sTGC8層と~MM8層の合計16層から構成される。
 
-NSWを用いたL2MuonSAアルゴリズムでは、まず~sTGC、MMでそれぞれヒットの選別を行い、選ばれた~sTGC、MMのヒットを組み合わせて部分飛跡つまり~SPが再構成される。
+NSWを用いた~L2MuonSAアルゴリズムでは、まず~sTGC、MMでそれぞれヒットの選別を行い、選ばれた~sTGC、MMのヒットを組み合わせて部分飛跡つまり~SPが再構成される。
 以下では~sTGC、MMそれぞれでのヒット選択アルゴリズムと、ヒットを組み合わせて~SPを作成するアルゴリズムについて説明する。
 
 \subsection{NSWの各検出器におけるヒット選択アルゴリズム}\label{chapter5-1-1}
@@ -68,7 +68,7 @@ $R$から$R'$への補正の方法を以下に示す。
 
 \begin{enumerate}
     \item sTGC~stripと~MM~$X$層のヒットの~($z$, $R$)座標を最小二乗法を用いて直線でフィットを行う。
-    \item sTGC~wireの情報を用いて、$i$層の$\phi$を求める。1で定義した直線の~sTGC~wireの各層の$z$座標での$R$座標を求め$R_{{\rm{Int}},i}$とする。$R_{{\rm{Int}},i}$を用いて、式\eqref{equ5-2}で$\phi_{{\rm{sTGC}},i}$を求める。
+    \item sTGC~wireの情報を用いて、$i$層の$\phi_{{\rm{sTGC}},i}$を求める。1で定義した直線の~sTGC~wireの各層の$z$座標での$R$座標を求め$R_{{\rm{Int}},i}$とする。$R_{{\rm{Int}},i}$を用いて、式\eqref{equ5-2}で$\phi_{{\rm{sTGC}},i}$を求める。
     \begin{equation}
         \phi_{\mathrm{sTGC},i}=\arctan\left(\frac{R_{\mathrm{wire},i}}{R_{\mathrm{int},i}} \times \tan(\phi_{\mathrm{wire},i})\right)\label{equ5-2}
     \end{equation}
@@ -145,30 +145,30 @@ $\Delta \theta$の定義を図~\ref{fig:5-7}に示す。
     \label{fig:5-7}
 \end{figure}
 
-Run-3実データとモンテカルロシミュレーションにおいて~NSWを$\pt$再構成に用いる~L2MuonSAアルゴリズムを走らせたときの、$\pt$~residualと$\Delta\theta$の分布のシミュレーションとの比較を図~\ref{fig:ptresidualDataMC}と\ref{fig:deltaThetaDataMC}に示す。
-またL2MuonSAで$\alpha$、$\beta$からそれぞれ求めた$p_{\rm{T, \alpha}}$、$p_{\rm{T, \beta}}$~residual分布を1次元比較したものを図~\ref{fig:ptresidualAlphaBetaData}、図~\ref{fig:ptresidualAlphaBetaMC}に、2次元で比較したものを図~\ref{fig:2DptresidualAlphaBetaData}、図~\ref{fig:2DptresidualAlphaBetaMC}に示す。
-\begin{figure}[H]
+Run-3実データと~MCシミュレーションにおいて~NSWを$\pt$再構成に用いる~L2MuonSAアルゴリズムを走らせたときの、$\pt$~residualと$\Delta\theta$の分布のシミュレーションとの比較を図~\ref{fig:ptresidualDataMC}と図~\ref{fig:deltaThetaDataMC}に示す。
+またL2MuonSAで$\alpha$、$\beta$からそれぞれ求めた$p_{\rm{T, \alpha}}$、$p_{\rm{T, \beta}}$~residual分布を1次元で比較したものを図~\ref{fig:ptresidualAlphaBetaData}、図~\ref{fig:ptresidualAlphaBetaMC}に、2次元で比較したものを図~\ref{fig:2DptresidualAlphaBetaData}、図~\ref{fig:2DptresidualAlphaBetaMC}に示す。
+\begin{figure}[h]
     \centering
     \includegraphics[clip, width=12cm]{fig/5/ptresidual_NSW.pdf}
     \caption{L2MuonSAでNSWを用いた時の$\pt$~residual}
     \label{fig:ptresidualDataMC}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
     \includegraphics[clip, width=12cm]{fig/5/deltaTheta_NSW.pdf}
     \caption{L2MuonSAでNSWを用いた時の$\Delta \theta$}
     \label{fig:deltaThetaDataMC}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
     \includegraphics[clip, width=12cm]{fig/5/data_ptresidual_alpha_beta.pdf}
     \caption{実データにおいて~L2MuonSAでNSWを用いた時の$\ptAlpha$~residualと$\ptBeta$~residual}
     \label{fig:ptresidualAlphaBetaData}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
     \includegraphics[clip, width=12cm]{fig/5/MC_ptresidual_alpha_beta.pdf}
     \caption{シミュレーションにおいて~L2MuonSAでNSWを用いた時の$\ptAlpha$~residualと$\ptBeta$~residual}
@@ -194,14 +194,32 @@ Run-3実データとモンテカルロシミュレーションにおいて~NSW�
 同様に、図~\ref{fig:deltaThetaDataMC}から実データでの$\Delta \theta$分布もピークの高さが低くなり、広がりが増えていることから~L2MuonSAでの部分飛跡再構成の精度がシミュレーションよりも悪くなっていることがわかる。
 
 また図~\ref{fig:ptresidualAlphaBetaData}から実データにおいて$\ptAlpha$の方が$\ptBeta$よりも$\pt$~residualがよい、つまり~L2MuonSAでの$\pt$再構成にインナーステーションの~NSWの情報を組み合わせて行う場合よりも、ミドルステーションとアウターステーションの情報のみで$\pt$再構成を行う場合の方が$\pt$再構成の精度がよいということがわかった。
-図~\ref{fig:ptresidualAlphaBetaMC}では$\ptBeta$の方が$\ptAlpha$よりもよいので、これはシミュレーションでは想定されていなかった結果である。
-$\ptAlpha$~residualと$\ptBeta$~residualを2次元分布で見ると、シミュレーションでは$\ptBeta$~residualが0付近で$\ptAlpha$が広がっている事象が多いことがわかるが、実データではそのような事象は少ない。またこの2次元分布において事象の分布は$\ptBeta/\ptAlpha$の傾きに沿って分布しており、その傾きは実データよりもシミュレーションで小さく見える。
-これは実データにおいて、シミュレーションよりも$\ptBeta$のずれが大きいということを示す。
+シミュレーションでは図~\ref{fig:ptresidualAlphaBetaMC}より$\ptBeta$の方が$\ptAlpha$よりもよいので、データでの動作はシミュレーションでは想定されていなかった結果である。
+$\ptAlpha$~residualと$\ptBeta$~residualを2次元分布で見ると、シミュレーションでは$\ptBeta$~residualが0付近で$\ptAlpha$が広がっている事象が多いことがわかるが、実データではそのような事象は少ない。またこの2次元分布において事象の分布は$\ptBeta/\ptAlpha$の傾きに沿って分布しているが、その傾きは実データよりもシミュレーションで小さく見える。
+これはシミュレーションでは$\beta$によって多重散乱などの~NSWに到達するまでの飛跡の曲がりを補正して、$\beta$が$\alpha$より真の曲がりに近づいているのに対し，データでは~NSWでの~SPの傾きによる補正が$\pt$分解能の向上に寄与していないことを表している。
+詳しく理解するために、実データでの$\ptAlpha$と$\ptBeta$の分解能のずれ($\pt$~residual分布の$\sigma$)の$\pt$依存性を確認したところ、図~\ref{fig:ptresidualSigma}のように$\pt$が低い領域では若干$\ptBeta$の方がよいものの、全$\pt$領域で$\ptBeta$の方がずれが少ないシミュレーションでの結果に比べると全体的に$\ptBeta$のずれが大きいということがわかる。
 
-これについて調べたところ、実データで$\ptBeta$の分解能が悪くなる原因として、~NSWの~SPを再構成する際に~MMのヒットを十分使えていないことがわかった。
-SP再構成に用いた~sTGC~stripと~MMのヒットの個数を以下に示す。
+\begin{figure}[h]
+        \begin{minipage}[b]{0.48\linewidth}
+            \centering
+            \includegraphics[clip, width=6.8cm]{fig/5/pt_alpha_beta_SD.pdf}
+            \subcaption{実データでの$\sigma$}
+            %\label{fig:enter-label}
+        \end{minipage}
+        \begin{minipage}[b]{0.48\linewidth}
+            \centering
+            \includegraphics[clip, width=6.8cm]{fig/5/pt_alpha_beta_SD_MC.pdf}
+            \subcaption{シミュレーションでの$\sigma$}
+            %\label{fig:enter-label}
+        \end{minipage}
+    \caption{$\ptAlpha$~residual分布と$\ptBeta$~residual分布の標準偏差~($\sigma$)と$\pt$の関係。赤点が$\ptAlpha$、黒点が$\ptBeta$を表す。}
+    \label{fig:ptresidualSigma}
+\end{figure}
 
-\begin{figure}[H]
+これについてさらに調べたところ、実データで$\ptBeta$の分解能が悪くなる要因として、~NSWの~SPを再構成する際に~MMのヒットを十分な数使えていないことが疑われた。
+SP再構成に用いた~sTGC~stripと~MMのヒットの個数を図~\ref{fig:onlineHits}に示す。
+
+\begin{figure}[h]
     \begin{tabular}{cc}
       \begin{minipage}[b]{0.48\linewidth}
           \centering
@@ -232,78 +250,62 @@ SP再構成に用いた~sTGC~stripと~MMのヒットの個数を以下に示す�
     \caption{Run-3実データ((a), (b))とシミュレーション((c), (d))におけるNSWでの~SP再構成に用いたsTGC~stripと~MMのヒットの個数。}\label{fig:onlineHits}
 \end{figure}
 
+\ref{section2-2-5}節で述べたように、sTGCと~MMはそれぞれ8層ずつ設置されているので、ヒット選択アルゴリズムによって選ばれ~SPの再構成に用いられるヒットの数は8個あたりにピークがあることが理想である。
+しかし図~\ref{fig:onlineHits}において~NSWの~SP再構成に用いた~sTGCのヒット数は7個あたりにピークがあるのに対して、MMのヒット数は多くの事象で0個であり、NSWで~SPを再構成する際に大半の事象で~MMのヒットを使えていない。
+一方でシミュレーションでの~SP再構成に用いたヒット数の分布は図~\ref{fig:onlineHits}~(c)、(d)で示すように、~MMのヒット数はほとんどの場合8個の近くにピークがあり、SP再構成に~MMのヒットを十分使えている。
+この原因として、現在のアルゴリズムでは~MMのヒットを選ぶ際に直線的に並んでいることを強く要求しているが、Run-3では~MMのヒットがすべての層に直線的に並んでいる事象が少ないのでヒット選択アルゴリズムで選ばれておらず、SPの再構成に用いられていないことが考えられる。
 
-第2章~\ref{section2-2-5}で述べたように、sTGCと~MMはそれぞれ8層ずつ設置されているので、ヒット選択アルゴリズムによって選ばれ~SPの再構成に用いるヒットの数は8個あたりにピークがあることが理想である。
-
-しかし上図において~NSWの~SP再構成に用いた~sTGCのヒット数は7個あたりにピークがあるのに対して、MMのヒット数は多くの事象で0個であり、NSWで~SPを再構成する際に大半の事象で~MMのヒットを使えていないことがわかった。
-一方でシミュレーションでの~SP再構成に用いたヒット数の分布は図~\ref{fig:onlineHits}で示すように、~MMのヒット数はほとんどの場合8個のところにピークがありSP再構成に~MMのヒットを十分使えているということがわかった。
-
-実データにおいて~MMのヒットが使えていない原因としては、現在のアルゴリズムでは~MMのヒットを選ぶ際に真っ直ぐ並んでいることを強く要求しているが、Run-3では~MMのヒットが真っ直ぐ並んでいる事象が少ないのでヒット選択アルゴリズムで選ばれておらず~SPの再構成に用いられていないことが考えられる。
-
-イベントディスプレイを作成して、NSWのヒット~(~sTGC~strip、MM)と~SPの傾きと切片、インナーステーションにおけるオフラインセグメントの様子を視覚的に確認した。
 %eventNum:7882,9191
-
-\begin{figure}[H]
+\begin{figure}[h]
       \centering
-      \includegraphics[clip, width=8cm]{fig/5/EventDisplay_7882_ZR_withMM.pdf}
+      \includegraphics[clip, width=9.5cm]{fig/5/EventDisplay_46_ZR_withMM.pdf}
       %\label{fig:eventDisplay-1}
       \centering
-      \includegraphics[clip, width=8cm]{fig/5/EventDisplay_9191_ZR_withMM.pdf}
+      \includegraphics[clip, width=9.5cm]{fig/5/EventDisplay_3806_ZR_withMM.pdf}
       %\label{fig:eventDisplay-2}
-  \caption{Event~displayでの~NSWのヒットと~SP、オフラインセグメントの様子}\label{fig:eventDisplay}
+  \caption{Event~displayでの~NSWのヒットと~SP、オフラインセグメントの様子。黒がsTGCのヒット、赤が~MMのX層のヒット、緑が~MMの~stereo~layerのヒットを表す。}\label{fig:eventDisplay}
 \end{figure}
+
+この状況を詳しく見るため、イベントディスプレイを作成してNSWのヒット~(~sTGC~strip、MM)と~SPの傾きと切片、インナーステーションにおけるオフラインセグメントの様子を視覚的に確認した。
 図~\ref{fig:eventDisplay}での"Outlier"ヒットというのは、ミドルステーションから引いたロードの中にあるが、sTGC、MMヒット選択アルゴリズムによって選ばれず~SPの再構成に用いられなかったヒットのことを指す。
+イベントディスプレイから、NSWの~SPの傾きと切片から引いた直線の周りに~MMのヒットはあるが、上のディスプレイでは2つの~MMのヒットが~sTGCのヒットと直線状に並んでいるが、下のディスプレイでは~MMのヒットが直線からずれており、現状のアルゴリズムで~MMのヒットを使えていないことがわかる。
 
-イベントディスプレイからNSWの~SPの傾きと切片から引いた直線の周りに~MMのヒットはあるが、ヒット同士が真っ直ぐ並んでいないことがわかる。
 これを定量的に評価するため、以下の解析を行った。
-まず、8層の内6層以上にヒットがあるトラックの数とSP再構成に6層以上のヒットを用いたトラック数を表~\ref{tab:numOfMMhits}にまとめる。
-表~\ref{tab:numOfMMhits}より8層のうち6層以上にヒットがあるトラックは全体の$48\%$で十分ヒットがあるが、SP再構成に用いられたヒットが8層中6層以上にあるトラックは全体の約$15.4\%$であり、MMヒット選択アルゴリズムでは6層以上でヒットを選択する場合が少ないことがわかった。
 
-\begin{table}[H]
-    \centering
-    \begin{tabular}{|c|c|c|}\hline
-         全体のトラック数 & 8層中6層以上ヒットがある数 & SP再構成に6層以上用いた数  \\ \hline
-         15646 & 7530 & 2417 \\ \hline
-    \end{tabular}
-    \caption{実データに~NSWを用いる~L2MuonSAを用いたときの全体のトラック数と、MM8層中6層以上にヒットがあるトラック数、SP再構成に6層以上のヒットを用いたトラック数。}
-    \label{tab:numOfMMhits}
-\end{table}
-
-
-さらにNSWのヒットのうち、ミドルステーションから引いたロード内にあり~SP再構成に用いたヒットの数とロード内にはあるが~SP再構成に用いなかったヒットの数の比較を行った。
+まずNSWのヒットのうち、ミドルステーションから引いたロード内にあり~SP再構成に用いたヒットの数とロード内にはあるが~SP再構成に用いなかったヒットの数の比較を行った。
 図~\ref{fig:isOutlierHit}には、NSWで~SPが作成されたときの、ミドルステーションから定義されたロード内にあるが~SPの再構成に使われなかったヒット~("Outlier")の個数を~sTGCと~MMそれぞれについて示している。
-
-\begin{figure}[H]
-\begin{tabular}{cc}
-    \begin{minipage}[b]{0.48\linewidth}
-        \centering
-        \includegraphics[clip, width=6.8cm]{fig/5/data_onlinemmIsoutlier.pdf}
-        \subcaption{実データでのMMのヒットの個数}
-        %\label{fig:5-11-1}
-    \end{minipage} &
-    \begin{minipage}[b]{0.48\linewidth}
-        \centering
-        \includegraphics[clip, width=6.8cm]{fig/5/data_onlinestgcetaIsoutlier.pdf}
-        \subcaption{実データでのsTGCのヒットの個数}
-        %\label{fig:5-11-1}
-    \end{minipage} \\
-    \begin{minipage}[b]{0.48\linewidth}
-        \centering
-        \includegraphics[clip, width=6.8cm]{fig/5/MC_onlinemmIsoutlier.pdf}
-        \subcaption{シミュレーションでのMMのヒットの個数}
-        %\label{fig:5-11-1}
-    \end{minipage} &
-    \begin{minipage}[b]{0.48\linewidth}
-        \centering
-        \includegraphics[clip, width=6.8cm]{fig/5/MC_onlinestgcetaIsoutlier.pdf}
-        \subcaption{シミュレーションでのsTGCのヒットの個数}
-        %\label{fig:5-11-1}
-    \end{minipage} \\
-\end{tabular}
+\begin{figure}[h]
+    \begin{tabular}{cc}
+        \begin{minipage}[b]{0.48\linewidth}
+            \centering
+            \includegraphics[clip, width=6.8cm]{fig/5/data_onlinemmIsoutlier.pdf}
+            \subcaption{実データでのMMのヒットの個数}
+            %\label{fig:5-11-1}
+        \end{minipage} &
+        \begin{minipage}[b]{0.48\linewidth}
+            \centering
+            \includegraphics[clip, width=6.8cm]{fig/5/data_onlinestgcetaIsoutlier.pdf}
+            \subcaption{実データでのsTGCのヒットの個数}
+            %\label{fig:5-11-1}
+        \end{minipage} \\
+        \begin{minipage}[b]{0.48\linewidth},
+            \centering
+            \includegraphics[clip, width=6.8cm]{fig/5/MC_onlinemmIsoutlier.pdf}
+            \subcaption{シミュレーションでのMMのヒットの個数}
+            %\label{fig:5-11-1}
+        \end{minipage} &
+        \begin{minipage}[b]{0.48\linewidth}
+            \centering
+            \includegraphics[clip, width=6.8cm]{fig/5/MC_onlinestgcetaIsoutlier.pdf}
+            \subcaption{シミュレーションでのsTGCのヒットの個数}
+            %\label{fig:5-11-1}
+        \end{minipage} \\
+    \end{tabular}
   \caption{ロード内にあるが~SPの再構成に用いられなかったヒットの個数。実データでの分布が((a)、(b))、シミュレーションでの分布が((c)、(d))である。}\label{fig:isOutlierHit}
 \end{figure}
+\begin{comment}
 
-\begin{figure}[H]
+\begin{figure}[h]
     \begin{tabular}{cc}
         \begin{minipage}[b]{0.48\linewidth}
             \centering
@@ -330,30 +332,49 @@ SP再構成に用いた~sTGC~stripと~MMのヒットの個数を以下に示す�
             %\label{fig:enter-label}
         \end{minipage} \\
     \end{tabular} 
-    \caption{ミドルステーションから引いたロード内にあり~SP再構成に用いたヒットの数の分布と、ロード内にはあるが~SP再構成に用いられなかったヒットの数の分布を重ね合わせた分布。青が~SP再構成に用いたヒットの数で、赤が用いなかったヒットの数である。実データでの分布が((a)、(b))、シミュレーションでの分布が((c)、(d))である。}
+    \caption{L2MuonSAでのNSWの全ヒット数と、ミドルステーションから引いたロード内にはあり~SP再構成に用いられたヒットの数の分布を重ね合わせた分布。黒が全トラックの数で、赤が~SP再構成に用いたヒットの数である。実データでの分布が((a)、(b))、シミュレーションでの分布が((c)、(d))である。}
     \label{fig:overWriteTotalHits}
 \end{figure}
 
-多くの事象で、MMのヒットはミドルステーションから引いたロード内にあるが、~SPの再構成に用いられていないということがこれからもわかる。
+\end{comment}
 
-一方で図~\ref{fig:eventDisplay}より~sTGCのヒットはきれいに直線で並んでおり8層のうちほとんどにヒットがあるということがわかる。そのため現行のヒット選択アルゴリズムで十分にヒットを選ぶことができている。
+図~\ref{fig:isOutlierHit}より、実データでの~MMの分布はヒット数が8個付近にピークがあり、多くの事象で~MMのヒットはミドルステーションから引いたロード内に多数あるが、SPの再構成に用いられていないということがわかる。
+さらに、実データとシミュレーションに対して~NSWを用いた~L2MuonSAを走らせたときの8層の内6層以上にヒットがあるトラックの割合と~SP再構成に6層以上のヒットを用いたトラックの割合を表~\ref{tab:numOfMMhits}にまとめた。
+表~\ref{tab:numOfMMhits}よりデータにおいて8層のうち6層以上にヒットがあるトラックは全体の$48\%$で十分ヒットがあるが、SP再構成に用いられたヒットが8層中6層以上にあるトラックは全体の約$15.4\%$とシミュレーションと比べて3分の1以下の割合である。
+このことからもMMヒット選択アルゴリズムでは6層以上でヒットを選択する場合が少ないことがわかった。
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|}\hline
+         サンプル & 8層中6層以上ヒットがある割合 & SP再構成に6層以上用いた割合  \\ \hline
+         実データ & 48.1$\%$ & 15.4$\%$ \\ \hline
+         シミュレーション & 56.6$\%$ & 47.3$\%$ \\ \hline
+    \end{tabular}
+    \caption{実データとシミュレーションに対してNSWを用いる~L2MuonSAを走らせたときの、それぞれでのMM8層中6層以上にヒットがあるトラックの割合と~SP再構成に6層以上のヒットを用いたトラックの割合。}
+    \label{tab:numOfMMhits}
+\end{table}
+
+
+一方で図~\ref{fig:eventDisplay}より~sTGCのヒットは、L2MuonSAで再構成した~SPの直線からの大きく外れたものは少ない。
+また、8層のうちほとんどにヒットがあるということがわかる。
+そのため現行のヒット選択アルゴリズムで十分にヒットを選ぶことができている。
 \ref{chapter5-1}で述べた通り、現行のヒット選択アルゴリズムでは~sTGC、MMはそれぞれ独立にヒット選択を行っている。現在L2MuonSAで用いているヒット選択アルゴリズムでは~sTGCのヒットは十分選ぶことができるが、MMに対しては十分選べない。
 
-そこで新たに~MMのヒットが真っ直ぐ並んでいない場合や、ヒットがある層が少ない場合でも~SP再構成に用いることができるようなアルゴリズムを検討した。
+そこで新たに~MMのヒットが直線的に並んでいない場合や、ヒットがある層が少ない場合でも~SP再構成に用いることができるようなアルゴリズムを検討した。
 
 \section{新たに検討した~NSWヒット選択アルゴリズム}\label{chapter5-4}
-新たに検討したアルゴリズムの目的は、前の節で述べたように、MMのヒットがロード内に存在するが真っ直ぐ並んでいない場合やヒットがある層が少ない場合でも~NSWの~SP再構成に用いることである。
-現行のヒット選択アルゴリズムで~sTGCのヒットは十分選べており、SPの直線の近くに~MMのヒットも多いことから現行のアルゴリズムで選ばれた~sTGCのヒットを用いて~MMのヒットを選び~SPの作成に用いることで$\pt$分解能の向上に繋がるのではないかと考えた。
+新たに検討したアルゴリズムの目的は、前の節で述べたように、MMのヒットがロード内に存在するが直線的に並んでいない場合やヒットがある層が少ない場合でも~NSWの~SP再構成に用いることである。
+現行のヒット選択アルゴリズムで~sTGCのヒットは十分選べておりSPの直線の近くに~MMのヒットも多いことから、現行のアルゴリズムで選ばれた~sTGCのヒットを用いて~MMのヒットを選び~SPの作成に用いることで$\pt$分解能の向上に繋がるのではないかと考えた。
 検討したアルゴリズムの流れを以下に示す。
 
 \begin{enumerate}
-    \item まず現行のヒット選択アルゴリズムで~SP再構成をする際に選んだ~sTGCヒットに対して直線フィットを行い、この直線を中心とするロードを新たに定義する。ロードの幅は図~\ref{fig:newSelectlg}で示すようにロード中心から片側の幅で定義する。
+    \item 現行のヒット選択アルゴリズムで~SP再構成をする際に選んだ~sTGCヒットに対して直線フィットを行い、この直線を中心とするロードを新たに定義する。ロードの幅は図~\ref{fig:newSelectlg}で示すようにロード中心から片側の幅で定義する。
     \item 1で定義したロード内にある~MMのヒットを選ぶ。この際に同じ層にヒットがある場合も除外しない。
     \item 1で用いた~sTGCヒットと、2で選んだ~MMヒットに対して直線フィットを行い、新たな~SPの傾きと切片を定義する。
 \end{enumerate}
 
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
     \includegraphics[clip, width=11cm]{fig/5/newHitSelectAlg.pdf}
     \caption{検討した~NSWヒット選択アルゴリズムの概要。MMの黒丸のヒットは~SP再構成に用いて、白丸のヒットは用いない。}
@@ -361,14 +382,14 @@ SP再構成に用いた~sTGC~stripと~MMのヒットの個数を以下に示す�
 \end{figure}
 
 
-そこで~sTGCのヒットから再定義したロードの幅については何パターンか変化させ、$\pt$~residualがどう変化するか試した。
+そこで~sTGCのヒットから再定義したロードの幅を変化させ、$\pt$~residualがどう変化するか試した。
 
 
 \section{検討した~NSWヒット選択アルゴリズムの性能評価}\label{chapter5-5}
 今回新たに検討したアルゴリズムを実データに対して用いた場合、L2MuonSAでの~SP再構成に用いた~MMのヒットの数を図~\ref{fig:numOfHitMultiWidth}に示す。
-sTGCのヒットから引いたロードの幅は$\SI{5}{\mm}$、$\SI{2}{\mm}$、$\SI{1}{\mm}$の3パターン変化させた。
+sTGCのヒットから引いたロードの幅は$\SI{5}{\mm}$、$\SI{2}{\mm}$、$\SI{1}{\mm}$で試した。
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
     \includegraphics[clip, width=14cm]{fig/5/numOfMMHit_multiWidth.pdf}
     \caption{新しいアルゴリズムにおいて~SP再構成に用いた~MMのヒットの個数と、従来のアルゴリズムでの~MMのヒットの個数の比較。(i)が従来のアルゴリズムでの~MMヒットの個数で、(ii)が本研究で検討したアルゴリズムでの~MMヒットの個数。}
@@ -380,7 +401,7 @@ sTGCからロードを引いて近くにある~MMヒットを用いるという�
 
 また新たに再構成した~SPとオフラインセグメントの$\Delta \theta$を従来のアルゴリズムと比較したものを図~\ref{fig:deltaThetaMultiWidth}に示す。
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
     \includegraphics[clip, width=14cm]{fig/5/deltaTheta_multiWidth.pdf}
     \caption{新しいアルゴリズムでの~SPの$\Delta \theta$の分布と、従来のアルゴリズムでの~SPの$\Delta \theta$の比較。(i)が従来のアルゴリズムでの$\Delta \theta$で、(ii)が本研究で検討したアルゴリズムでの$\Delta \theta$。}
@@ -390,9 +411,9 @@ sTGCからロードを引いて近くにある~MMヒットを用いるという�
 3パターンのロード幅のなかでは、ロード幅1mmの場合の$\Delta \theta$が一番よいが、その場合でも現行のアルゴリズムから改善されずほとんど一致していることがわかる。
 
 ここで、sTGCのヒットから引いたロードの中心と~MMヒットとの残差~(residual)を図~\ref{fig:mmresidualDataMC}に示す。
-またsTGCのヒットから引いたロード中心と~sTGCヒットの~residualを図~\ref{fig:stgcresidualDataMC}に示す。
+また~sTGCのヒットから引いたロード中心と~sTGCヒットの~residualを図~\ref{fig:stgcresidualDataMC}に示す。
 
-\begin{figure}[H]
+\begin{figure}[h]
         \begin{minipage}[b]{0.48\linewidth}
             \centering
             \includegraphics[clip, width=6.8cm]{fig/5/residualNewAlg_mm.pdf}
@@ -409,7 +430,7 @@ sTGCからロードを引いて近くにある~MMヒットを用いるという�
     \label{fig:mmresidualDataMC}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[h]
         \begin{minipage}[b]{0.48\linewidth}
             \centering
             \includegraphics[clip, width=6.8cm]{fig/5/residualNewAlg_stgc.pdf}
@@ -426,5 +447,5 @@ sTGCからロードを引いて近くにある~MMヒットを用いるという�
     \label{fig:stgcresidualDataMC}
 \end{figure}
 
-実データでのsTGCヒットの~residualもシミュレーションと比べて悪くなっているものの、MMヒットの~residualは実データでかなり悪いことがわかる。
-そのため~sTGCからロードを再定義し~SP再構成に用いる~MMヒットの数を増やしても、現在の検出器でのヒット分解能では~L2MuonSAに~NSWを用いても$\pt$分解能の改善に繋がらないことがわかった。
+実データでの~sTGCヒットの~residualもシミュレーションと比べて悪くなっているものの、MMヒットの~residualは実データでシミュレーションよりかなり悪いことがわかる。
+そのため~sTGCからロードを再定義し~SP再構成に用いる~MMヒットの数を増やしても、現在の検出器でのヒット分解能では~L2MuonSAに~NSWを用いても$\pt$分解能の改善に繋がらないと考えられる。
